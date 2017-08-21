@@ -27,6 +27,7 @@ router.get('/1/:id/:name', function(req, res, next) {
       video_title: video_title,
       description: description,
       id:id,
+      url:'http://videodown.cc/'+'play/1/'+id+'/'+req.params.name,
       website: website,
       youtube_url:youtube_url,
       image:meta_img, 
@@ -68,10 +69,6 @@ router.get('/2/:id/:name', function(req, res, next) {
 
       }
     })
-
-
-  
-
 });
 
 // Make URL.

@@ -1,37 +1,37 @@
 // use exports so the variable app will be ready to use.
 module.exports = function(app){
 
-app.get('/', function (req, res) {
-  res.render('home/views/home', { 
+  app.get('/', function (req, res) {
+    res.render('home/views/home', { 
       active_home:true 
-     });
-});
-app.get('/login', function (req, res) {
+    });
+  });
+  app.get('/login', function (req, res) {
 
    res.render('guess/views/login', { title: 'Login',loginMessage:req.flash('loginMessage') });
 
-});
-app.get('/register', function (req, res) {
+ });
+  app.get('/register', function (req, res) {
 
-  res.render('guess/views/register', { title: 'Register' });
+    res.render('guess/views/register', { title: 'Register' });
 
-});
+  });
 
-app.get('/about', function (req, res) {
+  app.get('/about', function (req, res) {
 
-  req.db.collection("pages").findOne({_id:1}, function (err , data){
-    if(err) throw err;
-    res.render('home/views/about', { title:data.title, url:'http://winner668.net/about',active_about:true, data: data});
+    req.db.collection("pages").findOne({_id:1}, function (err , data){
+      if(err) throw err;
+      res.render('home/views/about', { title:data.title, url:'http://winner668.net/about',active_about:true, data: data});
 
-  })
-  
-});
+    })
+
+  });
 // keyword
 app.get('/keyword/:key', function(req, res,next){
-    var q = req.params.key;
-    var key = q.replace(/_/g,' ').replace('.html', '');
+  var q = req.params.key;
+  var key = q.replace(/_/g,' ').replace('.html', '');
 
- req.db.collection('kwords').find({name:key}).count(function(err, data){
+  req.db.collection('kwords').find({name:key}).count(function(err, data){
     if(err) throw err;
     console.log(data);
     if(data==0){
@@ -43,7 +43,8 @@ app.get('/keyword/:key', function(req, res,next){
   })
   res.render('search/views/search_index',{
     title: key,
-    search_text: key
+    search_text: key,
+    url:'http://videodown.cc/'+'keyword/'+req.params.key,
   })
 })
 
@@ -82,7 +83,7 @@ app.get('/disclaimer', function (req, res) {
 
 
 app.get('/preview', function (req, res) {
-  
+
   res.render('home/views/preview', { title: 'Preview',active_preview:true});
 });
 app.get('/testimonials', function (req, res) {
@@ -92,16 +93,16 @@ function ensureAuth(req, res, next){
   if(req.user){
 
    req.db.collection("chat").find({read:false,to:req.user._id}).count(function (err,db){
-		 if (err) throw err;
-		 res.locals.count_chat =db;
-		 res.locals.chat_with =1;
-		   update_last_seen(req);
-           return next();
-	});
+     if (err) throw err;
+     res.locals.count_chat =db;
+     res.locals.chat_with =1;
+     update_last_seen(req);
+     return next();
+   });
    
-  }else{
-      res.redirect('/login');
-  }
+ }else{
+  res.redirect('/login');
+}
 }
 var dashboardCtr = require('./application/dashboard/controllers/dashboard');app.use('/dashboard', dashboardCtr);
 var guessCtr = require('./application/guess/controllers/guess');app.use('/guess', guessCtr);
