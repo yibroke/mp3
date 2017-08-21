@@ -1,0 +1,21 @@
+<div class="container preview">
+	<div class="row">
+		<div class="col-md-12" ng-controller="winCtr">
+			
+			<div ng-repeat="x in wins">
+			<div class="box">
+			<h1>[{x.title}]</h1>
+			
+			<a href="/win/read/[{x._id}]"> <img ng-src="[{x.thumb}]" alt="[{x.title}]"> </a><br><br>
+
+			<a class="btn btn-success" href="/win/read/[{x._id}]"> Read more </a><br><br>
+			</div>
+			
+			</div>
+
+		
+		</div>
+
+	</div>
+</div>
+

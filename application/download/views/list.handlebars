@@ -1,0 +1,30 @@
+<div class="container">
+
+	<div class="row">
+
+		<div class="col-md-12">
+		<br>
+		<a class="btn btn-info" href="/download/delete">Delete all</a>
+		<p class="text-muted">Delete all file on our server. Remember our server only can store less than 40GB. We better delete the files on schedule.<br>
+		Plese Make sure nobody is on the site when you delete. Otherwise you may accident delete the file that use not yet download. You can use google analytics to make sure nobody on our webstie.
+		</p>
+			<h1>List Downlaods MP3</h1>
+			
+			<ul>
+				{{#each arr3}}
+				<li><a target="_blank" href="/downloads/mp3/{{this}}">{{this}}</a></li>
+				{{/each}}
+			</ul>
+			
+			
+			<h1>List Downlaods MP4</h1>
+			<ul>
+				{{#each arr4}}
+				<li><a target="_blank" href="/downloads/mp4/{{this}}">{{this}}</a></li>
+				{{/each}}
+			</ul>
+		</div>
+
+	</div>
+
+</div>

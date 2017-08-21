@@ -1,0 +1,114 @@
+{
+  "IcoMoonType": "selection",
+  "icons": [
+    {
+      "icon": {
+        "paths": [
+          "M1024 527.515v279.273h-806.788v-279.273h-217.212v496.485h1241.212v-496.485z",
+          "M269.002 341.333l365.196 365.258 365.258-365.258z",
+          "M496.485 0h279.273v341.333h-279.273v-341.333z"
+        ],
+        "attrs": [
+          {},
+          {},
+          {}
+        ],
+        "width": 1241,
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "grid": 0,
+        "tags": [
+          "icon_download"
+        ]
+      },
+      "attrs": [
+        {},
+        {},
+        {}
+      ],
+      "properties": {
+        "order": 10,
+        "id": 1,
+        "name": "icon_download",
+        "prevSize": 32,
+        "code": 59649
+      },
+      "setIdx": 1,
+      "setId": 3,
+      "iconIdx": 0
+    },
+    {
+      "icon": {
+        "paths": [
+          "M938.667 661.333v256c0 12.8-8.533 21.333-21.333 21.333h-810.667c-12.8 0-21.333-8.533-21.333-21.333v-256h-42.667v256c0 36.267 27.733 64 64 64h810.667c36.267 0 64-27.733 64-64v-256h-42.667z",
+          "M740.267 548.267l-29.867-29.867-177.067 177.067v-652.8h-42.667v652.8l-177.067-177.067-29.867 29.867 228.267 228.267z"
+        ],
+        "attrs": [
+          {},
+          {}
+        ],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "grid": 0,
+        "tags": [
+          "if_Download_2202271"
+        ]
+      },
+      "attrs": [
+        {},
+        {}
+      ],
+      "properties": {
+        "order": 11,
+        "id": 0,
+        "name": "if_Download_2202271",
+        "prevSize": 32,
+        "code": 59648
+      },
+      "setIdx": 1,
+      "setId": 3,
+      "iconIdx": 1
+    }
+  ],
+  "height": 1024,
+  "metadata": {
+    "name": "icomoon"
+  },
+  "preferences": {
+    "showGlyphs": false,
+    "showQuickUse": true,
+    "showQuickUse2": true,
+    "showSVGs": true,
+    "fontPref": {
+      "prefix": "icon-",
+      "metadata": {
+        "fontFamily": "icomoon",
+        "majorVersion": 1,
+        "minorVersion": 0
+      },
+      "metrics": {
+        "emSize": 1024,
+        "baseline": 6.25,
+        "whitespace": 50
+      },
+      "embed": false,
+      "resetPoint": 59648,
+      "autoHost": true
+    },
+    "imagePref": {
+      "prefix": "icon-",
+      "png": true,
+      "useClassSelector": true,
+      "color": 0,
+      "bgColor": 16777215,
+      "classSelector": ".icon"
+    },
+    "historySize": 50,
+    "showCodes": false,
+    "gridSize": 16,
+    "showLiga": false,
+    "quickUsageToken": {
+      "UntitledProject": "YmQyNzQ0ZDQ0YjZjMDIxYzQ5MWQzZWU4Y2U4NTUwMjgjMSMxNTAxNDc5ODAzIyMj"
+    }
+  }
+}

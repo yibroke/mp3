@@ -1,0 +1,38 @@
+{
+
+
+"your_online_video":"您的在线视频转换器!",
+"allow_you":"Videodown.cc 允许您以YouTube，MP4等格式从YouTube，Dailymotion转换并下载您喜爱的视频.<br> 它的快速，自由，没有注册需要.",
+"hello":"Hello",
+"search":"搜索 ...",
+"insert_url":"插入视频链接（URL）并选择格式",
+"go":"走!",
+"home":"家",
+"support":"支持",
+"term":"服务期限",
+"policy":"隐私政策",
+"faq":"经常问的问题",
+"keyword":"输入要搜索的内容（视频标题）",
+"how_cap1":"搜索视频",
+"how_cap2":"复制链接",
+"how_cap3":"选择格式并转换",
+"how_con1":"在 Youtube, dailymotion, videodown.cc",
+"how_con2":"的视频并将其粘贴到上面的框中",
+"how_con3":"然后下载",
+"show_more":"更多",
+"too_long":"视频对于在线MP3转换器来说太长了.",
+"feedback":"反馈", 
+"name":"名称", 
+"text_from_image":"图像文字", 
+"submit":"提交", 
+"search_for":"搜索: ", 
+"play_and_download":"播放和兑换", 
+"next":"下一个", 
+"prev":"以前", 
+"resent_search":"最近搜索", 
+"convert":"兑换", 
+"supported_sites":"支持的网站", 
+"how_to_use":"如何使用", 
+"how_to_use_detail":" 在页面顶部的输入字段中输入URL地址，然后按Enter键或单击输入字段右侧的\"下载\"按钮."
+}
+

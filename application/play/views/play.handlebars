@@ -1,0 +1,59 @@
+<script>
+	var myinit = {
+		youtube_id:'{{id}}',
+		 url:"{{youtube_url}}",
+		website:"{{website}}",
+		name: "{{video_title}}"
+	};
+</script>
+<div ng-cloak class="container" ng-controller="playctr">
+	<div class="row">
+		<div class="col-md-9">
+			<h1><strong>{{video_title}}</strong></h1>
+			<div class="videoContainer">
+				{{#is website 1}}
+				<iframe width="853" height="480" src="https://www.youtube.com/embed/{{id}}" frameborder="0" allowfullscreen></iframe>
+				{{else}}
+				<iframe frameborder="0" width="853" height="480" src="//www.dailymotion.com/embed/video/{{id}}" allowfullscreen></iframe>
+				{{/is}}
+
+			</div>
+			<!-- like button -->
+			<div class="product-social-links pull-left">
+				<div class="fb-like pull-left" data-href="<?php echo $url; ?>" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>   
+				<div class="twitter">  <a href="<?php echo $url; ?>" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+			</div>
+			<!-- end like button -->
+			<div class="pull-right">
+				<strong><i class="fa fa-clock-o" aria-hidden="true"></i> <duration value="{{duration}}"></duration> </strong> 
+			</div>
+			<br>
+			<div class="clearfix"></div>
+			<!-- Loading and download -->
+			<div class="bao text-center" ng-show="loading">
+				<span class="status">[{status}]</span>
+				<div id="demo_contained"></div>
+				<!-- <button ng-click="resCancel()" class="btn btn-danger pull-right btn-xs">Cancel</button> -->
+			</div>
+			{{#is duration ">=" 600}}
+			{{#if website}}
+			<p class="alert alert-info">{{trans.too_long}}</p>
+			<!-- call download api -->
+			<client-dl id="{{id}}" title ="{{format_name}}"></client-dl>
+			<div class="clearfix"></div>
+			{{else}}
+			<p class="alert alert-info">{{trans.too_long}}</p>
+			{{/if}}
+			{{else}}
+			{{> short_video}}
+			{{/is}}
+		</div>
+		<div class="col-md-3">
+			<br>
+			<div class="fb-page" data-href="https://www.facebook.com/videodown.cc/" data-tabs="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/videodown.cc/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/videodown.cc/">videodown.cc</a></blockquote></div>
+			<br>
+			<!--add-->
+			 {{{ads.square.content}}}
+		</div>
+	</div>
+</div>

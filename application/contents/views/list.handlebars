@@ -1,0 +1,26 @@
+<h1>List Ads</h1>
+<a href="/contents/insert"><button class="btn btn-success">Insert</button></a>
+<div id="myerror"></div>
+<table class="table">
+	<thead>
+		<tr>
+			<th>ID </th>
+			<th>Name </th>
+			<th>Code </th>
+			<th>Content </th>
+			<th>Edit</th>
+		</tr>
+	</thead>
+	<tbody>
+			{{#each data}}
+			<tr>
+			<td>{{this._id}}</td>
+			<td>{{this.name}}</td>
+			<td>{{this.code}}</td>
+			<td>{{{this.content}}}</td>
+			<td><a href="/contents/insert?id={{this._id}}">Edit</a></td>
+			</tr>
+			{{/each}}
+	</tbody>
+</table>
+

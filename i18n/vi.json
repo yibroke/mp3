@@ -1,0 +1,41 @@
+{
+	"your_online_video" : "CHUYỂN ĐỔI VIDEO TRỰC TUYẾN!",
+"allow_you" : "Videodown.cc giúp bạn chuyển đổi và tải video yêu thích từ youtube, dailymotion thành mp3, mp4.<br> Miễn phí, mạnh mẽ và không cần đăng ký.",
+
+"hello":"Hello",
+"search":"Tìm kiếm ...",
+"insert_url":"Nhập liên kết video (URL) và chọn định dạng",
+"go":"Gởi!",
+"home":"Trang Chủ",
+"support":"Hỗ Trợ",
+"term":"Điều Lệ",
+"policy":"Chính Sách",
+"faq":"Câu Hỏi Thường Gặp",
+"keyword" : "Nhập cái gì đó để tìm kiếm (tiêu đề video)",
+
+"how_cap1":"Tìm kiếm video",
+"how_cap2":"Copy link",
+"how_cap3":"Chọn định dạng và chuyển đổi",
+
+"how_con1":"trên Youtube, dailymotion, videodown.cc",
+"how_con2":"của video và dán nó vào hộp ở trên",
+"how_con3":"sau đó tải xuống",
+"show_more":"Xem thêm",
+"too_long":"Video quá dài đối với trình chuyển đổi MP3 trực tuyến.",
+"feedback":"Phản Hồi", 
+"name":"Tên", 
+"text_from_image":"Nhập chữ trong hình", 
+"submit":"Gởi", 
+"search_for":"Tìm kiếm: ", 
+"play_and_download":"Play và chuyển đổi ", 
+"next":"Tiếp", 
+"prev":"Lùi", 
+"resent_search":"Tìm kiếm gần đây", 
+"convert":"Chuyển Đổi", 
+"supported_sites":"Hỗ trợ websites", 
+"how_to_use":"Cách sử dụng", 
+"how_to_use_detail":" Nhập link vào ô nhập link phía trên sau đó Enter hay click Gởi."
+
+
+
+}

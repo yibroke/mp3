@@ -1,0 +1,70 @@
+<script>var keyword ='{{search_text}}'</script>
+<div class="bg-gray-100">
+  <div class="container" ng-controller="youtubectr" ng-cloak>
+    <div class="row">
+      <div class="col-md-9" data-ng-init="getYoutubeData()">
+
+        <br>
+       add
+     
+        <h2> {{trans.search_for}}<strong>{{search_text}}</strong> </h2>
+
+        <ul class="nav nav-tabs">
+          <li ng-class="{active : website=== 1}"><a href="" ng-click="getYoutubeData()">Youtube</a></li>
+          <li ng-class="{active : website === 2}"><a href="" ng-click="dailymotion()">Dailymotion</a></li>
+        </ul>
+        <!--Loop youtube videos-->
+        <div ng-init="limit=10">
+          <div  class="list-group my_list" ng-repeat="x in videos | limitTo:limit">
+            <div class="youtube_thumb" ><a href="/play/[{website}]/[{x.id}]/[{x.title | slugify}].html"> <img  alt="[{x.title}]" ng-src="[{x.thumbnail}]"></a></div>
+
+
+
+            <div class="youtube_group">
+            <a class="youtube_title" href="/play/[{website}]/[{x.id}]/[{x.title | slugify}].html"><strong>[{x.title|limitTo : 100}]</strong></a> 
+            <!--show duration of youtube and dailymotion-->
+            <youtube-duration vid="[{x.id}]" wsite="[{website}]" d="[{x.duration}]" p="[{x.public}]"></youtube-duration>
+            <a class="btn btn-success" href="/play/[{website}]/[{x.id}]/[{x.title | slugify}].html">{{trans.play_and_download}}</a>
+            </div>
+            <!-- End youtube group -->
+
+
+            <i ng-show="search_spin[$index]" class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
+            <div ng-show="down[$index]"><a class="btn btn-info pull-right" target="_blank" href="<?php echo base_url() . 'download/get-file/{{result.location}}/{{result.id}}/{{result.format}}' ?>"><span class="glyphicon glyphicon-download"></span> Download</a></div>
+            <!--<div ng-show="down[$index]"><a ng-click="autoDownload(result.download)" class="btn btn-info pull-right"><span class="glyphicon glyphicon-download"></span> Download</a></div>-->
+            
+            <p ng-show="msg[$index]">[{message[$index]}] </p>
+          </div>
+        </div>
+        <!--end loop videos-->
+        <br>
+        <!-- pagination -->
+        <div class="text-center">
+
+          <button type="button" ng-show="nextPageToken" id="pageTokenNext" ng-click="limit = limit +10" class="btn btn-lg btn-success">{{trans.show_more}} </button>
+
+           <!-- <button type="button" ng-show="nextPageToken" id="pageTokenNext" ng-click="callNextPageFn(website,nextPageToken)" class="btn btn-lg btn-success">Show more </button> -->
+
+        </div>
+        <div class="clearfix"></div>
+        <!-- end pagination -->
+      </div> 
+      <div class="col-md-3 text-center">
+        <br>
+        <br>
+        <div class="fb-page" data-href="https://www.facebook.com/videodown.cc/" data-tabs="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/videodown.cc/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/videodown.cc/">videodown.cc</a></blockquote></div>
+        <br>
+        <br>
+        <!--add-->
+        add
+
+      </div>
+    </div>
+
+  </div>
+  <br>
+</div>
+
+
+
+

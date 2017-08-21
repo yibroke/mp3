@@ -1,0 +1,20 @@
+<div class="container preview">
+	<div class="row">
+		<div class="col-md-12" ng-controller="homeCtr">
+			
+			<div ng-repeat="x in posts">
+				<div class="box">
+					<h1>[{x.title}]</h1>
+					<a href="/post/read/[{x._id}]"> <img ng-src="[{x.thumb}]" alt="[{x.title}]"> </a><br><br>
+
+					<a class="btn btn-success" href="/post/read/[{x._id}]"> Read more </a><br><br>
+				</div>
+				
+			</div>
+
+			
+		</div>
+
+	</div>
+</div>
+

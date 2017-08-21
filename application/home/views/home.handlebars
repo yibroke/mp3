@@ -1,0 +1,83 @@
+<div ng-controller="homectr" ng-cloak>
+  <!-- container -->
+  <div class="container-fluid home_fruit">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <div class="text-left">
+            <h1>{{trans.your_online_video}}</h1>
+            <P>{{trans.allow_you}}</P>
+          </div>
+          <!-- Url bar -->
+          <br>
+          <div ng-show="loading"> <button class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Processing...</button></div>
+          <div ng-show="down"><a class="btn btn-info" target="_blank" download="new file name.{{result.format}}" href="<?php echo base_url() . 'download/get-file/{{result.location}}/{{result.id}}/{{result.format}}' ?>"><span class="glyphicon glyphicon-download"></span>Download</a></div>
+          <p ng-show="msg">{{message}} </p>
+          <form class="form_url" name="form_url">
+            <span class="pull-left">{{trans.insert_url}}</span>
+            <br>
+            <div class="input-group">
+              <input type="url" class="form-control input-lg" ng-model="youtube.url" placeholder="ex)http://www.youtube.com/watch?v=P7ek4scVCB8" required>
+              <span class="input-group-btn">
+               <button class="btn btn-success btn-lg" type="submit" ng-click="form_url.$valid && check_url_redirect(youtube)">{{trans.go}}</button>
+             </span>
+           </div>
+           <p class="text-left"> [{youtube.domain}] [{checkurl_msg}]</p>
+         </form>
+         <!-- End url bar -->
+       </div>    <!-- end 12 --> 
+       <div class="col-md-12 text-center">
+        <!-- search -->
+        <form action="<?php echo base_url() . 'search/make_url' ?>" name="search" class="form-search" role="form" method="GET" accept-charset="utf-8">
+         <span class="pull-left">{{trans.keyword}}</span><br>
+         <div class="input-group">
+           <input class="form-control input-lg" type="text" name="search_text" id="youtube1" required autocomplete="off" placeholder="{{trans.search}}">
+           <span class="input-group-btn"> <button class="btn btn-success btn-lg" type="submit">{{trans.go}}</button> </span>
+         </div>
+       </form> 
+       <!-- end search -->
+     </div>    <!-- end 12 -->     
+
+   </div><!-- end row -->
+ </div><!-- end container -->
+</div> <!-- end container fruit -->
+<!--end contaniner fuid grey-->
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+     <br>
+     <!--Ad-->
+     {{{ads.long.content}}}
+     <br>
+     <br>
+     <ul class="nav nav-tabs">
+      <li class="active">
+        <a data-related="tag2"><strong>{{trans.how_to_use}}</strong></a></li> 
+      </ul>
+      <br>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="well how_to">
+            <span class="firstcharacter">1</span><p><strong> {{trans.how_cap1}}</strong></p>
+            <p> {{trans.how_con1}}</p>
+          </div>
+        </div>
+        <div class="col-md-4"><div class="well how_to">
+          <span class="firstcharacter">2</span> <p><strong> {{trans.how_cap2}}</strong></p>
+          <p>{{trans.how_con2}}</p>
+        </div></div>
+        <div class="col-md-4"><div class="well how_to">
+          <span class="firstcharacter"> 3 </span> <p><strong>  {{trans.how_cap3}}</strong></p>
+          <p>{{trans.how_con3}}</p>
+        </div></div>
+      </div>
+      <!-- End row -->
+    </div>
+    <div class="col-md-3">
+     <br>
+     <div class="fb-page" data-href="https://www.facebook.com/videodown.cc/" data-tabs="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/videodown.cc/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/videodown.cc/">videodown.cc</a></blockquote></div>
+     <br>
+   </div>
+ </div>
+</div>
+</div>

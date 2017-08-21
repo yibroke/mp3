@@ -1,0 +1,41 @@
+{
+
+
+
+"your_online_video": "온라인 비디오 컨버터!",
+"allow_you": "Videodown.cc 을 사용하면 YouTube, Dailymotion에서 MP3, MP4 등의 형식으로 좋아하는 비디오를 변환하고 다운로드 할 수 있습니다..<br> 무료이며 등록이 필요 없습니다.",
+
+"hello":"Hello",
+"search":"수색 ...",
+"insert_url":"비디오 링크 (URL) 삽입 및 형식 선택",
+"go":"가기!",
+"home":"집",
+"support":"지원하다",
+"term":"서비스 기간",
+"policy":"개인 정보 정책",
+"faq":"자주 묻는 질문",
+"keyword": "검색 할 항목을 입력하십시오 (비디오 제목)",
+
+"how_cap1":"비디오 검색",
+"how_cap2":"링크 복사",
+"how_cap3":"형식 선택 및 변환",
+
+"how_con1":"Youtube, dailymotion, videodown.cc 에서",
+"how_con2":"위에있는 상자에 붙여 넣습니다",
+"how_con3":"그 다음 다운로드",
+"show_more":"자세히보기",
+"too_long":"비디오가 너무 길어서 온라인 MP3 변환기가 없습니다.",
+"feedback":"피드백", 
+"name":"이름", 
+"text_from_image":"이미지의 텍스트", 
+"submit":"제출", 
+"search_for":"검색: ", 
+"play_and_download":"재생 및 변환", 
+"next":"다음 것", 
+"prev":"너무 이른", 
+"resent_search":"재송신 검색", 
+"convert":"변하게 하다", 
+"supported_sites":"지원되는 사이트", 
+"how_to_use":"사용하는 방법", 
+"how_to_use_detail":" 페이지 상단의 입력 필드에 URL 주소를 입력하고 Enter를 누르거나 입력 필드의 오른쪽에있는 \"Download\"버튼을 클릭하십시오."
+}
