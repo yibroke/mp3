@@ -1,4 +1,9 @@
+<div ng-if="notwork" ng-init="finish(event)">
 
+	<p class="alert alert-danger">Video not available</p>
+	
+	<div class="clearfix"></div>
+</div>
 <div ng-if="formats.url" ng-init="finish(event)">
 
 	<a class="btn btn-lg btn-download pull-left" href="[{formats.url}]?title=[{title}]" download><span class="icon-if_Download_2202271"></span> DOWNLOAD </a> 

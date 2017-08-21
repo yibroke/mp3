@@ -46,27 +46,34 @@ router.get('/client_dl/:id', function(req,res,next){
   var url = 'http://www.youtube.com/watch?v='+id;
   var options = [];
   youtubedl.getInfo(url, options,{maxBuffer: 1000*1024}, function(err, info) {
-    if (err) throw err;
-    var arr1 = info.formats;
-    var i =0; var l = arr1.length;
-    var response = [];
-    for(i;i<l;i++)
-    {
-      var k =arr1[i];
-
-      if(k.format_id ==18 || k.format_id==22)
+    if (err) {
+     // throw err;
+       res.send('false');
+    }else{
+      var arr1 = info.formats;
+      var i =0; var l = arr1.length;
+      var response = [];
+      for(i;i<l;i++)
       {
-       var obj ={
-         ext:k.ext,
-         format_id: k.format_id,
-         height: k.height,
-         url: k.url
+        var k =arr1[i];
+
+        if(k.format_id ==18 || k.format_id==22)
+        {
+         var obj ={
+           ext:k.ext,
+           format_id: k.format_id,
+           height: k.height,
+           url: k.url
+         }
+         console.log(obj);
+         response.push(obj);
        }
-       console.log(obj);
-       response.push(obj);
      }
+       res.send(response);
+
    }
-   res.send(response);
+
+ 
  });
 })
 // old code
