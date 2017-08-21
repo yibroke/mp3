@@ -60,7 +60,7 @@ router.get('/2/:id/:name', function(req, res, next) {
           video_title: body.title,
           description: body.description,
           id:id,
-           url:'http://videodown.cc/'+'play/1/'+id+'/'+req.params.name,
+           url:'http://videodown.cc/'+'play/2/'+id+'/'+req.params.name,
           website:2,
           youtube_url:body.url,
           image:body.thumbnail_720_url, 
