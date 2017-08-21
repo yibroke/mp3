@@ -36,14 +36,14 @@
 				<!-- <button ng-click="resCancel()" class="btn btn-danger pull-right btn-xs">Cancel</button> -->
 			</div>
 			{{#is duration ">=" 600}}
-			{{#if website}}
+			{{#is website 1}}
 			<p class="alert alert-info">{{trans.too_long}}</p>
 			<!-- call download api -->
 			<client-dl id="{{id}}" title ="{{format_name}}"></client-dl>
 			<div class="clearfix"></div>
 			{{else}}
 			<p class="alert alert-info">{{trans.too_long}}</p>
-			{{/if}}
+			{{/is}}
 			{{else}}
 			{{> short_video}}
 			{{/is}}

@@ -19,7 +19,7 @@ router.get('/1/:id/:name', function(req, res, next) {
     var youtube_url ="https://www.youtube.com/watch?v="+id;
     var title = t+'【 VIDEODOWN.CC 】';
     var video_title= t;
-    var description= t+ ' youtube download ❤ ' +t+ 'youtube video ❤' + t +' mp3 download【 VIDEODOWN.CC 】';
+    var description= t+ ' youtube download ❤ ' +t+ ' youtube video ❤ ' + t +' mp3 download【 VIDEODOWN.CC 】';
     var duration_format =youtube_duration(body.items[0].contentDetails.duration);
     res.render('play/views/play',{
       title:title,
@@ -28,7 +28,7 @@ router.get('/1/:id/:name', function(req, res, next) {
       description: description,
       id:id,
       url:'http://videodown.cc/'+'play/1/'+id+'/'+req.params.name,
-      website: website,
+      website: 1,
       youtube_url:youtube_url,
       image:meta_img, 
       duration:duration_format,
