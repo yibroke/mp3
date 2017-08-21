@@ -17,15 +17,7 @@ module.exports = function(app){
 
   });
 
-  app.get('/about', function (req, res) {
 
-    req.db.collection("pages").findOne({_id:1}, function (err , data){
-      if(err) throw err;
-      res.render('home/views/about', { title:data.title, url:'http://winner668.net/about',active_about:true, data: data});
-
-    })
-
-  });
 // keyword
 app.get('/keyword/:key', function(req, res,next){
   var q = req.params.key;
@@ -48,47 +40,6 @@ app.get('/keyword/:key', function(req, res,next){
   })
 })
 
-
-app.get('/privacy-policy', function (req, res) {
-
-  req.db.collection("pages").findOne({_id:2}, function (err , data){
-    if(err) throw err;
-    res.render('home/views/about', { title: data.title, url:'http://winner668.net/privacy-policy',active_about:true, data: data});
-
-  })
-  
-});
-
-app.get('/terms-and-conditions', function (req, res) {
-
-  req.db.collection("pages").findOne({_id:3}, function (err , data){
-    if(err) throw err;
-    res.render('home/views/about', { title: data.title, url:'http://winner668.net/terms-and-conditions',active_about:true, data: data});
-
-  })
-  
-});
-
-app.get('/disclaimer', function (req, res) {
-
-  req.db.collection("pages").findOne({_id:4}, function (err , data){
-    if(err) throw err;
-    console.log(data);
-    res.render('home/views/about', { title: data.title, url:'http://winner668.net/disclaimer',active_about:true, data: data});
-
-  })
-  
-});
-
-
-
-app.get('/preview', function (req, res) {
-
-  res.render('home/views/preview', { title: 'Preview',active_preview:true});
-});
-app.get('/testimonials', function (req, res) {
-  res.render('home/views/testmonials', { title: 'Testimonials', url:'http://winner668.net/preview', active_testmonials:true});
-});
 function ensureAuth(req, res, next){
   if(req.user){
 
