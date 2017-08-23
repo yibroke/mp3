@@ -20,9 +20,12 @@
 	</span>
 </div>
 {{!-- <client-dl id="{{id}}" title ="{{title}}"></client-dl> --}}
-<client-dl id="{{id}}" title ="{{format_name}}"></client-dl>
 
-<!-- <div class="form-group">   
+{{#is website 1}}
+
+<client-dl id="{{id}}" title ="{{format_name}}"></client-dl>
+{{else}}
+<div class="form-group">   
 	<span class="input-group-btn">
 		<button type="submit" class="btn btn-success btn-lg" ng-click="theButtonMp4||check_url(youtube.mp4)">{{trans.convert}} video <span class="glyphicon glyphicon-facetime-video"></span>  </button>
 		<select class="btn btn-default input-lg" 
@@ -31,7 +34,8 @@
 		ng-options="m.id as m.name for m in arrformatv" required>   
 	</select>
 </span>
-</div> -->
+</div>
+{{/is}}
 
 
 <!-- Display button processsing here. -->
