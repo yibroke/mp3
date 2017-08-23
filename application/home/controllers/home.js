@@ -17,8 +17,6 @@ router.get('/login', function(req, res, next) {
 	// use default layout
   res.render('user/views/user', { title: 'login', data:d});
 });
-
-
 router.post('/youtube_dl', function(req, res, next){
   console.log(req.body);
   var url =  req.body.url.replace('&#x3D;','=');
@@ -28,22 +26,22 @@ router.post('/youtube_dl', function(req, res, next){
   var name =req.body.name;
   switch (format)  {
     case 1:
-    var format1 = '--extract-audio --audio-format mp3 --max-filesize 200000k';
+    var format1 = '--extract-audio --audio-format mp3';
     var location = 'mp3';
     var format2 = 'mp3';
     break;
     case 11:
-    var format1 = '-f mp3 --max-filesize 200000k';
+    var format1 = '-f mp3';
     var location = 'mp3';
     var format2 = 'mp3';
     break;
     case 2:
-    var format1 = "-f '(mp4)[height<=720]' --max-filesize 200000k";
+    var format1 = "-f '(mp4)[height<=720]'";
     var location = 'mp4';
     var format2 = 'mp4';
     break;
     case 22:
-    var format1 = "-f '(mp4)[height<=480]' --max-filesize 200000k";
+    var format1 = "-f '(mp4)[height<=480]'";
     var location = 'mp4m';
     var format2 = 'mp4';
     break;

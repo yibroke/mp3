@@ -1024,8 +1024,8 @@ angular.module('myApp').factory('homefact',function($http,$q){
     //convert in back end. youtube(id,format)
     factory.convert=function(youtube){
 
-         return $http.post('/home/youtube_dl',youtube, {timeout: 29000});
-         //return $http.post(base_url+'home/go',youtube);
+         // return $http.post('/home/youtube_dl',youtube, {timeout: 29000});
+          return $http.post('/home/youtube_dl',youtube);
     };
     factory.get_download_format=function(format)
     {
@@ -1143,19 +1143,18 @@ angular.module('myApp').controller('playctr',function($scope,homefact,$http,$win
         $scope.contained_progressbar.setColor('green');
         $scope.contained_progressbar.start();
        // event.defaultPrevented;
-        var id = setInterval(frame, 100);
-        function frame() {
-          if ($scope.contained_progressbar.status() >= 100 ) {
-            clearInterval(id);
-          } else {
-            $scope.status = $scope.contained_progressbar.status().toFixed(0) + '%';
-          }
+       var id = setInterval(frame, 300);
+       function frame() {
+        if ($scope.contained_progressbar.status() >= 100 ) {
+          clearInterval(id);
+        } else {
+          $scope.status = $scope.contained_progressbar.status().toFixed(0) + '%';
         }
       }
-
-      function finish() {
-        $timeout(callAtTimeout, 10);
-        $scope.contained_progressbar.complete();
+    }
+    function finish() {
+      $timeout(callAtTimeout, 10);
+      $scope.contained_progressbar.complete();
         // event.defaultPrevented;
         $scope.status = 100 + '%';
       }
@@ -1181,15 +1180,15 @@ $scope.check_url=function(data) {
             $scope.down=false;
             var youtube = {
               id:myinit.youtube_id,
-             url: myinit.url,
-             website: myinit.website,
-             name: myinit.name,
-             format:data
-           };
-           console.log(youtube);
+              url: myinit.url,
+              website: myinit.website,
+              name: myinit.name,
+              format:data
+            };
+            console.log(youtube);
            // un comment this 
            convert_youtube(youtube);
-        };
+         };
        // FUNCTION CONVER YOUTUBE
        function convert_youtube(youtube)
        {

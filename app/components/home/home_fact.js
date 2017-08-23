@@ -40,8 +40,8 @@ angular.module('myApp').factory('homefact',function($http,$q){
     //convert in back end. youtube(id,format)
     factory.convert=function(youtube){
 
-         return $http.post('/home/youtube_dl',youtube, {timeout: 29000});
-         //return $http.post(base_url+'home/go',youtube);
+         // return $http.post('/home/youtube_dl',youtube, {timeout: 29000});
+          return $http.post('/home/youtube_dl',youtube);
     };
     factory.get_download_format=function(format)
     {
