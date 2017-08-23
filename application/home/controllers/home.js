@@ -58,10 +58,8 @@ router.post('/youtube_dl', function(req, res, next){
           status:false,
           data:'Oops Your url is not work!'+err,
           download: 'downloads/' + location + '/' + id + '.' + format2,
-
         };
       } else{
-
         var arr = {
           status: true,
           data: 'Successful',
@@ -78,7 +76,6 @@ router.post('/youtube_dl', function(req, res, next){
     }
     );
 });
-
 // Get youtube id from url.
 router.post('/service_youtube_id_from_url', function(req, res, next){
   var url = req.body.url;

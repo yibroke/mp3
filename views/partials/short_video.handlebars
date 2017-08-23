@@ -3,7 +3,7 @@
 <p ng-show="msg">[{message}] </p>
 <!-- Download -->
 <div ng-show="down">
-	<a  class="btn btn-lg btn-download" target="_blank" id='mydownloadurl' href="[{result.link}]" download="{{format_name}}"><span class="icon-if_Download_2202271"></span> DOWNLOAD</a>
+	<a  class="btn btn-lg btn-download" target="_blank" id='mydownloadurl' href="[{result.link}]" download="{{format_name}}"><span class="icon-if_Download_2202271"></span> DOWNLOAD MP3</a>
 </div>
 <hr>
 <!-- End loading and download -->
@@ -20,8 +20,9 @@
 	</span>
 </div>
 {{!-- <client-dl id="{{id}}" title ="{{title}}"></client-dl> --}}
+<client-dl id="{{id}}" title ="{{format_name}}"></client-dl>
 
-<div class="form-group">   
+<!-- <div class="form-group">   
 	<span class="input-group-btn">
 		<button type="submit" class="btn btn-success btn-lg" ng-click="theButtonMp4||check_url(youtube.mp4)">{{trans.convert}} video <span class="glyphicon glyphicon-facetime-video"></span>  </button>
 		<select class="btn btn-default input-lg" 
@@ -30,6 +31,8 @@
 		ng-options="m.id as m.name for m in arrformatv" required>   
 	</select>
 </span>
-</div>
+</div> -->
+
+
 <!-- Display button processsing here. -->
 </div><!-- end bottun container -->
