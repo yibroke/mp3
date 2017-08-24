@@ -14,6 +14,7 @@
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/bower_components/flag-icon-css/css/flag-icon.min.css' />
   <link rel="icon" type="images/png" sizes="32x32" href="/images/favicon-32x32.png">
   <!-- google font -->
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
@@ -133,12 +134,12 @@
  <footer class="container-fluid footer">
   <div class="container">
     <div class="row text-center"> 
-     <div class="lang" ng-show="lang">
+     <div class="lang" ng-hide="lang">
      <ul>
-         <li> <a {{#is lang "en"}} class="active_lang" {{/is}} href="/?clang=en">English</a> </li>
-         <li> <a {{#is lang "vi"}} class="active_lang" {{/is}} href="/?clang=vi">Tiếng Việt</a></li>
-         <li><a {{#is lang "ko"}} class="active_lang" {{/is}}  href="/?clang=ko">한국어</a></li>
-         <li><a {{#is lang "zh"}} class="active_lang" {{/is}}  href="/?clang=zh">中文</a></li>
+         <li> <a {{#is lang "en"}} class="active_lang" {{/is}} href="/?clang=en"> <span class="flag-icon flag-icon-us"></span> USA / English</a> </li>
+         <li> <a {{#is lang "vi"}} class="active_lang" {{/is}} href="/?clang=vi"><span class="flag-icon flag-icon-vn"></span> Việt Nam / Tiếng Việt</a></li>
+         <li><a {{#is lang "ko"}} class="active_lang" {{/is}}  href="/?clang=ko"><span class="flag-icon flag-icon-kr"></span> 한국 / 한국어</a></li>
+         <li><a {{#is lang "zh"}} class="active_lang" {{/is}}  href="/?clang=zh"><span class="flag-icon flag-icon-cn"></span> 中国 / 中文</a></li>
        </ul>
      </div>
      <div class="col-md-3 col-xs-12">
