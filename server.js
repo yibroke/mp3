@@ -22,9 +22,9 @@ var path = require('path');
 //Express session
  app.use(session({//2
  // store: new RedisStore(),
-  secret:'secret',
-  resave: false,
-  saveUninitialized: false,
+ secret:'secret',
+ resave: false,
+ saveUninitialized: false,
 }));
 
 //Passport Init
@@ -35,8 +35,12 @@ app.use(flash());
 
 app.use(i18n({
   translationsPath: path.join(__dirname, 'i18n'), // <--- use here. Specify translations files path. 
-   siteLangs: ["en","vi","ko","zh"],
-  textsVarName: 'trans'
+  siteLangs: ["en","vi","ko","zh"],
+  textsVarName: 'trans',
+  defaultLang :'en',
+  browserEnable:false
+
+
 }));
 
 //customer validation
