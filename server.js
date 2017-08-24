@@ -56,7 +56,7 @@ app.use(express.static('public'));// Serving static files in Express
 app.use(function (req,res,next) {
 
   if(!res.locals.kwords) res.locals.kwords ={};
-  req.db.collection("kwords").find({}).sort({_id:-1}).toArray(function(err, data){
+  req.db.collection("kwords").find({}).limit(40).sort({_id:-1}).toArray(function(err, data){
    if(err) throw err;
    res.locals.kwords.arr = data;
  })
