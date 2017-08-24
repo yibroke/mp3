@@ -1,0 +1,35 @@
+<!-- Trigger the modal with a button -->
+
+ <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalLanguage"> <span class="glyphicon glyphicon-menu-left"></span>
+
+        {{#is lang "en"}} <span class="flag-icon flag-icon-us"></span> USA / English{{/is}}
+        {{#is lang "vi"}} <span class="flag-icon flag-icon-vn"></span> Việt Nam / Tiếng Việt {{/is}}
+        {{#is lang "ko"}} <span class="flag-icon flag-icon-kr"></span> 한국 / 한국어{{/is}}
+        {{#is lang "zh"}} <span class="flag-icon flag-icon-cn"></span> 中国 / 中文 {{/is}}
+      </button><br>
+<!-- Modal -->
+<div id="modalLanguage" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Select Language</h4>
+      </div>
+      <div class="modal-body">
+         <ul>
+         <li> <a {{#is lang "en"}} class="active_lang" {{/is}} href="/?clang=en"> <span class="flag-icon flag-icon-us"></span> USA / English</a> </li>
+         <li> <a {{#is lang "vi"}} class="active_lang" {{/is}} href="/?clang=vi"><span class="flag-icon flag-icon-vn"></span> Việt Nam / Tiếng Việt</a></li>
+         <li><a {{#is lang "ko"}} class="active_lang" {{/is}}  href="/?clang=ko"><span class="flag-icon flag-icon-kr"></span> 한국 / 한국어</a></li>
+         <li><a {{#is lang "zh"}} class="active_lang" {{/is}}  href="/?clang=zh"><span class="flag-icon flag-icon-cn"></span> 中国 / 中文</a></li>
+       </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+

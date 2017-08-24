@@ -1,18 +1,23 @@
 .active_lang{
     border-bottom: 1px solid green;
 }
-.lang {
-  
-
-
-  ul{
+#modalLanguage{
+  float: left;
+  text-align: left;
+  color: #333;
+  a{
+    color: #333 !important;
+  }
+    ul{
     list-style: none; /* Remove list bullets */
   }
   li{
-    display: inline;
-    padding: 0px 15px 0px 15px;
+    padding-top: 20px;
   }
 }
+
+
+
 #demo_contained1 {
   position: relative;
   width: 100%;

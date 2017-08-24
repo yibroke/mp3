@@ -84,6 +84,7 @@
     <div ng-class="{showhide: !logo}" id="myNavbar">
 
       <ul class="nav navbar-nav navbar-right">
+      <li class="hidden-sm hidden-xs"><a href="#" data-toggle="modal" data-target="#modalLanguage">Language</a></li>
 
        <form id="form_search" action="/search/make_url" name="search" class="navbar-form navbar-right ng-pristine ng-valid" role="form" method="GET" accept-charset="utf-8">
         <div class="input-group">
@@ -134,14 +135,9 @@
  <footer class="container-fluid footer">
   <div class="container">
     <div class="row text-center"> 
-     <div class="lang" ng-hide="lang">
-     <ul>
-         <li> <a {{#is lang "en"}} class="active_lang" {{/is}} href="/?clang=en"> <span class="flag-icon flag-icon-us"></span> USA / English</a> </li>
-         <li> <a {{#is lang "vi"}} class="active_lang" {{/is}} href="/?clang=vi"><span class="flag-icon flag-icon-vn"></span> Việt Nam / Tiếng Việt</a></li>
-         <li><a {{#is lang "ko"}} class="active_lang" {{/is}}  href="/?clang=ko"><span class="flag-icon flag-icon-kr"></span> 한국 / 한국어</a></li>
-         <li><a {{#is lang "zh"}} class="active_lang" {{/is}}  href="/?clang=zh"><span class="flag-icon flag-icon-cn"></span> 中国 / 中文</a></li>
-       </ul>
-     </div>
+
+  
+
      <div class="col-md-3 col-xs-12">
       <a class="navbar-brand" href="/"><img class="img-responsive b_logo" src="/images/videodown.png" alt="VideoDown logo footer"></a>
     </div>
@@ -151,12 +147,8 @@
       </p>
     </div>
     <div class="col-md-2 col-xs-12">
-      <button ng-click="lang=!lang" class="btn btn-primary"> <span class="glyphicon glyphicon-menu-left"></span>
-        {{#is lang "en"}} English{{/is}}
-        {{#is lang "vi"}} Tiếng Việt {{/is}}
-        {{#is lang "ko"}} 한국어 {{/is}}
-        {{#is lang "zh"}} 中文 {{/is}}
-      </button><br>
+      {{> language}}
+     
     </div>
   </div>
 </div>
