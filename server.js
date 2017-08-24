@@ -58,8 +58,7 @@ app.use(function (req,res,next) {
   if(!res.locals.kwords) res.locals.kwords ={};
   req.db.collection("kwords").find({}).sort({_id:-1}).toArray(function(err, data){
    if(err) throw err;
-   if(data.length>20) res.locals.kwords.haimuoi =true;
-   res.locals.kwords.arr =data;
+   res.locals.kwords.arr = data;
  })
   next();
 });
