@@ -26,21 +26,16 @@ var path = require('path');
  resave: false,
  saveUninitialized: false,
 }));
-
 //Passport Init
 app.use(passport.initialize());//3
 app.use(passport.session());//4
 app.use(flash());
-
-
 app.use(i18n({
   translationsPath: path.join(__dirname, 'i18n'), // <--- use here. Specify translations files path. 
   siteLangs: ["en","vi","ko","zh"],
   textsVarName: 'trans',
   defaultLang :'en',
   browserEnable:false
-
-
 }));
 
 //customer validation
