@@ -84,10 +84,33 @@ router.post('/service_youtube_id_from_url', function(req, res, next){
   if (match && match[2].length == 11) {
     var newUrl = match[2];
   } else {
-   var newUrl ='/'
-}
-res.send(newUrl);
+    var newUrl ='error'
+ }
+ res.send(newUrl);
 })
+// get dailymotion id from url.
+router.post('/service_dailymotion_id_from_url', function(req,res,next){
+    //https://stackoverflow.com/questions/12387389/how-to-parse-dailymotion-video-url-in-javascript
+    var url = req.body.url;
+    res.send(getDailyMotionIds(url));
+  });
+// FUNCTION
+
+function getDailyMotionIds(str) {
+  var ret = [];
+  var re = /(?:dailymotion\.com(?:\/video|\/hub)|dai\.ly)\/([0-9a-z]+)(?:[\-_0-9a-zA-Z]+#video=([a-z0-9]+))?/g;     
+  var m;
+
+  while ((m = re.exec(str)) != null) {
+    if (m.index === re.lastIndex) {
+      re.lastIndex++;
+    }
+    ret.push(m[2]?m[2]:m[1]);
+  }
+  return ret;
+}
+
+// END FUNCTION
 
 router.get('/no-layout', function(req, res, next) {
   var d = new Date().toLocaleTimeString();

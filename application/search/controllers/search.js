@@ -18,6 +18,8 @@ router.get('/make_url', function(req,res,next){
   res.redirect('/keyword/'+rep+'.html');
   //res.send('here is your keyword: -'+rep+'-');
 });
+
+
 router.get('/keyword/:key', function(req, res, next){
   var q = req.params.key;
   var key = q.replace(/_/g,' ');
@@ -104,7 +106,41 @@ router.get('/client_dl/:id', function(req,res,next){
 }
 });
 })
+// url dl
 
+// Client DL
+router.post('/url_dl', function(req,res,next){
+ var id = req.body.id;
+  var url = req.body.url;
+  var myCmd ='youtube-dl -o "public/downloads/mp3/'+id+'.%(ext)s" -f mp3 ' + url;
+  cmd.get(
+    myCmd,
+    function(err, data, stderr){
+      if(err){
+        var arr ={
+          status:false,
+          data:'Oops Your url is not work!'+err
+        };
+      } else{
+
+        var arr = {
+          status: true,
+          data: 'Successful',
+          id: id,
+          format:'mp3',
+          location:'mp3',
+          link: '/downloads/mp3/' + id + '.mp3',
+          download: '/downloads/mp3/' + id + '.mp3',
+          cmd: myCmd,
+        }; 
+      }
+      console.log('the current working dir is : ',data);
+      res.send(arr);
+    }
+    );
+
+
+})
 
 
 module.exports = router;

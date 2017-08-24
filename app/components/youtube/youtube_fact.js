@@ -49,6 +49,10 @@ angular.module('myApp').factory('youtubefact',function($http){
    {
      return $http.get('/search/client_dl/'+id);
    };
+   factory.urlDl=function(data)
+   {
+     return $http.post('/search/url_dl/',data);
+   };
 
 
 

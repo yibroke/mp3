@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
+var youtubedl = require('youtube-dl');
 var autoIncrement = require("mongodb-autoincrement"); // auto inc
 var d = +new Date();
 
@@ -34,9 +35,8 @@ router.get('/1/:id/:name', function(req, res, next) {
       duration:duration_format,
       video: body
     });
-
   }else{
-      res.redirect('/');// or can rediect to error page.
+      res.render('play/views/error');// or can rediect to error page.
     } 
   });// end request
 
@@ -51,6 +51,7 @@ router.get('/2/:id/:name', function(req, res, next) {
     url: url,
     json: true
   }, function (error, response, body) {
+    if(error) throw error;
 
     if (body.id) {
         console.log(body) // Print the json response
@@ -60,7 +61,7 @@ router.get('/2/:id/:name', function(req, res, next) {
           video_title: body.title,
           description: body.description,
           id:id,
-           url:'http://videodown.cc/'+'play/2/'+id+'/'+req.params.name,
+          url:'http://videodown.cc/'+'play/2/'+id+'/'+req.params.name,
           website:2,
           youtube_url:body.url,
           image:body.thumbnail_720_url, 
@@ -68,9 +69,39 @@ router.get('/2/:id/:name', function(req, res, next) {
           video: body
         });
 
+      }else{
+        console.log('error');
+         res.render('play/views/error');// or can rediect to error page.
       }
     })
 });
+
+// play 3
+
+router.get('/3', function(req, res, next) {
+  var url = req.query.url;
+  youtubedl.getInfo(url, [], function(err, info) {
+    if (err){
+      res.render('play/views/error');// or can rediect to error page.
+    }else{
+      res.render('play/views/play3',{
+       id: info.id,
+       title: info.title+'【 VIDEODOWN.CC 】',
+       video_title: info.title,
+       url:'http://videodown.cc/play/3?url='+url,
+       url_source: info.url,
+       url_pass:url,
+       image: info.thumbnail,
+       description: info.description,
+       filename: info._filename,
+       format_id: info.format_id
+     });
+    }
+  });
+});
+
+// end play 3
+
 
 // Make URL.
 router.get('/make_url', function(req,res,next){
