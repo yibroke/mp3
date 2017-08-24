@@ -4,14 +4,14 @@
 
 "hello":"Hello",
 "search":"Tìm kiếm ...",
-"insert_url":"Nhập liên kết video (URL) và chọn định dạng",
+"insert_url":"NNhập link (YouTube, DailyMotion, SoundCloud)",
 "go":"Gởi!",
 "home":"Trang Chủ",
 "support":"Hỗ Trợ",
 "term":"Điều Lệ",
 "policy":"Chính Sách",
 "faq":"Câu Hỏi Thường Gặp",
-"keyword" : "Nhập cái gì đó để tìm kiếm (tiêu đề video)",
+"keyword" : "Nhập cái gì đó để tìm kiếm (YouTube, DailyMotion)",
 
 "how_cap1":"Tìm kiếm video",
 "how_cap2":"Copy link",
