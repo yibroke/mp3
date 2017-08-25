@@ -5,13 +5,13 @@
 
 "hello":"Hello",
 "search":"검색 ...",
-"insert_url":"비디오 링크 입력 (YouTube, Dailymotion,soundcloud)",
+"insert_url":"비디오 링크 입력",
 "go":"검색",
 "home":"홈",
 "support":"고객지원",
 "term":"이용약관",
 "policy":"개인 정보 정책",
-"keyword": "동영상 명칭을 입력하세요 (YouTube, Dailymotion)",
+"keyword": "동영상 명칭을 입력하세요",
 
 "how_cap1":"비디오 검색",
 "how_cap2":"링크 복사",

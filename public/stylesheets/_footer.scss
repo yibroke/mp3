@@ -1,5 +1,10 @@
 $footer-color: #333333;
 .footer{
+ 
+        .navbar-brand{
+            text-align: center;
+        }
+    
     margin-top: 50px;
     padding-top: 30px;
     padding-bottom: 10px;
@@ -21,6 +26,7 @@ $footer-color: #333333;
     margin: 1em 0;
     padding: 0; 
     }
+
 }
 .b_logo img{
     

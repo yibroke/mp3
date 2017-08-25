@@ -231,7 +231,7 @@ option {
     margin-bottom: 10px;
   }
   .form-search {
-    margin-bottom: 120px;
+    margin-bottom: 40px;
   }
   /* number over thumbnail*/
   .thumbnail{
@@ -288,7 +288,12 @@ option {
   nav .input-group{
     width: 370px;
   }
+  .text-xs-center {
+    text-align: center !important;
+  } 
+  // mobile
   @media (max-width: 767px){
+     
     #form_search{
       max-width: 100%;
       margin-left: 3px;

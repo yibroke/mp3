@@ -14,7 +14,7 @@
           <div ng-show="down"><a class="btn btn-info" target="_blank" download="new file name.{{result.format}}" href="<?php echo base_url() . 'download/get-file/{{result.location}}/{{result.id}}/{{result.format}}' ?>"><span class="glyphicon glyphicon-download"></span>Download</a></div>
           <p ng-show="msg">{{message}} </p>
           <form class="form_url" name="form_url">
-            <span class="pull-left">{{trans.insert_url}}</span>
+            <span class="pull-left">{{trans.insert_url}} (<span class="small">YouTube, DailyMotion, SoundClound</span>) </span>
             <br>
             <div class="input-group">
               <input type="url" class="form-control input-lg" ng-model="youtube.url" placeholder="ex)http://www.youtube.com/watch?v=P7ek4scVCB8" required>
@@ -29,7 +29,7 @@
        <div class="col-md-12 text-center">
         <!-- search -->
         <form action="/search/make_url" name="search" class="form-search" role="form" method="GET" accept-charset="utf-8">
-         <span class="pull-left">{{trans.keyword}}</span><br>
+         <span class="pull-left">{{trans.keyword}} (<span class="small">YouTube, DailyMotion</span>)</span><br>
          <div class="input-group">
            <input class="form-control input-lg" type="text" name="search_text" id="youtube1" required autocomplete="off" placeholder="{{trans.search}}">
            <span class="input-group-btn"> <button class="btn btn-success btn-lg" type="submit">{{trans.go}}</button> </span>

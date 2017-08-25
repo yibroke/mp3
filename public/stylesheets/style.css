@@ -207,7 +207,7 @@ h2 {
   margin-bottom: 10px; }
 
 .form-search {
-  margin-bottom: 120px; }
+  margin-bottom: 40px; }
 
 /* number over thumbnail*/
 .thumbnail {
@@ -256,6 +256,9 @@ h1 {
 
 nav .input-group {
   width: 370px; }
+
+.text-xs-center {
+  text-align: center !important; }
 
 @media (max-width: 767px) {
   #form_search {
