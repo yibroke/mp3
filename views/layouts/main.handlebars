@@ -83,25 +83,20 @@
          
        </button>
 
+       <a href="#" ng-hide="logo==1" class="navbar-toggle pull-right top-flag"  data-toggle="modal" data-target="#modalLanguage">
 
-       <button ng-hide="logo==1" type="button" class="navbar-toggle pull-right top-flag"  data-toggle="modal" data-target="#modalLanguage">
-        {{#is lang "en"}} <span class="flag-icon flag-icon-us"></span>{{/is}}
-        {{#is lang "vi"}} <span class="flag-icon flag-icon-vn"></span>{{/is}}
-        {{#is lang "ko"}} <span class="flag-icon flag-icon-kr"></span>{{/is}}
-        {{#is lang "zh"}} <span class="flag-icon flag-icon-cn"></span>{{/is}}
-        
-      </button>
-
+        {{#is lang "en"}}  <img height="32" src="bower_components/flag-icon-css/flags/4x3/us.svg">{{/is}}
+        {{#is lang "vi"}}<img height="32" src="bower_components/flag-icon-css/flags/4x3/vn.svg">{{/is}}
+        {{#is lang "ko"}} <img height="32" src="bower_components/flag-icon-css/flags/4x3/kr.svg">{{/is}}
+        {{#is lang "zh"}} <img height="32" src="bower_components/flag-icon-css/flags/4x3/cn.svg">{{/is}}
+      </a>
       <a ng-hide="logo==1" class="navbar-brand" href="/"><img src="/images/logo_videodown.png" alt="logo"></a>
     </div>
     <div ng-class="{showhide: !logo}" id="myNavbar">
-
       <ul class="nav navbar-nav navbar-right">
         <li>
-
-
         </li>
-        <li class="hidden-sm hidden-xs li-language"><a href="#" data-toggle="modal" data-target="#modalLanguage">Language</a></li>
+        <li class="hidden-xs li-language"><a href="#" data-toggle="modal" data-target="#modalLanguage">Language</a></li>
 
         <form id="form_search" action="/search/make_url" name="search" class="navbar-form navbar-right ng-pristine ng-valid" role="form" method="GET" accept-charset="utf-8">
           <div class="input-group">

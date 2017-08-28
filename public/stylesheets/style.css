@@ -1,5 +1,9 @@
 .top-flag {
-  right: 10px; }
+  right: 10px;
+  border: none !important;
+  padding: 0 !important;
+  background-repeat: no-repeat;
+  background-size: 300% 100%; }
 
 .top-search {
   background-color: #5cb85c;
