@@ -27,12 +27,18 @@ app.get('/keyword/:key', function(req, res,next){
     if(err) throw err;
     console.log(data);
     if(data==0){
-      req.db.collection('kwords').insert({name:key, slug:q}, function(err, data){
+      req.db.collection('kwords').insert({name:key, slug:q, date:+new Date()}, function(err, data){
         if(err) throw err;
       });
 
+    }else{
+       var myquery = { name: key };
+          var newvalues = { $set: { date: +new Date() } };
+        req.db.collection('kwords').updateOne(myquery, newvalues,function(err, data){
+        if(err) throw err;
+      });
     }
-  })
+  });
   res.render('search/views/search_index',{
     title: key,
     search_text: key,

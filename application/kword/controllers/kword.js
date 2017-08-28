@@ -20,7 +20,7 @@ router.get('/all-kwords', function(req,res,next){
 
 router.get('/delete/:id', function(req,res,next){
 	
-	 var myquery = { _id: ObjectId(req.params.id) };
+	var myquery = { _id: ObjectId(req.params.id) };
 	req.db.collection("kwords").deleteOne(myquery, function(err, data) {
 		if (err) throw err;
 		console.log("1 document deleted");
