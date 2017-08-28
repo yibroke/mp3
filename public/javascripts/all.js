@@ -1098,9 +1098,10 @@ angular.module('myApp').controller('kwordsCtr',function($scope,kwordsFact){
      });
      $scope.delete=function(name)
      {
+        console.log(name);
          kwordsFact.delete(name).then(function(res){
             console.log(res.data); 
-            if(res.data==='1')
+            if(res.data.n===1)
             {
                kwordsFact.kwords().then(function(response){
       
@@ -1119,10 +1120,11 @@ angular.module('myApp').controller('kwordsCtr',function($scope,kwordsFact){
 angular.module('myApp').factory('kwordsFact',function($http){
     var factory={};
     factory.kwords=function(){
-        return $http.get(base_url+'kwords/all-kwords');
+        return $http.get('/kword/all-kwords');
+
     };
     factory.delete=function(name){
-      return $http.post(base_url+'kwords/delete/',name);  
+      return $http.get('/kword/delete/'+name);  
     };
     
   return factory;

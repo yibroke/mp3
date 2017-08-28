@@ -65,5 +65,7 @@ var infoCtr = require('./application/info/controllers/info');app.use('/info', in
 var pagesCtr = require('./application/pages/controllers/pages');app.use('/pages', pagesCtr);
 var downloadCtr = require('./application/download/controllers/download');app.use('/download', downloadCtr);
 var contentsCtr = require('./application/contents/controllers/contents');app.use('/contents', contentsCtr);
+var testCtr = require('./application/test/controllers/test');app.use('/test', testCtr);
+var keywordCtr = require('./application/kword/controllers/kword');app.use('/kword', keywordCtr);
 
 }
