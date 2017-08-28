@@ -5,8 +5,6 @@ var exec = require('child_process').execFile;
 var cmd=require('node-cmd');
 router.get('/', function(req, res, next) {
  res.render('home/views/home', { 
-  title: 'winner668 | winner668.net', 
-  url:'http://winner668.net/home', 
   active_home:true 
 });
 });
