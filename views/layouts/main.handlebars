@@ -14,7 +14,7 @@
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href='/bower_components/flag-icon-css/css/flag-icon.min.css' />
+  <link rel='stylesheet' href='/bower_components/flag-icon-css/css/flag-icon.min.css' />
   <link rel="icon" type="images/png" sizes="32x32" href="/images/favicon-32x32.png">
   <!-- google font -->
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
@@ -76,37 +76,54 @@
    <div class="row">
      <div class="col-md-12">
       <div class="navbar-header">
-       <button type="button" class="navbar-toggle" ng-click="searchbox_hide()">
-        <span class="glyphicon" ng-class="myglyphicon"></span>    
-      </button>
-      <a ng-hide="logo==1" class="navbar-brand" href="/"><img src="/images/logo_videodown.png" alt="logo"></a>
-    </div>
-    <div ng-class="{showhide: !logo}" id="myNavbar">
+        <button type="button" class="navbar-toggle pull-right top-search" ng-click="searchbox_hide()">
+
+         <span class="glyphicon" ng-class="myglyphicon"></span>    
+
+         
+       </button>
+
+
+       <button ng-hide="logo==1" type="button" class="navbar-toggle pull-right top-flag"  data-toggle="modal" data-target="#modalLanguage">
+        {{#is lang "en"}} <span class="flag-icon flag-icon-us"></span>{{/is}}
+        {{#is lang "vi"}} <span class="flag-icon flag-icon-vn"></span>{{/is}}
+        {{#is lang "ko"}} <span class="flag-icon flag-icon-kr"></span>{{/is}}
+        {{#is lang "zh"}} <span class="flag-icon flag-icon-cn"></span>{{/is}}
+        
+       </button>
+
+       <a ng-hide="logo==1" class="navbar-brand" href="/"><img src="/images/logo_videodown.png" alt="logo"></a>
+     </div>
+     <div ng-class="{showhide: !logo}" id="myNavbar">
 
       <ul class="nav navbar-nav navbar-right">
-      <li class="hidden-sm hidden-xs li-language"><a href="#" data-toggle="modal" data-target="#modalLanguage">Language</a></li>
+        <li>
 
-       <form id="form_search" action="/search/make_url" name="search" class="navbar-form navbar-right ng-pristine ng-valid" role="form" method="GET" accept-charset="utf-8">
-        <div class="input-group">
-          <input type="text" name="search_text" class="form-control" id="youtube" required placeholder="Search">
-          <div class="input-group-btn">
-            <button class="btn btn-success" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-          </div>
-        </div>
-      </form>
-      {{#if user }}
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> <strong>{{user.name}}</strong>
-          <ul class="dropdown-menu">
-            <li><a href="/dashboard">Daskboard</a></li>
-            <li><a href="/user/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-          </ul>
+
         </li>
-        {{/if}}
-      </ul>
+        <li class="hidden-sm hidden-xs li-language"><a href="#" data-toggle="modal" data-target="#modalLanguage">Language</a></li>
+
+        <form id="form_search" action="/search/make_url" name="search" class="navbar-form navbar-right ng-pristine ng-valid" role="form" method="GET" accept-charset="utf-8">
+          <div class="input-group">
+            <input type="text" name="search_text" class="form-control" id="youtube" required placeholder="Search">
+            <div class="input-group-btn">
+              <button class="btn btn-success" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            </div>
+          </div>
+        </form>
+        {{#if user }}
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> <strong>{{user.name}}</strong>
+            <ul class="dropdown-menu">
+              <li><a href="/dashboard">Daskboard</a></li>
+              <li><a href="/user/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
+          </li>
+          {{/if}}
+        </ul>
+      </div>
     </div>
   </div>
-</div>
 </div>
 </nav>
 <div class="wrapper"  ng-cloak>
@@ -135,20 +152,23 @@
  <footer class="container-fluid footer">
   <div class="container">
     <div class="row text-center"> 
-
-  
-
      <div class="col-md-3 col-xs-12">
-      <a  href="/"><img class=" b_logo" src="/images/logo_videodown.png" alt="VideoDown logo footer"></a>
+     <div class="row">
+       <div class="col-xs-8">  <a  href="/"><img class=" b_logo" src="/images/logo_videodown.png" alt="VideoDown logo footer"></a></div>
+       <div class="col-xs-4 hidden-lg hidden-md"> {{> language}}</div>
+     </div>
+
+    
+
+
     </div>
     <div class="col-md-7 col-xs-12">
       <br>
       <p><span class="glyphicon glyphicon-copyright-mark"></span> 2017 <a href="/">Videodown.cc</a> All Rights Reserved
       </p>
     </div>
-    <div class="col-md-2 col-xs-12">
+    <div class="col-md-2 col-xs-12 hidden-sm hidden-xs">
       {{> language}}
-     
     </div>
   </div>
 </div>

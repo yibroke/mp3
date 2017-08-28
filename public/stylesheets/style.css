@@ -1,3 +1,10 @@
+.top-flag {
+  right: 10px; }
+
+.top-search {
+  background-color: #5cb85c;
+  border-color: red; }
+
 .li-language {
   padding-top: 10px; }
 

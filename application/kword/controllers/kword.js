@@ -8,16 +8,14 @@ var ObjectId = require('mongodb').ObjectID;
 router.get('/list', function(req, res){
 	res.render('kword/views/list');
 })
-
 router.get('/all-kwords', function(req,res,next){
 
-	req.db.collection("kwords").find({}).sort({_id:-1}).toArray(function(err, data){
+	req.db.collection("kwords").find({}).sort({date:-1}).toArray(function(err, data){
 		if(err) throw err;
 		res.send(data);
 	})
 	
-})
-
+});
 router.get('/delete/:id', function(req,res,next){
 	
 	var myquery = { _id: ObjectId(req.params.id) };
@@ -26,7 +24,5 @@ router.get('/delete/:id', function(req,res,next){
 		console.log("1 document deleted");
 		res.send(data);
 	});
-	
-})
-
+});
 module.exports = router;
