@@ -1123,8 +1123,8 @@ angular.module('myApp').factory('kwordsFact',function($http){
         return $http.get('/kword/all-kwords');
 
     };
-    factory.delete=function(name){
-      return $http.get('/kword/delete/'+name);  
+    factory.delete=function(id){
+      return $http.get('/kword/delete/'+id);  
     };
     
   return factory;
