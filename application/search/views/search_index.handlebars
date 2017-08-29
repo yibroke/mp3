@@ -13,10 +13,12 @@
           <li ng-class="{active : website === 2}"><a href="" ng-click="dailymotion()">Dailymotion</a></li>
           <div class="youtube_sort" ng-class="{hidden : website === 2}">
           <li class="pull-right hidden-xs">
+          
             <label class="radio-inline"><input ng-model="order" value="relevance" type="radio">{{trans.relevance}}</label>
             <label class="radio-inline"><input ng-model="order" value="date" type="radio">{{trans.date}}</label>
             <label class="radio-inline"><input ng-model="order" value="viewCount" type="radio">{{trans.views}}</label>
             <label class="radio-inline"><input ng-model="order" value="rating" type="radio">{{trans.rating}}</label>
+           
           </li>
           <li class="pull-right hidden-lg hidden-md hidden-sm">
           <select class="form-control" ng-model="order" id="sel1">
