@@ -37,8 +37,11 @@
 	"convert":"Convert", 
 	"supported_sites":"Supported sites", 
 	"how_to_use":"How to use", 
-	"how_to_use_detail":" Enter the URL-address in the input field at the top of the page and press Enter or click on the Download button to the right of the input field."
+	"how_to_use_detail":" Enter the URL-address in the input field at the top of the page and press Enter or click on the Download button to the right of the input field.",
 
 
-
+	"relevance":"Relevance",
+	"date":"Date",
+	"views":"Views",
+	"rating":"Rating"
 }

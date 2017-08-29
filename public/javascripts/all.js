@@ -1494,14 +1494,16 @@ angular.module('myApp').directive('urlDl',function($http, youtubefact, ngProgres
 
 });
 angular.module('myApp').controller('youtubectr',function($scope,$http,$location,youtubefact,homefact,$window,dailymotionFactory){
-  
+
   $scope.arrformat=homefact.getFormat();
 $scope.search_spin = [];// set it at an array first.
 $scope.down = [];// set it at an array first.
 $scope.msg = [];// set it at an array first.
 $scope.message = [];// set it at an array first.
-
-$scope.test ="fuck u";
+  $scope.order ='relevance';
+  $scope.$watch("order", function (newValue, oldValue) {
+         $scope.getYoutubeData();
+    });
 //Search keyword.
  //var keyword=location.search.split('search_text=')[1]? location.search.split('search_text=')[1]:'music';
 // all parameters: https://developer.dailymotion.com/tools/apiexplorer#/video/list
@@ -1510,7 +1512,6 @@ $scope.search_convert = function (id,format,$index) {
   console.log('click');
   console.log('the index is:'+$index);
         // make up youtube.
-        
         var youtube={
           url:'https://www.youtube.com/watch?v='+id,
           format:format
@@ -1518,9 +1519,7 @@ $scope.search_convert = function (id,format,$index) {
         // start spin.
         $scope.search_spin[$index]=true;
         $scope.msg[$index]=true;
-        
         // Call Convert function. We need a file name first.
-        
         //get file name
         $scope.message[$index]='Get file name...';
         homefact.fileName(youtube.url).then(function(response){
@@ -1528,7 +1527,6 @@ $scope.search_convert = function (id,format,$index) {
           youtube.name=response.data.data;
           convert_youtube(youtube,$index);
         });
-
       };
     //Convert youtube. From search or home.
     function convert_youtube(youtube,$index)
@@ -1545,10 +1543,7 @@ $scope.search_convert = function (id,format,$index) {
             console.log(response.data.download);  
             $scope.down[$index]=true;
             $scope.message[$index]=response.data.data;
-            
-            
                    //auto download.
-                   
                    $window.open(base_url+'download/get-file/'+response.data.location+'/'+response.data.id+'/'+response.data.format, '_blank');
                    
                  }
@@ -1585,6 +1580,7 @@ $scope.dailymotion= function(){
     search:keyword, // (optional)
     //tags:keyword, // (optinal)d
     limit:"100", // (optional) valid values: 1-100 | default: 10
+    // sort:$scope.order, not work.
     page: $scope.nextPage ? $scope.nextPage : 1
   }).then(function(response){
         //on success
@@ -1620,7 +1616,7 @@ $scope.dailymotion= function(){
 
   function videoDetail(id)
   {
-   
+
 //    var id='SjK2XlNE39Q';
 youtubefact.videoDetail(id).then(function(response){
  console.log(response.data.items[0].snippet.publishedAt); 
@@ -1634,6 +1630,7 @@ $scope.nextPage = "";
  // Get youtube data
  $scope.getYoutubeData = function(){
    $scope.website=1; 
+ 
    if(!isNaN($scope.nextPage))
    {
      console.log('it is a number');
@@ -1646,6 +1643,7 @@ $scope.nextPage = "";
       key: "AIzaSyAnR-0wQOsEwYF7U4CHQIMBoBzkRpx-0dw",
       type: 'video',
       maxResults: '50',
+      order:$scope.order,
       pageToken: $scope.nextPage ? $scope.nextPage : '',
       part: 'id,snippet',
       q: keyword,
@@ -1654,7 +1652,7 @@ $scope.nextPage = "";
               
             }})
    .then(function (response) {
-    
+
     $scope.videos=[];
     $scope.t=[];
     console.log(response.data);
@@ -1700,30 +1698,9 @@ console.log('fire next page:'+nextPage);
             //reset all download button.
     };// end next page
     
-// Youtube popular videos.
-$scope.getYbPopular = function() {
-  $http.get('https://www.googleapis.com/youtube/v3/videos', {
-    params: {
-      key: "AIzaSyAnR-0wQOsEwYF7U4CHQIMBoBzkRpx-0dw",
-      type: 'video',
-      maxResults: '5',
-      pageToken: $scope.nextPage1 ? $scope.nextPage1 : '',
-      part: 'id,snippet',
-      chart: 'mostPopular',
-      regionCode:'Kr',
-      videoCategoryId: '10',
-      videoDuration: 'short',
-                    //You'll have to make separate requests for 'short' and 'medium' durations and merge the results together in your script.
-                    fields: 'items/id,items/snippet/title,items/snippet/description,items/snippet/thumbnails,items/snippet/channelTitle,nextPageToken,prevPageToken' 
-                  }
-                })
-  .then(function (response) {
-    $scope.videos = response.data.items;
-  });
-        };// end get youtube data
-        // check length data.
 
-      });
+
+  });
 
 angular.module('myApp').factory('youtubefact',function($http){
   var factory={};

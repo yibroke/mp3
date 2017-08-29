@@ -34,6 +34,11 @@
 "convert":"변환하기",
 "supported_sites":"이용 가능 사이트",
 "how_to_use":"사용방법",
-"how_to_use_detail":" 페이지 상단의 검색창에 URL 주소를 입력하고 엔터를 누르거나 검색창 오른쪽에있는 검색버튼을 클릭하세요."
+"how_to_use_detail":" 페이지 상단의 검색창에 URL 주소를 입력하고 엔터를 누르거나 검색창 오른쪽에있는 검색버튼을 클릭하세요.",
+
+	"relevance":"관련성",
+	"date":"업로드 날짜",
+	"views":"조회수",
+	"rating":"평점"
 
 }

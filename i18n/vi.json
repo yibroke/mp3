@@ -34,7 +34,12 @@
 "convert":"Chuyển Đổi", 
 "supported_sites":"Hỗ trợ websites", 
 "how_to_use":"Cách sử dụng", 
-"how_to_use_detail":" Nhập link vào ô nhập link phía trên sau đó Enter hay click Gởi."
+"how_to_use_detail":" Nhập link vào ô nhập link phía trên sau đó Enter hay click Gởi.",
+
+	"relevance":"Mức độ liên quan",
+	"date":"Ngày tải lên",
+	"views":"Lượt xem",
+	"rating":"Xếp hạng"
 
 
 

@@ -33,5 +33,12 @@
 "convert":"格式转换",
 "supported_sites":"可使用网站",
 "how_to_use":"使用指南",
-"how_to_use_detail":" 在页面顶部输入视频连接进行搜索，或点右侧搜索键进行搜索即可"
+"how_to_use_detail":" 在页面顶部输入视频连接进行搜索，或点右侧搜索键进行搜索即可",
+
+"relevance":"相关程度",
+	"date":"上传日期",
+	"views":"观看次数",
+	"rating":"评分"
+
+
 }
