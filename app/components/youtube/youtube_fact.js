@@ -25,6 +25,10 @@ angular.module('myApp').factory('youtubefact',function($http){
       }});
 
    };
+      factory.make_url=function(data)
+   {
+     return $http.get('/search/make_url/'+data);
+   };
 
 
    factory.convert=function(youtube){

@@ -12,35 +12,34 @@ router.get('/', function(req, res, next) {
 });
 
 // new code
-router.get('/make_url', function(req,res,next){
-  var key = req.query.search_text.trim();
-  var rep = key.replace(/ /g,'_');
-  res.redirect('/keyword/'+rep+'.html');
- 
-});
+router.get('/make_url/:key', function(req,res,next){
 
-
-router.get('/keyword/:key', function(req, res, next){
-  var q = req.params.key;
-  var key = q.replace(/_/g,' ');
-  // insert keyword to db.
-  // if exist then remove then isnert new one.
-  // check exist.
+  var key = req.params.key;
+  var rep = key.replace(/ /g,'_')+'.html';
+  // var key = q.replace(/_/g,' ').replace('.html', '');
   req.db.collection('kwords').find({name:key}).count(function(err, data){
     if(err) throw err;
     console.log(data);
     if(data==0){
-      req.db.collection('kwords').insert({name:key, slug:q}, function(err, data){
+      req.db.collection('kwords').insert({name:key, slug:rep, date:+new Date()}, function(err, data){
         if(err) throw err;
       });
 
+    }else{
+       var myquery = { name: key };
+          var newvalues = { $set: { date: +new Date() } };
+        req.db.collection('kwords').updateOne(myquery, newvalues,function(err, data){
+        if(err) throw err;
+      });
     }
-  })
-  res.render('search/views/search_index',{
-    title: key,
-    search_text: key
-  })
-})
+  });
+
+  
+  res.send(key);
+  //res.redirect('/keyword/'+rep+'.html');
+ 
+});
+
 
 // Client DL
 router.get('/client_dl/:id', function(req,res,next){

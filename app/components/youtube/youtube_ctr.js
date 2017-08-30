@@ -9,8 +9,9 @@ $scope.website =1;
 $scope.order ='relevance';
 $scope.order1 ='relevance';
 
-
+// order for youtube
 $scope.$watch("order", function (newValue, oldValue) {
+  // this if to prevent the watch function fire after page load.
  if (newValue !== oldValue) {
     // do whatever you were going to do
     $scope.order =newValue;
@@ -18,14 +19,14 @@ $scope.$watch("order", function (newValue, oldValue) {
   }
 
 });
-
+// order for dailymotion.
 $scope.$watch("order1", function (newValue, oldValue) {
  if (newValue !== oldValue) {
   $scope.order1 =newValue;
   $scope.dailymotion();
 }
 });
-
+// change search website.
 $scope.$watch("website", function (newValue, oldValue) {
         if (newValue !== oldValue) {
           if(newValue==1)

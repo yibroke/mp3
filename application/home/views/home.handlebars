@@ -10,9 +10,6 @@
           </div>
           <!-- Url bar -->
           <br>
-          <div ng-show="loading"> <button class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Processing...</button></div>
-          <div ng-show="down"><a class="btn btn-info" target="_blank" download="new file name.{{result.format}}" href="<?php echo base_url() . 'download/get-file/{{result.location}}/{{result.id}}/{{result.format}}' ?>"><span class="glyphicon glyphicon-download"></span>Download</a></div>
-          <p ng-show="msg">{{message}} </p>
           <form class="form_url" ng-submit="check_url_redirect(youtube)" name="form_url">
             <span class="pull-left">{{trans.insert_url}} (<span class="small">YouTube, DailyMotion, SoundClound</span>) </span>
             <br>
@@ -24,8 +21,11 @@
            </div>
            <p class="text-left text-warning" ng-show="checkurl_msg"> </p>
          </form>
+
          <!-- End url bar -->
+
        </div>    <!-- end 12 --> 
+       
        <div class="col-md-12 text-center">
         <!-- search -->
         <form name="search"  ng-submit="ysearch(search_text)" class="form-search" accept-charset="utf-8">

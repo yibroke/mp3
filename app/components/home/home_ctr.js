@@ -1,4 +1,4 @@
-angular.module('myApp').controller('homectr',function($scope,homefact,$http,$window){
+angular.module('myApp').controller('homectr',function($scope,homefact,$http,$window,youtubefact){
 
 
 
@@ -12,13 +12,13 @@ $scope.ysearch = function(search_text){
         //alert(1);
         
       }else{
-       console.log(search_text);
-       angular.element(youtube).tooltip('hide');
-      // youtubefact.make_url(search_text);
       var key = search_text.trim();
       var rep = key.replace(/ /g,'_');
-      window.location = '/keyword/'+rep+'.html';
-         //search/make_url
+     angular.element(youtube).tooltip('hide');
+       youtubefact.make_url(key).then(function(res){
+        console.log(res);
+          window.location = '/keyword/'+rep+'.html';
+       });
        }
      }
 

@@ -682,7 +682,7 @@ factory.delete=function(id){
 };
    return factory;
 });
-angular.module('myApp').controller('homectr',function($scope,homefact,$http,$window){
+angular.module('myApp').controller('homectr',function($scope,homefact,$http,$window,youtubefact){
 
 
 
@@ -696,13 +696,13 @@ $scope.ysearch = function(search_text){
         //alert(1);
         
       }else{
-       console.log(search_text);
-       angular.element(youtube).tooltip('hide');
-      // youtubefact.make_url(search_text);
       var key = search_text.trim();
       var rep = key.replace(/ /g,'_');
-      window.location = '/keyword/'+rep+'.html';
-         //search/make_url
+     angular.element(youtube).tooltip('hide');
+       youtubefact.make_url(key).then(function(res){
+        console.log(res);
+          window.location = '/keyword/'+rep+'.html';
+       });
        }
      }
 
@@ -1237,7 +1237,7 @@ $scope.check_url=function(data) {
         );// end then
        }
      });
-angular.module('myApp').controller('searchCtr',function($scope){  
+angular.module('myApp').controller('searchCtr',function($scope,youtubefact){  
 
 
     $scope.ysearch = function(search_text){
@@ -1250,12 +1250,14 @@ angular.module('myApp').controller('searchCtr',function($scope){
         
     }else{
      console.log(search_text);
-     angular.element(youtube).tooltip('hide');
-      // youtubefact.make_url(search_text);
+
       var key = search_text.trim();
       var rep = key.replace(/ /g,'_');
-      window.location = '/keyword/'+rep+'.html';
-         //search/make_url
+     angular.element(youtube).tooltip('hide');
+       youtubefact.make_url(key).then(function(res){
+        console.log(res);
+          window.location = '/keyword/'+rep+'.html';
+       });
      }
  }
 
@@ -1284,64 +1286,6 @@ angular.module('myApp').controller('searchCtr',function($scope){
 
 });
 // if you want show -hide the logo just make ng-hide"logo" in the logo div
-angular.module('myApp').controller('userctrl',function($scope,userFact,$window,homefact){  
- 
-    $scope.msg='';
-    //****************LOGIN ***********************
-         
-         
-    //*********************************************************
-     $scope.login = {
-         email: "",
-         password:""
-         };
-         $scope.login_submit=function(login){
-             console.log('fire login');
-             console.log(login);
-             userFact.login(login).then(function(response){
-                console.log(response.data);
-                if(response.data.success===true)
-                {
-                     $window.location.reload();
-                     $scope.msg='Success...';
-                }else{
-                    $scope.myMessage=response.data.data;
-                }
-                
-             });
-         };
-         //
-           $scope.youtube={
-             url:'',
-             format:1
-         };
-           $scope.arrformat=homefact.getFormat();
-             callDownload($scope.youtube.format);
-    function callDownload(newValue) {
-        homefact.get_download_format($scope.youtube.format).then(function (response) {
-            // no need to call user.data, service handles this
-            $scope.download = response;
-            //console.log($scope.download);      
-        });
-    }
-    //watch scople format
-    $scope.$watch("youtube.format", function (newValue, oldValue) {
-         callDownload(newValue);
-    });
-  });
-angular.module('myApp').factory('userFact',function($http){
-    var factory={};
-    factory.login=function(login){
-      //console.log(login);  
-//      return login;
-        return $http.post(base_url+'user/login_validation',login);
-    };
-    factory.kwords=function(){
-        return $http.get(base_url+'kwords/all-kwords');
-    };
-    
-  return factory;
-});
 angular.module('myApp').directive('clientDl',function($http, youtubefact, ngProgressFactory,$timeout,$interval){
   return {
     restrict: 'E',
@@ -1542,8 +1486,9 @@ $scope.website =1;
 $scope.order ='relevance';
 $scope.order1 ='relevance';
 
-
+// order for youtube
 $scope.$watch("order", function (newValue, oldValue) {
+  // this if to prevent the watch function fire after page load.
  if (newValue !== oldValue) {
     // do whatever you were going to do
     $scope.order =newValue;
@@ -1551,14 +1496,14 @@ $scope.$watch("order", function (newValue, oldValue) {
   }
 
 });
-
+// order for dailymotion.
 $scope.$watch("order1", function (newValue, oldValue) {
  if (newValue !== oldValue) {
   $scope.order1 =newValue;
   $scope.dailymotion();
 }
 });
-
+// change search website.
 $scope.$watch("website", function (newValue, oldValue) {
         if (newValue !== oldValue) {
           if(newValue==1)
@@ -1799,6 +1744,10 @@ angular.module('myApp').factory('youtubefact',function($http){
       }});
 
    };
+      factory.make_url=function(data)
+   {
+     return $http.get('/search/make_url/'+data);
+   };
 
 
    factory.convert=function(youtube){
@@ -1832,3 +1781,62 @@ angular.module('myApp').factory('youtubefact',function($http){
 
    return factory;
  });
+
+angular.module('myApp').controller('userctrl',function($scope,userFact,$window,homefact){  
+ 
+    $scope.msg='';
+    //****************LOGIN ***********************
+         
+         
+    //*********************************************************
+     $scope.login = {
+         email: "",
+         password:""
+         };
+         $scope.login_submit=function(login){
+             console.log('fire login');
+             console.log(login);
+             userFact.login(login).then(function(response){
+                console.log(response.data);
+                if(response.data.success===true)
+                {
+                     $window.location.reload();
+                     $scope.msg='Success...';
+                }else{
+                    $scope.myMessage=response.data.data;
+                }
+                
+             });
+         };
+         //
+           $scope.youtube={
+             url:'',
+             format:1
+         };
+           $scope.arrformat=homefact.getFormat();
+             callDownload($scope.youtube.format);
+    function callDownload(newValue) {
+        homefact.get_download_format($scope.youtube.format).then(function (response) {
+            // no need to call user.data, service handles this
+            $scope.download = response;
+            //console.log($scope.download);      
+        });
+    }
+    //watch scople format
+    $scope.$watch("youtube.format", function (newValue, oldValue) {
+         callDownload(newValue);
+    });
+  });
+angular.module('myApp').factory('userFact',function($http){
+    var factory={};
+    factory.login=function(login){
+      //console.log(login);  
+//      return login;
+        return $http.post(base_url+'user/login_validation',login);
+    };
+    factory.kwords=function(){
+        return $http.get(base_url+'kwords/all-kwords');
+    };
+    
+  return factory;
+});

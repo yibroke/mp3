@@ -23,7 +23,17 @@ $("#youtube").autocomplete({
     select: function( event, ui ) {
         var key = ui.item.label;
         var rep =key.trim().replace(/ /g,'_');
-        window.location = '/keyword/'+rep+'.html';
+         $.ajax({
+        type:'get',
+        url:'/search/make_url/'+key,
+        success: function (data) {
+            console.log(data);
+         window.location = '/keyword/'+rep+'.html';    
+        }   
+    });
+
+
+      
 
     }
 });
@@ -54,11 +64,14 @@ $("#youtube1").autocomplete({
     select: function( event, ui ) {
         var key = ui.item.label;
         var rep =key.trim().replace(/ /g,'_');
-        window.location = '/keyword/'+rep+'.html';
-        // console.log(key);
-        // $('#youtube').val(key);
-
-        // $('#form_search').find('[type="submit"]').trigger('click');
+         $.ajax({
+        type:'get',
+        url:'/search/make_url/'+key,
+        success: function (data) {
+            console.log(data);
+         window.location = '/keyword/'+rep+'.html';    
+        }   
+    });
 
     }
 });
