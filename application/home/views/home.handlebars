@@ -13,31 +13,30 @@
           <div ng-show="loading"> <button class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Processing...</button></div>
           <div ng-show="down"><a class="btn btn-info" target="_blank" download="new file name.{{result.format}}" href="<?php echo base_url() . 'download/get-file/{{result.location}}/{{result.id}}/{{result.format}}' ?>"><span class="glyphicon glyphicon-download"></span>Download</a></div>
           <p ng-show="msg">{{message}} </p>
-          <form class="form_url" name="form_url">
+          <form class="form_url" ng-submit="check_url_redirect(youtube)" name="form_url">
             <span class="pull-left">{{trans.insert_url}} (<span class="small">YouTube, DailyMotion, SoundClound</span>) </span>
             <br>
             <div class="input-group">
-              <input type="url" class="form-control input-lg" ng-model="youtube.url" placeholder="ex)http://www.youtube.com/watch?v=P7ek4scVCB8" required>
+            <input type="text" class="form-control input-lg" id="my_url" ng-model="youtube.url" title="{{trans.not_url}}" placeholder="ex)http://www.youtube.com/watch?v=P7ek4scVCB8">
               <span class="input-group-btn">
-               <button class="btn btn-success btn-lg" type="submit" ng-click="form_url.$valid && check_url_redirect(youtube)">{{trans.go}}</button>
+               <button class="btn btn-success btn-lg" type="submit">{{trans.go}}</button>
              </span>
            </div>
-           <p class="text-left"> [{youtube.domain}] [{checkurl_msg}]</p>
+           <p class="text-left text-warning" ng-show="checkurl_msg"> </p>
          </form>
          <!-- End url bar -->
        </div>    <!-- end 12 --> 
        <div class="col-md-12 text-center">
         <!-- search -->
-        <form action="/search/make_url" name="search" class="form-search" role="form" method="GET" accept-charset="utf-8">
+        <form name="search"  ng-submit="ysearch(search_text)" class="form-search" accept-charset="utf-8">
          <span class="pull-left">{{trans.keyword}} (<span class="small">YouTube, DailyMotion</span>)</span><br>
          <div class="input-group">
-           <input class="form-control input-lg" type="text" name="search_text" id="youtube1" required autocomplete="off" placeholder="{{trans.search}}">
+           <input class="form-control input-lg" type="text" name="search_text"  ng-model="search_text" id="youtube1" title="{{trans.cant_empty}}" autocomplete="off" placeholder="{{trans.search}}">
            <span class="input-group-btn"> <button class="btn btn-success btn-lg" type="submit">{{trans.go}}</button> </span>
          </div>
        </form> 
        <!-- end search -->
      </div>    <!-- end 12 -->     
-
    </div><!-- end row -->
  </div><!-- end container -->
 </div> <!-- end container fruit -->

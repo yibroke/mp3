@@ -683,23 +683,36 @@ factory.delete=function(id){
    return factory;
 });
 angular.module('myApp').controller('homectr',function($scope,homefact,$http,$window){
-      //Hometag
-      $scope.activeMenu = 1;
-      $scope.homeTag=function(id)
-      {
 
-       $scope.activeMenu = id;
-       if(id===1)
-       {
-        $scope.supported_sites=false;
-        $scope.how_to_use=false;
 
-      }else {
-       $scope.supported_sites=true;
-       $scope.how_to_use=true;
 
+//home search copy from searchCtr
+$scope.ysearch = function(search_text){
+  if(search_text==''|| search_text==null)
+  {
+    angular.element(youtube1).tooltip({ placement: 'bottom', trigger:'manual'});
+    angular.element(youtube1).tooltip('show');
+    angular.element(youtube1).focus();
+        //alert(1);
+        
+      }else{
+       console.log(search_text);
+       angular.element(youtube).tooltip('hide');
+      // youtubefact.make_url(search_text);
+      var key = search_text.trim();
+      var rep = key.replace(/ /g,'_');
+      window.location = '/keyword/'+rep+'.html';
+         //search/make_url
+       }
      }
-   };
+
+     $scope.$watch("search_text", function (newValue, oldValue) {
+      if(newValue!=''|| newValue!=null){
+       angular.element(youtube1).tooltip('hide');
+     }
+   });
+// end home search
+
         // Array format 
         $scope.arrformat=homefact.getFormat('video');
         $scope.youtube={
@@ -707,23 +720,14 @@ angular.module('myApp').controller('homectr',function($scope,homefact,$http,$win
              domain:'',
              format:2//default should be 1.
            };
-         //https://www.youtube.com/watch?v=As1pot091jU
-         //https://soundcloud.com/sontungmtpofficial/khuonmatdangthuongremix
-         //use watch to catchy url change 
-         
-         $scope.$watch("youtube.url",function(newValue){
-          console.log(homefact.domain(newValue));
-          $scope.youtube.domain=homefact.domain(newValue);
-//            if($scope.youtube.domain==='soundcloud.com')
-//            {
-//                 $scope.arrformat=homefact.getFormat('mp3');
-//                 //console.log($scope.arrformat[0]);
-//            }else {
-//                  $scope.arrformat=homefact.getFormat('video');
-//            }
-//             $scope.youtube.format=$scope.arrformat[1].id;//change to 0
-});
-         
+
+
+           $scope.$watch("youtube.url",function(newValue){
+             angular.element(my_url).tooltip('hide');
+             $scope.youtube.domain=homefact.domain(newValue);
+
+           });
+
          //********************************************'
          
          //convert time to second.
@@ -857,14 +861,20 @@ $scope.check_url_redirect=function(youtube) {
 
 
                 $window.location.href="play/3?url="+youtube.url;//should be the video title.
-               
+
               // check_url(youtube);
 
             }else{
 
-              $scope.checkurl_msg ='Not correct youtube url';
-            }
-            
+                 $scope.checkurl_msg =true;
+                  angular.element(my_url).focus();
+                  angular.element(my_url).tooltip({ placement: 'bottom', trigger:'manual'});
+                    angular.element(my_url).tooltip('show');
+
+                  //angular.element(my_url).tooltip({ placement: 'bottom', delay: {show: 10, hide: 100}});
+
+                }
+
 
 //  End check
 };
@@ -1130,6 +1140,8 @@ angular.module('myApp').factory('kwordsFact',function($http){
   return factory;
 });
 angular.module('myApp').controller('playctr',function($scope,homefact,$http,$window,ngProgressFactory, $timeout,$q){
+
+
         // Array format 
         $scope.arrformatv=homefact.getFormat('video');
         $scope.arrformatmp3=homefact.getFormat('mp3');
@@ -1164,7 +1176,7 @@ angular.module('myApp').controller('playctr',function($scope,homefact,$http,$win
       function callAtTimeout() {
         $scope.loading =false;
       }
-      $scope.resCancel = function() {
+        $scope.resCancel = function() {
         console.log('Cancel request');
       }
 // get video infomation.
@@ -1178,7 +1190,7 @@ $scope.check_url=function(data) {
            $scope.theButtonMp4=true;
          }
          start();
-         $scope.msg=true;
+         // $scope.msg=true;
             //hide donwload button, resulet before if any.
             $scope.down=false;
             var youtube = {
@@ -1195,7 +1207,7 @@ $scope.check_url=function(data) {
        // FUNCTION CONVER YOUTUBE
        function convert_youtube(youtube)
        {
-         $scope.message = '';
+        
          homefact.convert(youtube).then(
            function (response) {
             console.log(response.data);
@@ -1219,7 +1231,6 @@ $scope.check_url=function(data) {
               $scope.loading = false;
               console.log(rejected);
               finish();
-              $scope.message = 'Sorry we cancel your request because it take too long. Maybe your target website is busy at the moments. Please try again later or try with other websites.';
               $scope.msg=true;
               console.log($scope.message);
             }    
@@ -1227,20 +1238,47 @@ $scope.check_url=function(data) {
        }
      });
 angular.module('myApp').controller('searchCtr',function($scope){  
-    	$scope.myglyphicon = "glyphicon-search";
+
+
+    $scope.ysearch = function(search_text){
+        if(search_text==''|| search_text==null)
+        {
+          angular.element(youtube).tooltip({ placement: 'bottom', trigger:'manual'});
+          angular.element(youtube).tooltip('show');
+          angular.element(youtube).focus();
+        //alert(1);
+        
+    }else{
+     console.log(search_text);
+     angular.element(youtube).tooltip('hide');
+      // youtubefact.make_url(search_text);
+      var key = search_text.trim();
+      var rep = key.replace(/ /g,'_');
+      window.location = '/keyword/'+rep+'.html';
+         //search/make_url
+     }
+ }
+
+ $scope.$watch("search_text", function (newValue, oldValue) {
+  if(newValue!=''|| newValue!=null){
+     angular.element(youtube).tooltip('hide');
+ }
+});
+
+ $scope.myglyphicon = "glyphicon-search";
 
  $scope.searchbox_hide = function() {
     $scope.logo= !$scope.logo;
     if($scope.logo==true){
     	
     	// dipaly delete search bar.
-    		$scope.myglyphicon = "glyphicon-remove";
-    	
-    }else{
-    
-    	
-    	$scope.myglyphicon = "glyphicon-search";
-    }
+      $scope.myglyphicon = "glyphicon-remove";
+
+  }else{
+
+
+   $scope.myglyphicon = "glyphicon-search";
+}
 }
 
 

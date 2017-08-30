@@ -1,4 +1,6 @@
 angular.module('myApp').controller('playctr',function($scope,homefact,$http,$window,ngProgressFactory, $timeout,$q){
+
+
         // Array format 
         $scope.arrformatv=homefact.getFormat('video');
         $scope.arrformatmp3=homefact.getFormat('mp3');
@@ -33,7 +35,7 @@ angular.module('myApp').controller('playctr',function($scope,homefact,$http,$win
       function callAtTimeout() {
         $scope.loading =false;
       }
-      $scope.resCancel = function() {
+        $scope.resCancel = function() {
         console.log('Cancel request');
       }
 // get video infomation.
@@ -47,7 +49,7 @@ $scope.check_url=function(data) {
            $scope.theButtonMp4=true;
          }
          start();
-         $scope.msg=true;
+         // $scope.msg=true;
             //hide donwload button, resulet before if any.
             $scope.down=false;
             var youtube = {
@@ -64,7 +66,7 @@ $scope.check_url=function(data) {
        // FUNCTION CONVER YOUTUBE
        function convert_youtube(youtube)
        {
-         $scope.message = '';
+        
          homefact.convert(youtube).then(
            function (response) {
             console.log(response.data);
@@ -88,7 +90,6 @@ $scope.check_url=function(data) {
               $scope.loading = false;
               console.log(rejected);
               finish();
-              $scope.message = 'Sorry we cancel your request because it take too long. Maybe your target website is busy at the moments. Please try again later or try with other websites.';
               $scope.msg=true;
               console.log($scope.message);
             }    

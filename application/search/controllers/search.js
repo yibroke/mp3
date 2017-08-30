@@ -16,7 +16,7 @@ router.get('/make_url', function(req,res,next){
   var key = req.query.search_text.trim();
   var rep = key.replace(/ /g,'_');
   res.redirect('/keyword/'+rep+'.html');
-  //res.send('here is your keyword: -'+rep+'-');
+ 
 });
 
 
