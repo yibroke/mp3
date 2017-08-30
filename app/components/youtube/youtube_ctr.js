@@ -5,10 +5,42 @@ $scope.search_spin = [];// set it at an array first.
 $scope.down = [];// set it at an array first.
 $scope.msg = [];// set it at an array first.
 $scope.message = [];// set it at an array first.
-  $scope.order ='relevance';
-  $scope.$watch("order", function (newValue, oldValue) {
-         $scope.getYoutubeData();
-    });
+$scope.website =1;
+$scope.order ='relevance';
+$scope.order1 ='relevance';
+
+
+$scope.$watch("order", function (newValue, oldValue) {
+ if (newValue !== oldValue) {
+    // do whatever you were going to do
+    $scope.order =newValue;
+    $scope.getYoutubeData();
+  }
+
+});
+
+$scope.$watch("order1", function (newValue, oldValue) {
+ if (newValue !== oldValue) {
+  $scope.order1 =newValue;
+  $scope.dailymotion();
+}
+});
+
+$scope.$watch("website", function (newValue, oldValue) {
+        if (newValue !== oldValue) {
+          if(newValue==1)
+          {
+           $scope.getYoutubeData();
+         }else{
+          $scope.dailymotion();
+        }
+
+      }
+  });
+
+
+
+
 //Search keyword.
  //var keyword=location.search.split('search_text=')[1]? location.search.split('search_text=')[1]:'music';
 // all parameters: https://developer.dailymotion.com/tools/apiexplorer#/video/list
@@ -85,7 +117,7 @@ $scope.dailymotion= function(){
     search:keyword, // (optional)
     //tags:keyword, // (optinal)d
     limit:"100", // (optional) valid values: 1-100 | default: 10
-    // sort:$scope.order, not work.
+    sort:$scope.order1, 
     page: $scope.nextPage ? $scope.nextPage : 1
   }).then(function(response){
         //on success
@@ -135,7 +167,7 @@ $scope.nextPage = "";
  // Get youtube data
  $scope.getYoutubeData = function(){
    $scope.website=1; 
- 
+
    if(!isNaN($scope.nextPage))
    {
      console.log('it is a number');

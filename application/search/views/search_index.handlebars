@@ -9,26 +9,49 @@
 
         <h2> {{trans.search_for}}<strong>{{search_text}}</strong></h2>
         <ul class="nav nav-tabs">
-          <li ng-class="{active : website=== 1}"><a href="" ng-click="getYoutubeData()">Youtube</a></li>
-          <li ng-class="{active : website === 2}"><a href="" ng-click="dailymotion()">Dailymotion</a></li>
+          <li ng-class="{active : website=== 1}"><a href="" ng-click="website=1">Youtube</a></li>
+          <li ng-class="{active : website === 2}"><a href="" ng-click="website=2">Dailymotion</a></li>
+
+<!--           youtube sort hide on daily -->
           <div class="youtube_sort" ng-class="{hidden : website === 2}">
           <li class="pull-right hidden-xs">
-          
+         
             <label class="radio-inline"><input ng-model="order" value="relevance" type="radio">{{trans.relevance}}</label>
             <label class="radio-inline"><input ng-model="order" value="date" type="radio">{{trans.date}}</label>
             <label class="radio-inline"><input ng-model="order" value="viewCount" type="radio">{{trans.views}}</label>
-            <label class="radio-inline"><input ng-model="order" value="rating" type="radio">{{trans.rating}}</label>
-           
+          
+            
           </li>
           <li class="pull-right hidden-lg hidden-md hidden-sm">
           <select class="form-control" ng-model="order">
             <option value="relevance">{{trans.relevance}}</option>
             <option value="date">{{trans.date}}</option>
             <option  value="viewCount">{{trans.views}}</option>
-            <option value="rating">{{trans.rating}}</option>
+         
           </select>
         </li>
-        <div>
+        </div>
+      <!-- daily sort hide on youtube  -->
+        <div class="youtube_sort" ng-class="{hidden : website === 1}">
+          <li class="pull-right hidden-xs">
+         
+            <label class="radio-inline"><input ng-model="order1" value="relevance" type="radio">{{trans.relevance}}</label>
+            <label class="radio-inline"><input ng-model="order1" value="recent" type="radio">{{trans.date}}</label>
+            <label class="radio-inline"><input ng-model="order1" value="visited" type="radio">{{trans.views}}</label>
+          
+            
+          </li>
+          <li class="pull-right hidden-lg hidden-md hidden-sm">
+          <select class="form-control" ng-model="order1">
+            <option value="relevance">{{trans.relevance}}</option>
+            <option value="recent">{{trans.date}}</option>
+            <option  value="visited">{{trans.views}}</option>
+         
+          </select>
+        </li>
+        </div>
+ <!-- end daily sort -->
+
       </ul>
       <!--Loop youtube videos-->
       <div ng-init="limit=10">
