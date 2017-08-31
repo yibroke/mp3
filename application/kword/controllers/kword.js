@@ -6,7 +6,7 @@ var autoIncrement = require("mongodb-autoincrement"); // auto inc
 var ObjectId = require('mongodb').ObjectID;
 
 router.get('/list', function(req, res){
-	res.render('kword/views/list');
+	res.render('kword/views/list',{layout:'dashboard'});
 })
 router.get('/all-kwords', function(req,res,next){
 
@@ -25,4 +25,5 @@ router.get('/delete/:id', function(req,res,next){
 		res.send(data);
 	});
 });
+
 module.exports = router;
