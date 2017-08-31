@@ -19,6 +19,14 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(cookieParser());
 var ObjectId = require('mongodb').ObjectID;
 var path = require('path');
+
+//static go above session to prevent passport deserializeUser called 10x
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+app.use(express.static('public'));// Serving static files in Express
+app.set('views', path.join(__dirname, 'application'));// set views/ any file in client directory
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 //Express session
  app.use(session({//2
   store: new RedisStore(),
@@ -47,9 +55,7 @@ app.use(function (req,res,next) {
   next();
 });
 
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
-app.use(express.static('public'));// Serving static files in Express
+
 
 
 //global vars keyword
@@ -76,10 +82,8 @@ app.use(function (req,res,next) {
 });
 
 
-app.set('views', path.join(__dirname, 'application'));// set views/ any file in client directory
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
-require('./routes')(app);
+
+require('./routes')(app);// it need to be here. on top it not work.
 var port    = process.env.PORT || 3000;
 app.listen(port, function () {
   console.log('Example app listening on port 3000!');

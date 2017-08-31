@@ -11,35 +11,21 @@ module.exports = function(app){
    res.render('guess/views/login', { title: 'Login',loginMessage:req.flash('loginMessage') });
 
  });
-  app.get('/register', function (req, res) {
-
-    res.render('guess/views/register', { title: 'Register' });
-
-  });
-
 
 // keyword
 app.get('/keyword/:key', function(req, res,next){
-   var q = req.params.key;
-   var key = q.replace(/_/g,' ').replace('.html', '');
-  res.render('search/views/search_index',{
-    title: key,
-    search_text: key,
-    url:'http://videodown.cc/'+'keyword/'+req.params.key,
-  })
+ var q = req.params.key;
+ var key = q.replace(/_/g,' ').replace('.html', '');
+ res.render('search/views/search_index',{
+  title: key,
+  search_text: key,
+  url:'http://videodown.cc/'+'keyword/'+req.params.key,
+})
 })
 
 function ensureAuth(req, res, next){
   if(req.user){
-
-   req.db.collection("chat").find({read:false,to:req.user._id}).count(function (err,db){
-     if (err) throw err;
-     res.locals.count_chat =db;
-     res.locals.chat_with =1;
-     update_last_seen(req);
-     return next();
-   });
-   
+   return next();
  }else{
   res.redirect('/login');
 }

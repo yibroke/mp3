@@ -98,15 +98,6 @@ router.post('/login_validation', passport.authenticate('local',{ failureRedirect
  successRedirect: '/dashboard'
 }), function(req, res) {
   console.log('call');
-  console.log('user id is:'+req.user._id);
-  console.log('user id is:'+req.user.name);
-  console.log('user id is:'+req.user.email);
-
-        // If this function gets called, authentication was successful.
-        // `req.user` contains the authenticated user.
-     // res.redirect(req.get('referer'));
-
-// Update Last seen.
 
 
 res.send({success:true,message:'Success'});
