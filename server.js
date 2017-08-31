@@ -21,7 +21,7 @@ var ObjectId = require('mongodb').ObjectID;
 var path = require('path');
 //Express session
  app.use(session({//2
- // store: new RedisStore(),
+  store: new RedisStore(),
  secret:'secret',
  resave: false,
  saveUninitialized: false,
