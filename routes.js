@@ -30,6 +30,8 @@ function ensureAuth(req, res, next){
   res.redirect('/login');
 }
 }
+
+//Route
 var dashboardCtr = require('./application/dashboard/controllers/dashboard');app.use('/dashboard', dashboardCtr);
 var guessCtr = require('./application/guess/controllers/guess');app.use('/guess', guessCtr);
 var userCtr = require('./application/user/controllers/user');app.use('/user', userCtr);
@@ -42,5 +44,9 @@ var downloadCtr = require('./application/download/controllers/download');app.use
 var contentsCtr = require('./application/contents/controllers/contents');app.use('/contents', contentsCtr);
 var testCtr = require('./application/test/controllers/test');app.use('/test', testCtr);
 var keywordCtr = require('./application/kword/controllers/kword');app.use('/kword', keywordCtr);
+var contactCtr = require('./application/contact/controllers/contact');app.use('/contact', contactCtr);
+
+// API
+var api_contact = require('./application/api/api_contact');app.use('/api/contact', api_contact);
 
 }

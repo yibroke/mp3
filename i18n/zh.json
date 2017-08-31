@@ -40,7 +40,17 @@
 	"rating":"评分",
 	"cancel_request":"很抱歉，当前访问人数过多，导致连接服务器超时，稍后请重试！",
 	"cant_empty":"请输入搜索内容",
-	"not_url":"请输入视频链接"
+	"not_url":"请输入视频链接",
+
+
+	"contact_us":"联系我们",
+	"email_address":"电子邮箱",
+	"email_address2":"请输入邮箱地址（可选项)",
+	"message":"内容",
+	"optional":"可选项",
+	"leave_comments":"请输入内容",
+	"send":"提交",
+	"required":"需要"
 
 
 

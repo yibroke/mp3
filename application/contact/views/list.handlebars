@@ -1,0 +1,30 @@
+<div class="container" ng-controller="contactList">
+	<div class="row">
+		<div class="col-md-12">
+				<h1>List Contact</h1>
+
+				<table class="table table-striped">
+					<tr>
+
+						<th>Email</th>
+						<th>Message</th>
+					
+						<th>Delete</th>
+					</tr>
+					<tr  dir-paginate="x in list  | itemsPerPage: 20">
+						<td>[{ x.email }]</td>
+						<td><pre>[{ x.message }]</pre></td>
+						
+						<td><button ng-click="delete(x._id)" class="btn btn-danger">Delete</button></td>
+
+					</tr>
+				</table>
+				<dir-pagination-controls
+				max-size="5"
+				direction-links="true"
+				boundary-links="true">
+			</dir-pagination-controls>
+		
+	</div>
+</div>
+</div>

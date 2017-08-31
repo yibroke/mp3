@@ -42,7 +42,16 @@
 	"rating":"Xếp hạng",
 	"cancel_request":"xin lỗi, chúng tôi hủy bỏ yêu cầu của bạn vì máy chủ trả yêu cầu quá lâu. Có thể do website bạn yêu cầu đang quá tải vào thời điểm hiện tại. Xin thử lại sau ít phút hay dùng website khác.",
 	"cant_empty":"Xin nhập thông tin cần tìm",
-	"not_url":"Xin nhập url"
+	"not_url":"Xin nhập url",
+
+	"contact_us":"Liên hệ",
+	"email_address":"Email",
+	"email_address2":"Email (Không bắt buộc)",
+	"message":"Nội dung",
+	"optional":"Không bắt buộc",
+	"leave_comments":"Nội dung",
+	"send":"Gởi",
+	"required":"Bắt buộc"
 
 
 

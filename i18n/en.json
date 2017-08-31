@@ -47,5 +47,14 @@
 
 	"cancel_request":"Sorry we cancel your request because it take too long. Maybe your target website is busy at the moments. Please try again later or try with other websites.",
 	"cant_empty":"Please insert something to search",
-	"not_url":"Please enter a URL"
+	"not_url":"Please enter a URL",
+
+	"contact_us":"Contact us",
+	"email_address":"Email address",
+	"email_address2":"Email adress (optional)",
+	"message":"Message",
+	"optional":"optional",
+	"leave_comments":"Leave Comments",
+	"send":"Send",
+	"required":"required"
 }

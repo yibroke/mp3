@@ -612,6 +612,74 @@ catalyst.filter('timeago', function() {
     });
 
     
+angular.module('myApp').controller('contactCtr', function($scope, contactFact){
+
+// if not defind here it will coz underfined error.
+$scope.cont ={ email:'', message:''};
+
+	$scope.contact = function(cont){
+		console.log(cont);
+
+		if(cont.message==''|| cont.message==null)
+		{
+			angular.element(contact_message).tooltip({ placement: 'bottom', trigger:'manual'});
+			angular.element(contact_message).tooltip('show');
+			angular.element(contact_message).focus();
+        //alert(1);
+        
+    }else{
+    	contactFact.insert(cont).then(function(res){
+    		console.log(res);
+    		$scope.cont ={
+    			email:'',
+    			message:''
+    		}
+			// hide modal.
+			angular.element('#modalContact').modal('hide');
+		})
+
+    }
+
+}
+
+
+
+
+})
+angular.module('myApp').factory('contactFact', function($http){
+	var factory ={};
+	factory.insert = function(data){
+		return $http.post('/contact/insert', data);
+	}
+	factory.list = function(){
+		return $http.get('/api/contact/list');
+	}
+	factory.delete = function(id){
+		return $http.get('/api/contact/delete/'+id);
+	}
+	return factory;
+})
+angular.module('myApp').controller('contactList', function($scope, contactFact){
+	console.log(1);
+
+	list();
+
+	function list(){
+		contactFact.list().then(function(res){
+			$scope.list = res.data;
+			console.log(res);
+		});
+
+	}
+	// delete
+	$scope.delete = function(id){
+		contactFact.delete(id).then(function(res){
+			console.log(1);
+			list();
+		})
+	}
+
+})
 angular.module('myApp').controller('feedback_ctr',function($scope,feedback_fact,$window){
     $scope.msg='';
 
@@ -1286,6 +1354,64 @@ angular.module('myApp').controller('searchCtr',function($scope,youtubefact){
 
 });
 // if you want show -hide the logo just make ng-hide"logo" in the logo div
+angular.module('myApp').controller('userctrl',function($scope,userFact,$window,homefact){  
+ 
+    $scope.msg='';
+    //****************LOGIN ***********************
+         
+         
+    //*********************************************************
+     $scope.login = {
+         email: "",
+         password:""
+         };
+         $scope.login_submit=function(login){
+             console.log('fire login');
+             console.log(login);
+             userFact.login(login).then(function(response){
+                console.log(response.data);
+                if(response.data.success===true)
+                {
+                     $window.location.reload();
+                     $scope.msg='Success...';
+                }else{
+                    $scope.myMessage=response.data.data;
+                }
+                
+             });
+         };
+         //
+           $scope.youtube={
+             url:'',
+             format:1
+         };
+           $scope.arrformat=homefact.getFormat();
+             callDownload($scope.youtube.format);
+    function callDownload(newValue) {
+        homefact.get_download_format($scope.youtube.format).then(function (response) {
+            // no need to call user.data, service handles this
+            $scope.download = response;
+            //console.log($scope.download);      
+        });
+    }
+    //watch scople format
+    $scope.$watch("youtube.format", function (newValue, oldValue) {
+         callDownload(newValue);
+    });
+  });
+angular.module('myApp').factory('userFact',function($http){
+    var factory={};
+    factory.login=function(login){
+      //console.log(login);  
+//      return login;
+        return $http.post(base_url+'user/login_validation',login);
+    };
+    factory.kwords=function(){
+        return $http.get(base_url+'kwords/all-kwords');
+    };
+    
+  return factory;
+});
 angular.module('myApp').directive('clientDl',function($http, youtubefact, ngProgressFactory,$timeout,$interval){
   return {
     restrict: 'E',
@@ -1781,62 +1907,3 @@ angular.module('myApp').factory('youtubefact',function($http){
 
    return factory;
  });
-
-angular.module('myApp').controller('userctrl',function($scope,userFact,$window,homefact){  
- 
-    $scope.msg='';
-    //****************LOGIN ***********************
-         
-         
-    //*********************************************************
-     $scope.login = {
-         email: "",
-         password:""
-         };
-         $scope.login_submit=function(login){
-             console.log('fire login');
-             console.log(login);
-             userFact.login(login).then(function(response){
-                console.log(response.data);
-                if(response.data.success===true)
-                {
-                     $window.location.reload();
-                     $scope.msg='Success...';
-                }else{
-                    $scope.myMessage=response.data.data;
-                }
-                
-             });
-         };
-         //
-           $scope.youtube={
-             url:'',
-             format:1
-         };
-           $scope.arrformat=homefact.getFormat();
-             callDownload($scope.youtube.format);
-    function callDownload(newValue) {
-        homefact.get_download_format($scope.youtube.format).then(function (response) {
-            // no need to call user.data, service handles this
-            $scope.download = response;
-            //console.log($scope.download);      
-        });
-    }
-    //watch scople format
-    $scope.$watch("youtube.format", function (newValue, oldValue) {
-         callDownload(newValue);
-    });
-  });
-angular.module('myApp').factory('userFact',function($http){
-    var factory={};
-    factory.login=function(login){
-      //console.log(login);  
-//      return login;
-        return $http.post(base_url+'user/login_validation',login);
-    };
-    factory.kwords=function(){
-        return $http.get(base_url+'kwords/all-kwords');
-    };
-    
-  return factory;
-});

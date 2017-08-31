@@ -31,9 +31,19 @@
   border-width: 0 5px 5px;
   border-bottom-color: #ccc; }
 
-.youtube_sort .radio-inline {
-  padding: 6px 10px 6px 20px;
-  border-radius: 3px; }
+.youtube_sort {
+  padding: 6px 10px 6px 20px; }
+  .youtube_sort ul {
+    display: inline; }
+    .youtube_sort ul li {
+      display: inline;
+      margin-left: 10px;
+      cursor: pointer; }
+    .youtube_sort ul .active {
+      border-bottom: 1px solid #4264ba; }
+
+.nav-tabs {
+  margin-right: 0px; }
 
 .li-language {
   padding-top: 10px; }
