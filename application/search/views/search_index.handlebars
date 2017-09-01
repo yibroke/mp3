@@ -19,7 +19,6 @@
           <!--           youtube sort hide on daily -->
           <div class="youtube_sort" ng-class="{hidden : website === 2}">
             <li class="pull-right hidden-xs">
-
               <ul>
                <li ng-class="{active: order ==='relevance'}" ng-click="order='relevance'">{{trans.relevance}}</li>
                <li>|</li>
@@ -29,8 +28,6 @@
                <li>|</li>
                <li ng-class="{active: order ==='rating'}" ng-click="order='rating'">{{trans.rating}}</li>
              </ul>
-
-
            </li>
            <li class="pull-right hidden-lg hidden-md hidden-sm" ng-click="mobile_filter=!mobile_filter">
             <span class="icon-if_filter_326641"></span> {{trans.filter}}
