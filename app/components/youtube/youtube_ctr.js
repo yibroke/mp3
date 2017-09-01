@@ -1,6 +1,7 @@
 angular.module('myApp').controller('youtubectr',function($scope,$http,$location,youtubefact,homefact,$window,dailymotionFactory){
 
-  $scope.arrformat=homefact.getFormat();
+$scope.mobile_filter =false;
+$scope.arrformat=homefact.getFormat();
 $scope.search_spin = [];// set it at an array first.
 $scope.down = [];// set it at an array first.
 $scope.msg = [];// set it at an array first.
@@ -16,6 +17,7 @@ $scope.$watch("order", function (newValue, oldValue) {
     // do whatever you were going to do
     $scope.order =newValue;
     $scope.getYoutubeData();
+    $scope.mobile_filter =false;
   }
 
 });
@@ -24,11 +26,13 @@ $scope.$watch("order1", function (newValue, oldValue) {
  if (newValue !== oldValue) {
   $scope.order1 =newValue;
   $scope.dailymotion();
+   $scope.mobile_filter =false;
 }
 });
 // change search website.
 $scope.$watch("website", function (newValue, oldValue) {
         if (newValue !== oldValue) {
+          $scope.mobile_filter =false;
           if(newValue==1)
           {
            $scope.getYoutubeData();

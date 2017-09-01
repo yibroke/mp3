@@ -1,34 +1,59 @@
  .youtube_sort{
-     padding:6px 10px 6px 20px;
-    //border:1px solid red;
+ 	padding:6px 10px 6px 20px;
 
-    // .radio-inline{
-    // 	padding: 6px 10px 6px 20px;
-    // 	// border:1px solid #ccc;
-    // 	border-radius:3px;
-    // 	 //background-color: white;
-    	
-    // }
-   
     ul{
-    	 display:inline;
+    	display:inline;
     	li{
-    		 display:inline;
-    		 margin-left:10px;
-    		 cursor: pointer;
-    		
+    		display:inline;
+    		margin-left:10px;
+    		cursor: pointer;
     	}
     	a:hover{
 
     	}
     	.active{
-    			border-bottom:1px solid #4264ba;
+    		border-bottom:1px solid #4264ba;
+    		color: green;
+    		font-weight: bolder;
     	}
 
 
     }
-  }
-   .nav-tabs{
-    	
-    	margin-right: 0px;
+}
+.nav-tabs{
+
+	margin-right: 0px;
+}
+
+.filter-left{
+	// background-color:white;
+
+    	// border:1px solid red;
+    	//float: right;
+    	//text-align: right;
+
+
+    	ul{
+    		padding-left: 0px !important;
+    		padding-top: 10px;
+    		padding-right: 10px;
+
+    		li{
+    		// border-bottom:1px solid red;
+    		display: block;
+    		cursor: pointer;
+    		
+
+    	}
+    	.active{
+    			color: green;
+    		}
+    		li:hover{
+    			color: orange;
+    		}
+
     }
+    
+    
+
+}

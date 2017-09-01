@@ -40,6 +40,9 @@
 	"date":"Ngày tải lên",
 	"views":"Lượt xem",
 	"rating":"Xếp hạng",
+	"filter":"Lọc",
+
+
 	"cancel_request":"xin lỗi, chúng tôi hủy bỏ yêu cầu của bạn vì máy chủ trả yêu cầu quá lâu. Có thể do website bạn yêu cầu đang quá tải vào thời điểm hiện tại. Xin thử lại sau ít phút hay dùng website khác.",
 	"cant_empty":"Xin nhập thông tin cần tìm",
 	"not_url":"Xin nhập url",

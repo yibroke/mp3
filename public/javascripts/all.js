@@ -681,76 +681,6 @@ angular.module('myApp').controller('contactList', function($scope, contactFact){
 	}
 
 })
-angular.module('myApp').controller('feedback_ctr',function($scope,feedback_fact,$window){
-    $scope.msg='';
-
-//    Insert
-    $scope.insert=function(feedback) {
-       if(feedback.capcha!==feedback.typecap)
-       {
-           $scope.msg='Wrong Capcha!';
-         
-           return;
-           
-       }
-        
- 
-      feedback_fact.insert(feedback).then(function(response){
-          console.log(response.data);
-          $scope.msg=response.data.data;
-          $scope.feedback={
-               capcha:feedback.capcha,
-               email:'',
-                name:'',
-              content:''
-          };
-          
-      });// end then.
-    };
-//  List feedback function reuseable
-function list_feedback()
-{
-      feedback_fact.list().then(function(response){
-          $scope.feedback_list=response.data;
-      }) ;
-}
-//call list feedback function.
-    list_feedback();
-// Delete feedback
-
-$scope.feedback_delete=function(id) {
-  console.log('fire delete'+id);  
-   var del = $window.confirm('Are you absolutely sure you want to delete?');
-    if (del) {
-        console.log('confirm');
-        feedback_fact.delete(id).then(function(response){
-           //call list feedback again. reload data
-             list_feedback();
-        });
-    }// end if delete
-};
-
-   
-    
-});
-
-angular.module('myApp').factory('feedback_fact',function($http){
-//    factory object for return
-   var factory={};
-//   Insert
-   factory.insert=function(feedback){
-       return $http.post(base_url+'feedback/insert',feedback);
-   };
-//   List
-   factory.list=function() {
-      return $http.get(base_url+'feedback/list-service');  
-   };
-//   Delete
-factory.delete=function(id){
-  return $http.delete(base_url+'feedback/delete/'+id);  
-};
-   return factory;
-});
 angular.module('myApp').controller('homectr',function($scope,homefact,$http,$window,youtubefact){
 
 
@@ -1169,45 +1099,6 @@ angular.module('myApp').factory('homefact',function($http,$q){
   return factory;
 });
 
-angular.module('myApp').controller('kwordsCtr',function($scope,kwordsFact){  
-  
-    kwordsFact.kwords().then(function(response){
-      
-        $scope.kwords=response.data;
-     });
-     $scope.delete=function(name)
-     {
-        console.log(name);
-         kwordsFact.delete(name).then(function(res){
-            console.log(res.data); 
-            if(res.data.n===1)
-            {
-               kwordsFact.kwords().then(function(response){
-      
-                    $scope.kwords=response.data;
-                });  
-            }else {
-                alert('error');
-            }
-         });
-     };
-  
-   
-  });
-
-
-angular.module('myApp').factory('kwordsFact',function($http){
-    var factory={};
-    factory.kwords=function(){
-        return $http.get('/api/kwords/list');
-
-    };
-    factory.delete=function(id){
-      return $http.delete('/api/kwords/delete/'+id);  
-    };
-    
-  return factory;
-});
 angular.module('myApp').controller('playctr',function($scope,homefact,$http,$window,ngProgressFactory, $timeout,$q){
 
 
@@ -1306,6 +1197,45 @@ $scope.check_url=function(data) {
         );// end then
        }
      });
+angular.module('myApp').controller('kwordsCtr',function($scope,kwordsFact){  
+  
+    kwordsFact.kwords().then(function(response){
+      
+        $scope.kwords=response.data;
+     });
+     $scope.delete=function(name)
+     {
+        console.log(name);
+         kwordsFact.delete(name).then(function(res){
+            console.log(res.data); 
+            if(res.data.n===1)
+            {
+               kwordsFact.kwords().then(function(response){
+      
+                    $scope.kwords=response.data;
+                });  
+            }else {
+                alert('error');
+            }
+         });
+     };
+  
+   
+  });
+
+
+angular.module('myApp').factory('kwordsFact',function($http){
+    var factory={};
+    factory.kwords=function(){
+        return $http.get('/api/kwords/list');
+
+    };
+    factory.delete=function(id){
+      return $http.delete('/api/kwords/delete/'+id);  
+    };
+    
+  return factory;
+});
 angular.module('myApp').controller('searchCtr',function($scope,youtubefact){  
 
 
@@ -1604,7 +1534,8 @@ angular.module('myApp').directive('urlDl',function($http, youtubefact, ngProgres
 });
 angular.module('myApp').controller('youtubectr',function($scope,$http,$location,youtubefact,homefact,$window,dailymotionFactory){
 
-  $scope.arrformat=homefact.getFormat();
+$scope.mobile_filter =false;
+$scope.arrformat=homefact.getFormat();
 $scope.search_spin = [];// set it at an array first.
 $scope.down = [];// set it at an array first.
 $scope.msg = [];// set it at an array first.
@@ -1620,6 +1551,7 @@ $scope.$watch("order", function (newValue, oldValue) {
     // do whatever you were going to do
     $scope.order =newValue;
     $scope.getYoutubeData();
+    $scope.mobile_filter =false;
   }
 
 });
@@ -1628,11 +1560,13 @@ $scope.$watch("order1", function (newValue, oldValue) {
  if (newValue !== oldValue) {
   $scope.order1 =newValue;
   $scope.dailymotion();
+   $scope.mobile_filter =false;
 }
 });
 // change search website.
 $scope.$watch("website", function (newValue, oldValue) {
         if (newValue !== oldValue) {
+          $scope.mobile_filter =false;
           if(newValue==1)
           {
            $scope.getYoutubeData();

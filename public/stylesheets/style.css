@@ -40,10 +40,24 @@
       margin-left: 10px;
       cursor: pointer; }
     .youtube_sort ul .active {
-      border-bottom: 1px solid #4264ba; }
+      border-bottom: 1px solid #4264ba;
+      color: green;
+      font-weight: bolder; }
 
 .nav-tabs {
   margin-right: 0px; }
+
+.filter-left ul {
+  padding-left: 0px !important;
+  padding-top: 10px;
+  padding-right: 10px; }
+  .filter-left ul li {
+    display: block;
+    cursor: pointer; }
+  .filter-left ul .active {
+    color: green; }
+  .filter-left ul li:hover {
+    color: orange; }
 
 .li-language {
   padding-top: 10px; }
