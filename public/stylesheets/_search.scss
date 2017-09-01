@@ -7,17 +7,20 @@
     		display:inline;
     		margin-left:10px;
     		cursor: pointer;
+    		color: #666;
     	}
     	a:hover{
 
     	}
     	.active{
-    		border-bottom:1px solid #4264ba;
+    		border-bottom:1px solid green;
     		color: green;
     		font-weight: bolder;
     	}
     	li:hover{
-    			color: orange;
+    			color: black;
+
+    			
     		}
 
 

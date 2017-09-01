@@ -22,15 +22,18 @@
 
               <ul>
                <li ng-class="{active: order ==='relevance'}" ng-click="order='relevance'">{{trans.relevance}}</li>
+               <li>|</li>
                <li ng-class="{active: order ==='date'}" ng-click="order='date'">{{trans.date}}</li>
+               <li>|</li>
                <li ng-class="{active: order ==='viewCount'}" ng-click="order='viewCount'">{{trans.views}}</li>
+               <li>|</li>
                <li ng-class="{active: order ==='rating'}" ng-click="order='rating'">{{trans.rating}}</li>
              </ul>
 
 
            </li>
            <li class="pull-right hidden-lg hidden-md hidden-sm" ng-click="mobile_filter=!mobile_filter">
-             <span class="glyphicon glyphicon-sort-by-attributes-alt"></span> {{trans.filter}}
+            <span class="icon-if_filter_326641"></span> {{trans.filter}}
            </li>
          </div>
          <!-- daily sort hide on youtube  -->
@@ -38,13 +41,14 @@
           <li class="pull-right hidden-xs">
           <ul>
               <li ng-class="{active: order1 ==='relevance'}" ng-click="order1='relevance'">{{trans.relevance}}</li>
+              <li>|</li>
               <li ng-class="{active: order1 ==='recent'}" ng-click="order1='recent'">{{trans.date}}</li>
+              <li>|</li>
               <li ng-class="{active: order1 ==='visited'}" ng-click="order1='visited'">{{trans.views}}</li>
             </ul>
-
           </li>
           <li class="pull-right hidden-lg hidden-md hidden-sm"  ng-click="mobile_filter=!mobile_filter">
-           <span class="glyphicon glyphicon-sort-by-attributes-alt"></span> {{trans.filter}}
+         <span class="icon-if_filter_326641"></span> {{trans.filter}}
          </li>
        </div>
        <!-- end daily sort -->
