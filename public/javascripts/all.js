@@ -615,6 +615,7 @@ catalyst.filter('timeago', function() {
 angular.module('myApp').controller('contactCtr', function($scope, contactFact){
 
 // if not defind here it will coz underfined error.
+
 $scope.cont ={ email:'', message:''};
 
 	$scope.contact = function(cont){
@@ -655,7 +656,7 @@ angular.module('myApp').factory('contactFact', function($http){
 		return $http.get('/api/contact/list');
 	}
 	factory.delete = function(id){
-		return $http.get('/api/contact/delete/'+id);
+		return $http.delete('/api/contact/delete/'+id);
 	}
 	return factory;
 })
@@ -1198,11 +1199,11 @@ angular.module('myApp').controller('kwordsCtr',function($scope,kwordsFact){
 angular.module('myApp').factory('kwordsFact',function($http){
     var factory={};
     factory.kwords=function(){
-        return $http.get('/kword/all-kwords');
+        return $http.get('/api/kwords/list');
 
     };
     factory.delete=function(id){
-      return $http.get('/kword/delete/'+id);  
+      return $http.delete('/api/kwords/delete/'+id);  
     };
     
   return factory;

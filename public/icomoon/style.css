@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?8orl2j');
-  src:  url('fonts/icomoon.eot?8orl2j#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?8orl2j') format('truetype'),
-    url('fonts/icomoon.woff?8orl2j') format('woff'),
-    url('fonts/icomoon.svg?8orl2j#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?u4h9kj');
+  src:  url('fonts/icomoon.eot?u4h9kj#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?u4h9kj') format('truetype'),
+    url('fonts/icomoon.woff?u4h9kj') format('woff'),
+    url('fonts/icomoon.svg?u4h9kj#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,53 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-YouTube_logo_2017 .path1:before {
+  content: "\e904";
+  color: rgb(255, 0, 0);
+}
+.icon-YouTube_logo_2017 .path2:before {
+  content: "\e905";
+  margin-left: -4.4814453125em;
+  color: rgb(255, 255, 255);
+}
+.icon-YouTube_logo_2017 .path3:before {
+  content: "\e906";
+  margin-left: -4.4814453125em;
+  color: rgb(0, 0, 0);
+}
+.icon-YouTube_logo_2017 .path4:before {
+  content: "\e907";
+  margin-left: -4.4814453125em;
+  color: rgb(0, 0, 0);
+}
+.icon-YouTube_logo_2017 .path5:before {
+  content: "\e908";
+  margin-left: -4.4814453125em;
+  color: rgb(0, 0, 0);
+}
+.icon-YouTube_logo_2017 .path6:before {
+  content: "\e909";
+  margin-left: -4.4814453125em;
+  color: rgb(0, 0, 0);
+}
+.icon-YouTube_logo_2017 .path7:before {
+  content: "\e90a";
+  margin-left: -4.4814453125em;
+  color: rgb(0, 0, 0);
+}
+.icon-YouTube_logo_2017 .path8:before {
+  content: "\e90b";
+  margin-left: -4.4814453125em;
+  color: rgb(0, 0, 0);
+}
+.icon-YouTube_logo_2017 .path9:before {
+  content: "\e90c";
+  margin-left: -4.4814453125em;
+  color: rgb(0, 0, 0);
+}
+.icon-Dailymotion_logo:before {
+  content: "\e901";
+}
 .icon-brand:before {
   content: "\e902";
   color: #cd201f;
@@ -31,9 +78,6 @@
 .icon-brand2:before {
   content: "\e903";
   color: #0066dc;
-}
-.icon-icon_download:before {
-  content: "\e901";
 }
 .icon-if_Download_2202271:before {
   content: "\e900";

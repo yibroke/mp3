@@ -42,7 +42,7 @@ router.get('/read/:id', function(req,res,next){
 
 // delete
 
-router.get('/delete/:id', function(req,res,next){
+router.delete('/delete/:id', function(req,res,next){
 	var myquery = { _id: ObjectId(req.params.id) };
 	req.db.collection("contact").deleteOne(myquery, function(err, data) {
 		if (err) throw err;

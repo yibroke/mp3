@@ -47,6 +47,7 @@ var keywordCtr = require('./application/kword/controllers/kword');app.use('/kwor
 var contactCtr = require('./application/contact/controllers/contact');app.use('/contact', contactCtr);
 
 // API
-var api_contact = require('./application/api/api_contact');app.use('/api/contact', api_contact);
+var api_contact = require('./api/api_contact');app.use('/api/contact', api_contact);
+var api_contact = require('./api/api_kwords');app.use('/api/kwords', api_contact);
 
 }

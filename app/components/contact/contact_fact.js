@@ -7,7 +7,7 @@ angular.module('myApp').factory('contactFact', function($http){
 		return $http.get('/api/contact/list');
 	}
 	factory.delete = function(id){
-		return $http.get('/api/contact/delete/'+id);
+		return $http.delete('/api/contact/delete/'+id);
 	}
 	return factory;
 })

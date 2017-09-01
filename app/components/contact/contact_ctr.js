@@ -1,6 +1,7 @@
 angular.module('myApp').controller('contactCtr', function($scope, contactFact){
 
 // if not defind here it will coz underfined error.
+
 $scope.cont ={ email:'', message:''};
 
 	$scope.contact = function(cont){
