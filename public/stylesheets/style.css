@@ -67,6 +67,15 @@
     .filter-left ul li:hover {
       color: orange; }
 
+.contact-list ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+  .contact-list ul li {
+    list-style-type: none;
+    padding: 10px 0;
+    border-bottom: 1px solid #dfdfdf; }
+
 .li-language {
   padding-top: 10px; }
 
