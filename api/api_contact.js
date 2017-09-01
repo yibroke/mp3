@@ -10,6 +10,7 @@ router.post('/insert', function(req,res,next){
 	var myobj ={
 		email: req.body.email,
 		message: req.body.message,
+		date:+new Date()
 
 	};
 	req.db.collection('contact').insertOne(myobj, function(err, data){

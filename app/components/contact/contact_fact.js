@@ -1,7 +1,7 @@
 angular.module('myApp').factory('contactFact', function($http){
 	var factory ={};
 	factory.insert = function(data){
-		return $http.post('/contact/insert', data);
+		return $http.post('/api/contact/insert', data);
 	}
 	factory.list = function(){
 		return $http.get('/api/contact/list');

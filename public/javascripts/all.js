@@ -650,7 +650,7 @@ $scope.cont ={ email:'', message:''};
 angular.module('myApp').factory('contactFact', function($http){
 	var factory ={};
 	factory.insert = function(data){
-		return $http.post('/contact/insert', data);
+		return $http.post('/api/contact/insert', data);
 	}
 	factory.list = function(){
 		return $http.get('/api/contact/list');
@@ -662,6 +662,15 @@ angular.module('myApp').factory('contactFact', function($http){
 })
 angular.module('myApp').controller('contactList', function($scope, contactFact){
 	console.log(1);
+	 $scope.ids="";
+	console.log($scope.ids);
+
+	$scope.$watch("ids", function(newValue, oldValue){
+		if(newValue!=oldValue)
+		{
+			console.log(newValue);
+		}
+	});
 
 	list();
 
@@ -1099,6 +1108,45 @@ angular.module('myApp').factory('homefact',function($http,$q){
   return factory;
 });
 
+angular.module('myApp').controller('kwordsCtr',function($scope,kwordsFact){  
+  
+    kwordsFact.kwords().then(function(response){
+      
+        $scope.kwords=response.data;
+     });
+     $scope.delete=function(name)
+     {
+        console.log(name);
+         kwordsFact.delete(name).then(function(res){
+            console.log(res.data); 
+            if(res.data.n===1)
+            {
+               kwordsFact.kwords().then(function(response){
+      
+                    $scope.kwords=response.data;
+                });  
+            }else {
+                alert('error');
+            }
+         });
+     };
+  
+   
+  });
+
+
+angular.module('myApp').factory('kwordsFact',function($http){
+    var factory={};
+    factory.kwords=function(){
+        return $http.get('/api/kwords/list');
+
+    };
+    factory.delete=function(id){
+      return $http.delete('/api/kwords/delete/'+id);  
+    };
+    
+  return factory;
+});
 angular.module('myApp').controller('playctr',function($scope,homefact,$http,$window,ngProgressFactory, $timeout,$q){
 
 
@@ -1197,45 +1245,6 @@ $scope.check_url=function(data) {
         );// end then
        }
      });
-angular.module('myApp').controller('kwordsCtr',function($scope,kwordsFact){  
-  
-    kwordsFact.kwords().then(function(response){
-      
-        $scope.kwords=response.data;
-     });
-     $scope.delete=function(name)
-     {
-        console.log(name);
-         kwordsFact.delete(name).then(function(res){
-            console.log(res.data); 
-            if(res.data.n===1)
-            {
-               kwordsFact.kwords().then(function(response){
-      
-                    $scope.kwords=response.data;
-                });  
-            }else {
-                alert('error');
-            }
-         });
-     };
-  
-   
-  });
-
-
-angular.module('myApp').factory('kwordsFact',function($http){
-    var factory={};
-    factory.kwords=function(){
-        return $http.get('/api/kwords/list');
-
-    };
-    factory.delete=function(id){
-      return $http.delete('/api/kwords/delete/'+id);  
-    };
-    
-  return factory;
-});
 angular.module('myApp').controller('searchCtr',function($scope,youtubefact){  
 
 
@@ -1805,7 +1814,7 @@ angular.module('myApp').factory('youtubefact',function($http){
       }});
 
    };
-      factory.make_url=function(data)
+  factory.make_url=function(data)
    {
      return $http.get('/search/make_url/'+data);
    };

@@ -1,5 +1,14 @@
 angular.module('myApp').controller('contactList', function($scope, contactFact){
 	console.log(1);
+	 $scope.ids="";
+	console.log($scope.ids);
+
+	$scope.$watch("ids", function(newValue, oldValue){
+		if(newValue!=oldValue)
+		{
+			console.log(newValue);
+		}
+	});
 
 	list();
 

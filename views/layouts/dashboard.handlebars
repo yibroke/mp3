@@ -5,27 +5,25 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <!-- font awsome -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
-  <!-- Latest compiled JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-  <link rel="icon" type="images/png" sizes="32x32" href="/images/favicon-32x32.png">
-  <!-- google font -->
-  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
-  <!-- custome icon  -->
-  <link rel="stylesheet" href="/icomoon/style.css">  
-  <title>{{title}}</title>
+	<!-- font awsome -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+	<link rel="icon" type="images/png" sizes="32x32" href="/images/favicon-32x32.png">
+	<!-- google font -->
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+	<!-- custome icon  -->
+	<link rel="stylesheet" href="/icomoon/style.css">  
+	<title>{{title}}</title>
 </head>
 <body ng-app="myApp">
 	<div class="container-fluid top-header">
 		<div class="container">
 			<div class="row">
-
-
 			</div>
 		</div>
 	</div>
@@ -43,24 +41,16 @@
 				<div class="collapse navbar-collapse pull-right" id="myNavbar">
 
 					<ul class="nav navbar-nav navbar-right">
-					  <li><a href="/contact/list">Contact</a></li>
-					    <li><a href="/kword/list">Keyword</a></li>
+						<li><a href="/contact/list">Contact</a></li>
+						<li><a href="/kword/list">Keyword</a></li>
 						<li><a href="/download/list">File</a></li>
-						<li><a href="/info">Site info</a></li>
 						<li><a href="/contents">Ads</a></li>
-						
-
 						{{#if user }}
-
-
 						<li class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> <strong>{{user.name}}</strong>
 								<ul class="dropdown-menu">
 									<li><a href="/dashboard">Daskboard</a></li>
-									
-
 									<li><a href="/user/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-
 								</ul>
 							</li>
 							{{ else }}
