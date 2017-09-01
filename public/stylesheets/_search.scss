@@ -30,7 +30,7 @@
 
     	// border:1px solid red;
     	//float: right;
-    	//text-align: right;
+    	text-align: right;
 
 
     	ul{
@@ -38,10 +38,15 @@
     		padding-top: 10px;
     		padding-right: 10px;
 
+
     		li{
     		// border-bottom:1px solid red;
     		display: block;
     		cursor: pointer;
+    		padding-top:10px;
+    		padding-bottom: 10px;
+    		border-bottom:1px solid white;
+
     		
 
     	}
