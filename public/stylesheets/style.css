@@ -43,6 +43,8 @@
       border-bottom: 1px solid #4264ba;
       color: green;
       font-weight: bolder; }
+    .youtube_sort ul li:hover {
+      color: orange; }
 
 .nav-tabs {
   margin-right: 0px; }
