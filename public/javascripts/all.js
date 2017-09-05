@@ -894,7 +894,10 @@ $scope.changeStatus= function(data){
 	// push status to obj
  contactFact.changeStatus(obj).then(function(res){
  	console.log(res.data);
- 	list('new');
+ 	list($scope.pickSort.id,$scope.pickQuery.id);
+			$scope.contact = {
+				ids: []
+			};
  })
 
 }
@@ -911,7 +914,7 @@ $scope.deleteArray = function(data){
 		//delete array.
 		contactFact.deleteArray(obj).then(function(res){
 			console.log(res);
-			list();
+			list($scope.pickSort.id,$scope.pickQuery.id);
 			$scope.contact = {
 				ids: []
 			};
