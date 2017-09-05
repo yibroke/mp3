@@ -41,11 +41,12 @@
       cursor: pointer;
       color: #666; }
     .youtube_sort ul .active {
-      border-bottom: 1px solid green;
+      border-bottom: 2px solid green;
       color: green;
       font-weight: bolder; }
     .youtube_sort ul li:hover {
-      color: black; }
+      color: black;
+      border-bottom: 2px solid green; }
 
 .nav-tabs {
   margin-right: 0px; }

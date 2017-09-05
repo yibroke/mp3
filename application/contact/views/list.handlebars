@@ -1,13 +1,45 @@
 <div class="container contact-list" ng-controller="contactList">
 	<div class="row">
 		<div class="col-md-12">
+			<br>
+			<div ng-show="contact.ids.length">
+				{{!-- delete --}}
+				<a class="btn btn-danger btn-xs pull-right" href="#" ng-click="deleteArray(contact.ids)"><span class="glyphicon glyphicon-trash"></span> Delete ([{contact.ids.length}]) rows</a>
+				{{!-- change status --}}
+				<form ng-submit="changeStatus(status)" >
+					<label class="radio-inline">
+						<input type="radio" name="optradio" ng-model="status" value="Pending">Pending
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="optradio" ng-model="status" value="Solve">Solve
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="optradio" ng-model="status" value="Reference">Reference
+					</label>
+					<button type="submit" class="btn btn-success">Change Status</button>
+				</form>
+			</div>
 			<h1>Contact ([{list.length}])</h1>
-			<a href="#" ng-click="deleteArray()" class="btn btn-danger">Delete</a>
-			<ul  dir-paginate="x in list  | itemsPerPage: 5">
+			{{!-- Choose perpage --}}
+			<div class="pull-right">Sort by  
+				<select ng-model="pickSort" ng-options="x.value for x in listSort track by x.id">
+				</select>
+			</div>
+			
+			Show <select ng-model="perPage" ng-init="perPage=5" ng-options="x for x in listPerPage"></select> Items per page
+
+			<hr>
+
+
+
+			<ul  dir-paginate="x in list | orderBy:sortKey:reverse | itemsPerPage: perPage">
 				<li> 
 					<div class="row">
 						<div class="col-md-12">
-							<input type="checkbox" ng-model="ids" value="x._id"> [{ x.email || 'No Email' }] | [{x.date | date }] <button ng-click="delete(x._id)" class="btn btn-xs btn-danger pull-right"><span class="glyphicon glyphicon-trash"></span></button><br><br>
+							<p class="pull-right">[{x.status}]</p>
+							<input type="checkbox" checklist-model="contact.ids" checklist-value="x._id"> [{ x.email || 'No Email' }] | [{x.date | date }] 
+							<button ng-click="delete(x._id)" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+							<br><br>
 							<pre>[{ x.message }]</pre>
 						</div>
 					</div>
@@ -18,7 +50,6 @@
 			direction-links="true"
 			boundary-links="true">
 		</dir-pagination-controls>
-		
 	</div>
 </div>
 </div>

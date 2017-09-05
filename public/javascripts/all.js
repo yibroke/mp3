@@ -1,4 +1,4 @@
-var app= angular.module('myApp',['ngSanitize','ngProgress','angularUtils.directives.dirPagination','ngtimeago']);
+var app= angular.module('myApp',['ngSanitize','ngProgress','angularUtils.directives.dirPagination','ngtimeago','checklist-model']);
 //customer filter..
 app.filter('slugify', function() {
         return function(input) {
@@ -173,6 +173,182 @@ angular.module('myApp').factory('dailymotionFactory', ['$http', 'dailymotionSear
     @license: MIT
 */
 "use strict";angular.module("jtt_dailymotion",[]).factory("dailymotionFactory",["$http","dailymotionSearchDataService",function(a,b){var c={};return c.getVideosFromUserById=function(c){if(!c.id)return!1;var d=b.getNew("videosFromUserById",c);return a({method:"GET",url:d.url,params:d.object})},c.getVideosFromChannelById=function(c){if(!c.id)return!1;var d=b.getNew("videosFromChannelById",c);return a({method:"GET",url:d.url,params:d.object})},c.getVideosFromPlaylistById=function(c){if(!c.id)return!1;var d=b.getNew("videosFromPlaylistById",c);return a({method:"GET",url:d.url,params:d.object})},c.getVideosByParams=function(c){var d=b.getNew("videosByParams",c);return a({method:"GET",url:d.url,params:d.object})},c}]).service("dailymotionSearchDataService",function(){this.getApiBaseUrl=function(a){return"https://api.dailymotion.com/"},this.fillDataInObjectByList=function(a,b,c){return angular.forEach(c,function(c,d){"undefined"!=typeof b[c]&&(a.object[c]=b[c])}),a},this.getNew=function(a,b){var c={object:{},url:""};switch(a){case"videosFromUserById":c.object.fields="bookmarks_total,comments_total,created_time,description,duration,embed_html,id,item_type,media_type,owner.id,owner.screenname,owner.url,thumbnail_240_url,thumbnail_720_url,thumbnail_url,title,updated_time,url,",c=this.fillDataInObjectByList(c,b,["fields","channel","created_after","created_before","genre","nogenre","page","limit","search","tags"]),c.url=this.getApiBaseUrl()+"user/"+b.id+"/videos";break;case"videosFromChannelById":c.object.fields="bookmarks_total,comments_total,created_time,description,duration,embed_html,id,item_type,media_type,owner.id,owner.screenname,owner.url,thumbnail_240_url,thumbnail_720_url,thumbnail_url,title,updated_time,url,",c=this.fillDataInObjectByList(c,b,["fields","channel","created_after","created_before","search","sort","tags","page","limit"]),c.url=this.getApiBaseUrl()+"channel/"+b.id+"/videos";break;case"videosFromPlaylistById":c.object.fields="bookmarks_total,comments_total,created_time,description,duration,embed_html,id,item_type,media_type,owner.id,owner.screenname,owner.url,thumbnail_240_url,thumbnail_720_url,thumbnail_url,title,updated_time,url,",c=this.fillDataInObjectByList(c,b,["fields","search","sort","tags","page","limit"]),c.url=this.getApiBaseUrl()+"playlist/"+b.id+"/videos";break;case"videosByParams":c.object.fields="bookmarks_total,comments_total,created_time,description,duration,embed_html,id,item_type,media_type,owner.id,owner.screenname,owner.url,thumbnail_240_url,thumbnail_720_url,thumbnail_url,title,updated_time,url,",c=this.fillDataInObjectByList(c,b,["fields","channel","country","created_after","created_before","detected_language","exclude_ids","featured","genre","has_game","hd","ids","in_history","languages","list","live","live_offair","live_onair","live_upcoming","longer_than","no_live","no_premium","nogenre","owners","partner","poster","premium","private","search","shorter_than","sort","svod","tags","tvod","ugc","verified","page","limit"]),c.url=this.getApiBaseUrl()+"videos"}return c}});
+/**
+ * Checklist-model
+ * AngularJS directive for list of checkboxes
+ * https://github.com/vitalets/checklist-model
+ * License: MIT http://opensource.org/licenses/MIT
+ */
+
+ /* commonjs package manager support (eg componentjs) */
+ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.exports === exports){
+   module.exports = 'checklist-model';
+ }
+
+angular.module('checklist-model', [])
+.directive('checklistModel', ['$parse', '$compile', function($parse, $compile) {
+  // contains
+  function contains(arr, item, comparator) {
+    if (angular.isArray(arr)) {
+      for (var i = arr.length; i--;) {
+        if (comparator(arr[i], item)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  // add
+  function add(arr, item, comparator) {
+    arr = angular.isArray(arr) ? arr : [];
+      if(!contains(arr, item, comparator)) {
+          arr.push(item);
+      }
+    return arr;
+  }
+
+  // remove
+  function remove(arr, item, comparator) {
+    if (angular.isArray(arr)) {
+      for (var i = arr.length; i--;) {
+        if (comparator(arr[i], item)) {
+          arr.splice(i, 1);
+          break;
+        }
+      }
+    }
+    return arr;
+  }
+
+  // http://stackoverflow.com/a/19228302/1458162
+  function postLinkFn(scope, elem, attrs) {
+     // exclude recursion, but still keep the model
+    var checklistModel = attrs.checklistModel;
+    attrs.$set("checklistModel", null);
+    // compile with `ng-model` pointing to `checked`
+    $compile(elem)(scope);
+    attrs.$set("checklistModel", checklistModel);
+
+    // getter for original model
+    var checklistModelGetter = $parse(checklistModel);
+    var checklistChange = $parse(attrs.checklistChange);
+    var checklistBeforeChange = $parse(attrs.checklistBeforeChange);
+    var ngModelGetter = $parse(attrs.ngModel);
+
+
+
+    var comparator = function (a, b) {
+      if(!isNaN(a) && !isNaN(b)) {
+        return String(a) === String(b);
+      } else {
+        return angular.equals(a,b);
+      }
+    };
+
+    if (attrs.hasOwnProperty('checklistComparator')){
+      if (attrs.checklistComparator[0] == '.') {
+        var comparatorExpression = attrs.checklistComparator.substring(1);
+        comparator = function (a, b) {
+          return a[comparatorExpression] === b[comparatorExpression];
+        };
+
+      } else {
+        comparator = $parse(attrs.checklistComparator)(scope.$parent);
+      }
+    }
+
+    // watch UI checked change
+    var unbindModel = scope.$watch(attrs.ngModel, function(newValue, oldValue) {
+      if (newValue === oldValue) {
+        return;
+      }
+
+      if (checklistBeforeChange && (checklistBeforeChange(scope) === false)) {
+        ngModelGetter.assign(scope, contains(checklistModelGetter(scope.$parent), getChecklistValue(), comparator));
+        return;
+      }
+
+      setValueInChecklistModel(getChecklistValue(), newValue);
+
+      if (checklistChange) {
+        checklistChange(scope);
+      }
+    });
+
+    // watches for value change of checklistValue
+    var unbindCheckListValue = scope.$watch(getChecklistValue, function(newValue, oldValue) {
+      if( newValue != oldValue && angular.isDefined(oldValue) && scope[attrs.ngModel] === true ) {
+        var current = checklistModelGetter(scope.$parent);
+        checklistModelGetter.assign(scope.$parent, remove(current, oldValue, comparator));
+        checklistModelGetter.assign(scope.$parent, add(current, newValue, comparator));
+      }
+    }, true);
+
+    var unbindDestroy = scope.$on('$destroy', destroy);
+
+    function destroy() {
+      unbindModel();
+      unbindCheckListValue();
+      unbindDestroy();
+    }
+
+    function getChecklistValue() {
+      return attrs.checklistValue ? $parse(attrs.checklistValue)(scope.$parent) : attrs.value;
+    }
+
+    function setValueInChecklistModel(value, checked) {
+      var current = checklistModelGetter(scope.$parent);
+      if (angular.isFunction(checklistModelGetter.assign)) {
+        if (checked === true) {
+          checklistModelGetter.assign(scope.$parent, add(current, value, comparator));
+        } else {
+          checklistModelGetter.assign(scope.$parent, remove(current, value, comparator));
+        }
+      }
+
+    }
+
+    // declare one function to be used for both $watch functions
+    function setChecked(newArr, oldArr) {
+      if (checklistBeforeChange && (checklistBeforeChange(scope) === false)) {
+        setValueInChecklistModel(getChecklistValue(), ngModelGetter(scope));
+        return;
+      }
+      ngModelGetter.assign(scope, contains(newArr, getChecklistValue(), comparator));
+    }
+
+    // watch original model change
+    // use the faster $watchCollection method if it's available
+    if (angular.isFunction(scope.$parent.$watchCollection)) {
+        scope.$parent.$watchCollection(checklistModel, setChecked);
+    } else {
+        scope.$parent.$watch(checklistModel, setChecked, true);
+    }
+  }
+
+  return {
+    restrict: 'A',
+    priority: 1000,
+    terminal: true,
+    scope: true,
+    compile: function(tElement, tAttrs) {
+
+      if (!tAttrs.checklistValue && !tAttrs.value) {
+        throw 'You should provide `value` or `checklist-value`.';
+      }
+
+      // by default ngModel is 'checked', so we set it if not specified
+      if (!tAttrs.ngModel) {
+        // local scope var storing individual checkbox model
+        tAttrs.$set("ngModel", "checked");
+      }
+
+      return postLinkFn;
+    }
+  };
+}]);
+
 angular.module('myApp').directive('duration',function($http){
     return {
         restrict: 'E',
@@ -658,28 +834,97 @@ angular.module('myApp').factory('contactFact', function($http){
 	factory.delete = function(id){
 		return $http.delete('/api/contact/delete/'+id);
 	}
+	factory.deleteArray = function(data){
+		console.log(data);
+		var d={0:'fdfds',1:'fdsf'};
+		return $http.post('/api/contact/delete_array/', data);
+	}
+	factory.changeStatus = function(data){
+		
+		return $http.post('/api/contact/change_status', data);
+	}
 	return factory;
 })
 angular.module('myApp').controller('contactList', function($scope, contactFact){
 	console.log(1);
-	 $scope.ids="";
-	console.log($scope.ids);
 
-	$scope.$watch("ids", function(newValue, oldValue){
-		if(newValue!=oldValue)
-		{
-			console.log(newValue);
-		}
-	});
+
+// sort
+
+$scope.$watch("pickSort", function(newValue,oldValue){
+	 if(newValue!=''|| newValue!=null){
+	 	console.log(newValue);
+	 	$scope.sortKey =newValue.id;
+	 	$scope.reverse =!$scope.reverse;
+
+	 }
+})
+
+
+
+// $scope.listPerPage =[2,4,6,8,9];
+$scope.listPerPage =[5,10,20,30,50,100];
+$scope.listSort =[
+{id:'_id' , value:'Old First'},
+{id:'_id', value:'New First'},
+{id:'Pending', value:'peding'},
+{id:'Solve', value:'Solve'},
+{id:'Reference', value:'Reference'}
+];
+ $scope.pickSort= {id: '_id', value: 'Old First'} //This sets the default value of the select in the ui
+//need this.
+$scope.contact = {
+	ids: []
+};
+// change status
+
+$scope.status ='Pending';
+$scope.changeStatus= function(data){
+ console.log(data);
+ console.log($scope.contact.ids);
+// convert array to obj
+	var obj = $scope.contact.ids.reduce(function(acc, cur, i) {
+			acc[i] = cur;
+			return acc;
+		}, {});
+	obj.status = data;
+
+		console.log(obj);
+	// push status to obj
+ contactFact.changeStatus(obj).then(function(res){
+ 	console.log(res.data);
+ 	list();
+ })
+
+}
+// end change status
+
+$scope.deleteArray = function(data){
+	console.log(data);
+		// convert array data to object.
+		var obj = data.reduce(function(acc, cur, i) {
+			acc[i] = cur;
+			return acc;
+		}, {});
+		console.log(obj);
+		//delete array.
+		contactFact.deleteArray(obj).then(function(res){
+			console.log(res);
+			list();
+			$scope.contact = {
+				ids: []
+			};
+
+		})
+	}
+
 
 	list();
-
 	function list(){
 		contactFact.list().then(function(res){
 			$scope.list = res.data;
 			console.log(res);
 		});
-
 	}
 	// delete
 	$scope.delete = function(id){
@@ -688,7 +933,6 @@ angular.module('myApp').controller('contactList', function($scope, contactFact){
 			list();
 		})
 	}
-
 })
 angular.module('myApp').controller('homectr',function($scope,homefact,$http,$window,youtubefact){
 

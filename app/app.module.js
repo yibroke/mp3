@@ -1,4 +1,4 @@
-var app= angular.module('myApp',['ngSanitize','ngProgress','angularUtils.directives.dirPagination','ngtimeago']);
+var app= angular.module('myApp',['ngSanitize','ngProgress','angularUtils.directives.dirPagination','ngtimeago','checklist-model']);
 //customer filter..
 app.filter('slugify', function() {
         return function(input) {
