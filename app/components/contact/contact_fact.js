@@ -3,8 +3,8 @@ angular.module('myApp').factory('contactFact', function($http){
 	factory.insert = function(data){
 		return $http.post('/api/contact/insert', data);
 	}
-	factory.list = function(){
-		return $http.get('/api/contact/list');
+	factory.list = function(sort,query){
+		return $http.get('/api/contact/list?sort='+sort+'&query='+query);
 	}
 	factory.delete = function(id){
 		return $http.delete('/api/contact/delete/'+id);

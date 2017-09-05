@@ -21,18 +21,29 @@
 			</div>
 			<h1>Contact ([{list.length}])</h1>
 			{{!-- Choose perpage --}}
-			<div class="pull-right">Sort by  
+
+			<div class="row">
+				<div class="col-md-4">Show <select ng-model="perPage" ng-init="perPage=5" ng-options="x for x in listPerPage"></select> Items per page</div>
+				<div class="col-md-4"><div>Query  
+				<select ng-model="pickQuery" ng-options="x.value for x in listQuery track by x.id">
+				</select>
+			</div></div>
+				<div class="col-md-4"><div class="pull-right">Sort by  
 				<select ng-model="pickSort" ng-options="x.value for x in listSort track by x.id">
 				</select>
+			</div></div>
 			</div>
 			
-			Show <select ng-model="perPage" ng-init="perPage=5" ng-options="x for x in listPerPage"></select> Items per page
+
+			
+			
+			
 
 			<hr>
 
 
 
-			<ul  dir-paginate="x in list | orderBy:sortKey:reverse | itemsPerPage: perPage">
+			<ul  dir-paginate="x in list | itemsPerPage: perPage">
 				<li> 
 					<div class="row">
 						<div class="col-md-12">

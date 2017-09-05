@@ -7,24 +7,35 @@ angular.module('myApp').controller('contactList', function($scope, contactFact){
 $scope.$watch("pickSort", function(newValue,oldValue){
 	 if(newValue!=''|| newValue!=null){
 	 	console.log(newValue);
-	 	$scope.sortKey =newValue.id;
-	 	$scope.reverse =!$scope.reverse;
+	 	list(newValue.id,$scope.pickQuery.id);
+
+	 }
+})
+// query
+$scope.$watch("pickQuery", function(newValue,oldValue){
+	 if(newValue!=''|| newValue!=null){
+	 	console.log(newValue);
+	 	list($scope.pickSort.id,newValue.id);
 
 	 }
 })
 
 
-
 // $scope.listPerPage =[2,4,6,8,9];
 $scope.listPerPage =[5,10,20,30,50,100];
 $scope.listSort =[
-{id:'_id' , value:'Old First'},
-{id:'_id', value:'New First'},
-{id:'Pending', value:'peding'},
-{id:'Solve', value:'Solve'},
-{id:'Reference', value:'Reference'}
+{id:'new', value:'New First'},
+{id:'old' , value:'Old First'}
 ];
- $scope.pickSort= {id: '_id', value: 'Old First'} //This sets the default value of the select in the ui
+$scope.listQuery =[
+{id:'all', value:'All'},
+{id:'pending', value:'Pending'},
+{id:'solve' , value:'Solve'},
+{id:'reference', value:'Reference'}
+];
+$scope.pickQuery ={id:'all',value:'All'};
+
+ $scope.pickSort= {id: 'new', value: 'New First'} //This sets the default value of the select in the ui
 //need this.
 $scope.contact = {
 	ids: []
@@ -46,7 +57,7 @@ $scope.changeStatus= function(data){
 	// push status to obj
  contactFact.changeStatus(obj).then(function(res){
  	console.log(res.data);
- 	list();
+ 	list('new');
  })
 
 }
@@ -72,9 +83,9 @@ $scope.deleteArray = function(data){
 	}
 
 
-	list();
-	function list(){
-		contactFact.list().then(function(res){
+	list('new','all');
+	function list(sort,query){
+		contactFact.list(sort,query).then(function(res){
 			$scope.list = res.data;
 			console.log(res);
 		});
@@ -83,7 +94,7 @@ $scope.deleteArray = function(data){
 	$scope.delete = function(id){
 		contactFact.delete(id).then(function(res){
 			console.log(1);
-			list();
+			list('new');
 		})
 	}
 })

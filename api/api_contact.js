@@ -24,8 +24,38 @@ router.post('/insert', function(req,res,next){
 // list 
 
 router.get('/list', function(req,res,next){
+
+	var sort = req.query.sort||'';
+	var q = req.query.query||'';
 	
-	req.db.collection('contact').find({}).sort({_id:-1}).toArray(function(err, data){
+	var myquery={};
+	var mysort={};
+	console.log(req.query);
+	if(sort=='new'){
+		console.log('new');
+		var mysort = { _id: -1 };
+
+	}else{
+		console.log('old');
+		var mysort = { _id: 1 };
+	}
+
+	if(q=='pending'){
+		var myquery={status:'Pending'};
+
+	}else if(q=='solve'){
+		var myquery={status:'Solve'};
+
+	}else if(q=='reference'){
+		var myquery={status:'Reference'};
+
+	}else {
+		var myquery={};
+
+	}
+
+	
+	req.db.collection('contact').find(myquery,{}).sort(mysort).toArray(function(err, data){
 		if(err) throw err;
 		res.send(data);
 	})
