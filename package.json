@@ -23,6 +23,7 @@
     "express-mongo-db": "^2.0.3",
     "express-session": "^1.15.3",
     "express-validator": "^3.2.1",
+    "find-remove": "^1.0.1",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "handlepers": "0.0.2",

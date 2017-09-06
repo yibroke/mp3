@@ -5,15 +5,25 @@ var path = require('path');
 var fs = require('fs');
 var serveIndex = require('serve-index');
 var youtubedl = require('youtube-dl');
+var findRemoveSync = require('find-remove');
 
 
 const dirmp3 = '/var/node/mp3/public/downloads/mp3/';
 const dirmp4 = '/var/node/mp3/public/downloads/mp4/';
 
+
+
+// delete file older than 1 hour.
+var result = findRemoveSync(dirmp4, {age: {seconds: 3600}, extensions: '.mp4'});
+// delete file older than 1 hour.
+var result1 = findRemoveSync(dirmp3, {age: {seconds: 3600}, extensions: '.mp3'});
+
 var autoIncrement = require("mongodb-autoincrement"); // auto inc
 router.get('/', function(req,res,next){
   res.send('done');
 })
+
+// what the fuck.
 router.get('/get-file/:type/:id/:format/:title', function(req,res,next){
 
   var type = req.params.type;
@@ -34,6 +44,8 @@ router.get('/get-file/:type/:id/:format/:title', function(req,res,next){
   
   res.send(req.params);
 });
+
+
 router.get('/list', function(req,res,next){
   
   var arrMp3 = [];
