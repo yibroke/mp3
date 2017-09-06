@@ -79,9 +79,6 @@
           <a class="btn btn-success" href="/play/[{website}]/[{x.id}]/[{x.title | slugify}].html">{{trans.play_and_download}}</a>
         </div>
         <!-- End youtube group -->
-        <i ng-show="search_spin[$index]" class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
-        <div ng-show="down[$index]"><a class="btn btn-info pull-right" target="_blank" href="<?php echo base_url() . 'download/get-file/{{result.location}}/{{result.id}}/{{result.format}}' ?>"><span class="glyphicon glyphicon-download"></span> Download</a></div>
-        <!--<div ng-show="down[$index]"><a ng-click="autoDownload(result.download)" class="btn btn-info pull-right"><span class="glyphicon glyphicon-download"></span> Download</a></div>-->
 
         <p ng-show="msg[$index]">[{message[$index]}] </p>
       </div>
