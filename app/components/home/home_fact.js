@@ -32,10 +32,7 @@ angular.module('myApp').factory('homefact',function($http,$q){
          return $http.post(base_url+'home/check_youtube_download',youtube);
        //  return $http.post(base_url+'home/youtube_download',youtube);
     };
-    factory.youtube_download=function(youtube)
-    {
-         return $http.post(base_url+'home/youtube_download',youtube);
-    };
+
     
     //convert in back end. youtube(id,format)
     factory.convert=function(youtube){

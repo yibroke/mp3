@@ -4,8 +4,6 @@ var ytdl = require('youtube-dl');
 var exec = require('child_process').execFile;
 var cmd=require('node-cmd');
 
-
-
 router.post('/youtube_dl', function(req, res, next){
   console.log(req.body);
   var url =  req.body.url.replace('&#x3D;','=');

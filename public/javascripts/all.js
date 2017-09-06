@@ -939,9 +939,6 @@ $scope.deleteArray = function(data){
 	}
 })
 angular.module('myApp').controller('homectr',function($scope,homefact,$http,$window,youtubefact){
-
-
-
 //home search copy from searchCtr
 $scope.ysearch = function(search_text){
   if(search_text==''|| search_text==null)
@@ -952,17 +949,18 @@ $scope.ysearch = function(search_text){
         //alert(1);
         
       }else{
-      var key = search_text.trim();
-      var rep = key.replace(/ /g,'_');
-     angular.element(youtube).tooltip('hide');
-       youtubefact.make_url(key).then(function(res){
-        console.log(res);
+        var key = search_text.trim();
+        var rep = key.replace(/ /g,'_');
+        angular.element(youtube).tooltip('hide');
+        youtubefact.make_url(key).then(function(res){
+          console.log(res);
           window.location = '/keyword/'+rep+'.html';
-       });
-       }
-     }
+        });
+      }
+    }
+    // end 
 
-     $scope.$watch("search_text", function (newValue, oldValue) {
+    $scope.$watch("search_text", function (newValue, oldValue) {
       if(newValue!=''|| newValue!=null){
        angular.element(youtube1).tooltip('hide');
      }
@@ -971,6 +969,7 @@ $scope.ysearch = function(search_text){
 
         // Array format 
         $scope.arrformat=homefact.getFormat('video');
+
         $scope.youtube={
              url:'',//leave it empty
              domain:'',
@@ -1091,6 +1090,8 @@ $scope.ysearch = function(search_text){
           // end then  
 //  End check
 };
+
+// CHECK URL REDIRECT. IMPORTANT.
 $scope.check_url_redirect=function(youtube) {
 
  if((youtube.domain==='youtube.com')||(youtube.domain==='youtu.be'))
@@ -1122,10 +1123,10 @@ $scope.check_url_redirect=function(youtube) {
 
             }else{
 
-                 $scope.checkurl_msg =true;
-                  angular.element(my_url).focus();
-                  angular.element(my_url).tooltip({ placement: 'bottom', trigger:'manual'});
-                    angular.element(my_url).tooltip('show');
+             $scope.checkurl_msg =true;
+             angular.element(my_url).focus();
+             angular.element(my_url).tooltip({ placement: 'bottom', trigger:'manual'});
+             angular.element(my_url).tooltip('show');
 
                   //angular.element(my_url).tooltip({ placement: 'bottom', delay: {show: 10, hide: 100}});
 
@@ -1134,24 +1135,8 @@ $scope.check_url_redirect=function(youtube) {
 
 //  End check
 };
-// Download youtube use client.
-function download_youtube_client(youtube)
-{
- homefact.youtube_download(youtube).then(function(response){
-  console.log(response.data);
-             // console.log(response.data.url);
-             console.log(response.data.download);            
-               //  $scope.down=true;
-               $scope.result = response.data;
-               $scope.message = response.data.data;
-               $scope.msg=true;
-               console.log($scope.message);
-               var link = document.createElement("a");
-               link.download = name;
-               link.href = response.data.link;
-               link.click();
-             });
-}
+
+
     //*********************************************************
     function convert_youtube(youtube)
     {
@@ -1184,71 +1169,8 @@ function download_youtube_client(youtube)
             }    
         );// end then
    }
-    //******************************** No longer in use ***********************
-    $scope.converter = function (youtube) {
-        //show loading
-        $scope.loading = true;
-        //hide donwload button, resulet before if any.
-        $scope.down=false;
-        $scope.msg=false;
-        console.log(youtube);
-       // return;
-        // youtube format mp4 no need convert only download.
-        if(youtube.domain==='youtube.com' && youtube.format===2)
-        {
-          console.log('donwload');
 
-
-          homefact.check_client_download(youtube).then(function(response){
-            console.log(response.data);
-            if(response.data.link_status===200)
-            {
-              console.log('download client');
-              download_youtube_client(youtube);
-            }else {
-              console.log('cant download client Copyright video. Check length download server instead... wait...');
-            }
-
-          }); 
-
-
-
-          $scope.loading = false;
-        }else{
-
-        //console.log(use.login(login));
-        // console.log(homefact.convert(youtube));
-        homefact.convert(youtube).then(
-         function (response) {
-          console.log(response.data);
-          console.log(response.status);
-          $scope.loading = false;
-          console.log(response.data.status);
-          if(response.data.status===true)
-          {
-
-            console.log(response.data.download);            
-            $scope.down=true;
-          }
-          
-          $scope.result = response.data;
-          $scope.message = response.data.data;
-          $scope.msg=true;
-          console.log($scope.message);
-
-
-        },function(rejected){
-          console.log('time out');
-          $scope.loading = false;
-          console.log(rejected);
-          $scope.message = 'Sorry we cancel your request because it take too long. Maybe your target website is busy at the moments. Please try again later or try with other websites.';
-          $scope.msg=true;
-          console.log($scope.message);
-        } 
-        );// end then
-        }// end else convert
-      };
-    });
+ });
 angular.module('myApp').factory('homefact',function($http,$q){
     var deferred = $q.defer();
     var factory={};
@@ -1283,10 +1205,7 @@ angular.module('myApp').factory('homefact',function($http,$q){
          return $http.post(base_url+'home/check_youtube_download',youtube);
        //  return $http.post(base_url+'home/youtube_download',youtube);
     };
-    factory.youtube_download=function(youtube)
-    {
-         return $http.post(base_url+'home/youtube_download',youtube);
-    };
+
     
     //convert in back end. youtube(id,format)
     factory.convert=function(youtube){
