@@ -38,7 +38,7 @@ angular.module('myApp').controller('playctr',function($scope,homefact,$http,$win
         $scope.resCancel = function() {
         console.log('Cancel request');
       }
-// get video infomation.
+// get video infomation. IMPORTANT USE IN SHORT_VIDEO PARTIALS.
 $scope.check_url=function(data) {
   console.log(data);
           // $scope.buttonContainer =true;

@@ -1036,8 +1036,7 @@ $scope.check_url_redirect=function(youtube) {
 
 
 });
-angular.module('myApp').factory('homefact',function($http,$q){
-    var deferred = $q.defer();
+angular.module('myApp').factory('homefact',function($http){
     var factory={};
     //array format
       var arrvideo=[{id:2,name:"mp4 Best"},{id:22,name:"mp4 Medium"}];
@@ -1065,32 +1064,14 @@ angular.module('myApp').factory('homefact',function($http,$q){
     {
          return $http.post('/home/service_dailymotion_id_from_url',url);
     };
-    factory.check_client_download=function(youtube)
-    {
-         return $http.post(base_url+'home/check_youtube_download',youtube);
-       //  return $http.post(base_url+'home/youtube_download',youtube);
-    };
-
-    
     //convert in back end. youtube(id,format)
     factory.convert=function(youtube){
 
          // return $http.post('/home/youtube_dl',youtube, {timeout: 29000});
           return $http.post('/home/youtube_dl',youtube);
     };
-    factory.get_download_format=function(format)
-    {
-         return $http.get(base_url+'download/fet_all_format/'+format)
-       .then(function (response) {
-        return response.data;
-        });
-    };
-     factory.download=function(path)
-    {
-     return $http.post(base_url+'download/get_file',path);
-     //console.log(path);
-     // return path;
-    };
+
+
     //for domain. use in factory.domain
     function extractHostname(url) {
             var hostname;
@@ -1212,7 +1193,7 @@ angular.module('myApp').controller('playctr',function($scope,homefact,$http,$win
         $scope.resCancel = function() {
         console.log('Cancel request');
       }
-// get video infomation.
+// get video infomation. IMPORTANT USE IN SHORT_VIDEO PARTIALS.
 $scope.check_url=function(data) {
   console.log(data);
           // $scope.buttonContainer =true;
