@@ -31,7 +31,6 @@ $scope.ysearch = function(search_text){
 
 
 
-//NOT SURE ABOUT THIS. WHERE IT USE. FIND OUT LATER.
 
 $scope.youtube={
              url:'',//leave it empty
@@ -47,10 +46,7 @@ $scope.youtube={
            });
 
          //********************************************'
-         
-
-
-
+        
 
 // CHECK URL REDIRECT. IMPORTANT.
 $scope.check_url_redirect=function(youtube) {

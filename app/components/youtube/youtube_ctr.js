@@ -1,11 +1,8 @@
 angular.module('myApp').controller('youtubectr',function($scope,$http,$location,youtubefact,homefact,$window,dailymotionFactory){
 
 $scope.mobile_filter =false;
-$scope.arrformat=homefact.getFormat();
-$scope.search_spin = [];// set it at an array first.
-$scope.down = [];// set it at an array first.
-$scope.msg = [];// set it at an array first.
-$scope.message = [];// set it at an array first.
+
+
 $scope.website =1;
 $scope.order ='relevance';
 $scope.order1 ='relevance';
@@ -43,70 +40,7 @@ $scope.$watch("website", function (newValue, oldValue) {
       }
   });
 
-
-
-
-//Search keyword.
- //var keyword=location.search.split('search_text=')[1]? location.search.split('search_text=')[1]:'music';
-// all parameters: https://developer.dailymotion.com/tools/apiexplorer#/video/list
-
-$scope.search_convert = function (id,format,$index) {
-  console.log('click');
-  console.log('the index is:'+$index);
-        // make up youtube.
-        var youtube={
-          url:'https://www.youtube.com/watch?v='+id,
-          format:format
-        };
-        // start spin.
-        $scope.search_spin[$index]=true;
-        $scope.msg[$index]=true;
-        // Call Convert function. We need a file name first.
-        //get file name
-        $scope.message[$index]='Get file name...';
-        homefact.fileName(youtube.url).then(function(response){
-          console.log(response);
-          youtube.name=response.data.data;
-          convert_youtube(youtube,$index);
-        });
-      };
-    //Convert youtube. From search or home.
-    function convert_youtube(youtube,$index)
-    {
-         //convert youtube
-         $scope.message[$index]='Converting...';
-         homefact.convert(youtube).then(function (response) {
-          console.log(response.data);
-          $scope.loading = false;
-          $scope.search_spin[$index]=false;
-          console.log(response.data.status);
-          if(response.data.status===true)
-          {
-            console.log(response.data.download);  
-            $scope.down[$index]=true;
-            $scope.message[$index]=response.data.data;
-                   //auto download.
-                   $window.open(base_url+'download/get-file/'+response.data.location+'/'+response.data.id+'/'+response.data.format, '_blank');
-                   
-                 }
-                 
-                 $scope.result = response.data;
-            //var json=response.data;
-
-          });
-        // end convert youtube.
-        
-      }
-    //download
-    $scope.autoDownload=function(path){
-      console.log('fire download...');
-      console.log(path);
-      homefact.auto_download_after_success(path);
-    };
-    
-    $scope.search_text='';
-
-//Daily moting search funciton
+//Daily moting search funciton Important
 $scope.dailymotion= function(){
   $scope.website=2;
   console.log(keyword+'<=========');
@@ -156,20 +90,11 @@ $scope.dailymotion= function(){
       });
   };
 
-  function videoDetail(id)
-  {
 
-//    var id='SjK2XlNE39Q';
-youtubefact.videoDetail(id).then(function(response){
- console.log(response.data.items[0].snippet.publishedAt); 
- var publish=response.data.items[0].snippet.publishedAt;
- return publish;
-});
-}
 
 
 $scope.nextPage = "";
- // Get youtube data
+ // Get youtube data Important
  $scope.getYoutubeData = function(){
    $scope.website=1; 
 
@@ -220,11 +145,10 @@ $scope.nextPage = "";
          $scope.prevPageToken = response.data.prevPageToken;
        });
 };// end get youtube data
-        // check length data.
-        $scope.checkDataLength = function(data){
-          return (data.length >=1);
-    };// end check length data
- //Function next page.
+
+
+ //Function next page. Important But not in use.
+ // we now just pagination in 50 result.
  $scope.callNextPageFn = function(website,nextPage){
    $scope.nextPage = nextPage;
    if(website===1)

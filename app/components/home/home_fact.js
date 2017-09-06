@@ -89,15 +89,8 @@ angular.module('myApp').factory('homefact',function($http,$q){
           return $http.post('/home/getinfo',aaa);
     };// end getInfo
     
-    //Get file name
-    factory.fileName=function(url) {
-         var aaa={myurl:url};
-          return $http.post('/home/get_file_name',aaa);
-    };
-    factory.auto_download_after_success=function(id){
-        var param={download:id};
-        return $http.post(base_url+'download/get_file',param);
-    };
+
+    
     
   return factory;
 });

@@ -788,212 +788,6 @@ catalyst.filter('timeago', function() {
     });
 
     
-angular.module('myApp').controller('homectr',function($scope,homefact,$http,$window,youtubefact){
-//home search copy from searchCtr
-$scope.ysearch = function(search_text){
-  if(search_text==''|| search_text==null)
-  {
-    angular.element(youtube1).tooltip({ placement: 'bottom', trigger:'manual'});
-    angular.element(youtube1).tooltip('show');
-    angular.element(youtube1).focus();
-        //alert(1);
-        
-      }else{
-        var key = search_text.trim();
-        var rep = key.replace(/ /g,'_');
-        angular.element(youtube).tooltip('hide');
-        youtubefact.make_url(key).then(function(res){
-          console.log(res);
-          window.location = '/keyword/'+rep+'.html';
-        });
-      }
-    }
-    // end 
-
-    $scope.$watch("search_text", function (newValue, oldValue) {
-      if(newValue!=''|| newValue!=null){
-       angular.element(youtube1).tooltip('hide');
-     }
-   });
-// end home search
-
-
-
-
-
-//NOT SURE ABOUT THIS. WHERE IT USE. FIND OUT LATER.
-
-$scope.youtube={
-             url:'',//leave it empty
-             domain:'',
-             format:2//default should be 1.
-           };
-
-
-           $scope.$watch("youtube.url",function(newValue){
-             angular.element(my_url).tooltip('hide');
-             $scope.youtube.domain=homefact.domain(newValue);
-
-           });
-
-         //********************************************'
-         
-
-
-
-
-// CHECK URL REDIRECT. IMPORTANT.
-$scope.check_url_redirect=function(youtube) {
-
- if((youtube.domain==='youtube.com')||(youtube.domain==='youtu.be'))
- {
-  homefact.get_youtube_id_from_url(youtube).then(function(response){
-    if(response.data!=='0')
-    {
-                           $window.location.href="play/1/"+response.data+'/youtube';//should be the video title
-
-                         }else {
-                          $scope.msg=true;
-                          $scope.message = 'Wrong youtube url';
-                        }
-
-                      });
-}else if(youtube.domain==='dailymotion.com')
-{
-
- homefact.get_daily_id_from_url(youtube).then(function(response){
-                   $window.location.href="play/2/"+response.data+'/dailymotion';//should be the video title.
-                 });
-
-}else if(youtube.domain==='soundcloud.com') {
-
-
-                $window.location.href="play/3?url="+youtube.url;//should be the video title.
-
-              // check_url(youtube);
-
-            }else{
-
-             $scope.checkurl_msg =true;
-             angular.element(my_url).focus();
-             angular.element(my_url).tooltip({ placement: 'bottom', trigger:'manual'});
-             angular.element(my_url).tooltip('show');
-
-                  //angular.element(my_url).tooltip({ placement: 'bottom', delay: {show: 10, hide: 100}});
-
-                }
-
-
-//  End check
-};
-
-
-
-});
-angular.module('myApp').factory('homefact',function($http,$q){
-    var deferred = $q.defer();
-    var factory={};
-    //array format
-      var arrvideo=[{id:2,name:"mp4 Best"},{id:22,name:"mp4 Medium"}];
-      var arrmp3=[{id:1,name:"mp3"},{id:1,name:"mp3 best"}];
-    
-    factory.getFormat=function(value){
-        if(value==='mp3') {
-            return arrmp3;
-        }else {
-             return arrvideo;
-        }
-       
-    };
-    factory.getFormat2=function(value){
-       return arrvideo;
-       
-    };
-    //get youtube id from url. not work if id content equal sign. (=)
-    factory.get_youtube_id_from_url=function(url)
-    {
-         return $http.post('/home/service_youtube_id_from_url',url);
-    };
-    //get dailymotion id from url
-     factory.get_daily_id_from_url=function(url)
-    {
-         return $http.post('/home/service_dailymotion_id_from_url',url);
-    };
-    factory.check_client_download=function(youtube)
-    {
-         return $http.post(base_url+'home/check_youtube_download',youtube);
-       //  return $http.post(base_url+'home/youtube_download',youtube);
-    };
-
-    
-    //convert in back end. youtube(id,format)
-    factory.convert=function(youtube){
-
-         // return $http.post('/home/youtube_dl',youtube, {timeout: 29000});
-          return $http.post('/home/youtube_dl',youtube);
-    };
-    factory.get_download_format=function(format)
-    {
-         return $http.get(base_url+'download/fet_all_format/'+format)
-       .then(function (response) {
-        return response.data;
-        });
-    };
-     factory.download=function(path)
-    {
-     return $http.post(base_url+'download/get_file',path);
-     //console.log(path);
-     // return path;
-    };
-    //for domain. use in factory.domain
-    function extractHostname(url) {
-            var hostname;
-            //find & remove protocol (http, ftp, etc.) and get hostname
-
-            if (url.indexOf("://") > -1) {
-                hostname = url.split('/')[2];
-            }
-            else {
-                hostname = url.split('/')[0];
-            }
-            //find & remove port number
-            hostname = hostname.split(':')[0];
-            //find & remove "?"
-            hostname = hostname.split('?')[0];
-
-            return hostname;
-        }
-//Get domain from url
-    factory.domain=function(url) {
-
-         var domain = extractHostname(url),
-        splitArr = domain.split('.'),
-        arrLen = splitArr.length;
-
-        //extracting the root domain here
-        if (arrLen > 2) {
-            domain = splitArr[arrLen - 2] + '.' + splitArr[arrLen - 1];
-        }
-        return domain;
-    };// end domain
-    factory.getInfo=function(url) {
-       var aaa={myurl:url};
-          return $http.post('/home/getinfo',aaa);
-    };// end getInfo
-    
-    //Get file name
-    factory.fileName=function(url) {
-         var aaa={myurl:url};
-          return $http.post('/home/get_file_name',aaa);
-    };
-    factory.auto_download_after_success=function(id){
-        var param={download:id};
-        return $http.post(base_url+'download/get_file',param);
-    };
-    
-  return factory;
-});
-
 angular.module('myApp').controller('contactCtr', function($scope, contactFact){
 
 // if not defind here it will coz underfined error.
@@ -1144,6 +938,201 @@ $scope.deleteArray = function(data){
 		})
 	}
 })
+angular.module('myApp').controller('homectr',function($scope,homefact,$http,$window,youtubefact){
+//home search copy from searchCtr
+$scope.ysearch = function(search_text){
+  if(search_text==''|| search_text==null)
+  {
+    angular.element(youtube1).tooltip({ placement: 'bottom', trigger:'manual'});
+    angular.element(youtube1).tooltip('show');
+    angular.element(youtube1).focus();
+        //alert(1);
+        
+      }else{
+        var key = search_text.trim();
+        var rep = key.replace(/ /g,'_');
+        angular.element(youtube).tooltip('hide');
+        youtubefact.make_url(key).then(function(res){
+          console.log(res);
+          window.location = '/keyword/'+rep+'.html';
+        });
+      }
+    }
+    // end 
+
+    $scope.$watch("search_text", function (newValue, oldValue) {
+      if(newValue!=''|| newValue!=null){
+       angular.element(youtube1).tooltip('hide');
+     }
+   });
+// end home search
+
+
+
+
+
+
+$scope.youtube={
+             url:'',//leave it empty
+             domain:'',
+             format:2//default should be 1.
+           };
+
+
+           $scope.$watch("youtube.url",function(newValue){
+             angular.element(my_url).tooltip('hide');
+             $scope.youtube.domain=homefact.domain(newValue);
+
+           });
+
+         //********************************************'
+        
+
+// CHECK URL REDIRECT. IMPORTANT.
+$scope.check_url_redirect=function(youtube) {
+
+ if((youtube.domain==='youtube.com')||(youtube.domain==='youtu.be'))
+ {
+  homefact.get_youtube_id_from_url(youtube).then(function(response){
+    if(response.data!=='0')
+    {
+                           $window.location.href="play/1/"+response.data+'/youtube';//should be the video title
+
+                         }else {
+                          $scope.msg=true;
+                          $scope.message = 'Wrong youtube url';
+                        }
+
+                      });
+}else if(youtube.domain==='dailymotion.com')
+{
+
+ homefact.get_daily_id_from_url(youtube).then(function(response){
+                   $window.location.href="play/2/"+response.data+'/dailymotion';//should be the video title.
+                 });
+
+}else if(youtube.domain==='soundcloud.com') {
+
+
+                $window.location.href="play/3?url="+youtube.url;//should be the video title.
+
+              // check_url(youtube);
+
+            }else{
+
+             $scope.checkurl_msg =true;
+             angular.element(my_url).focus();
+             angular.element(my_url).tooltip({ placement: 'bottom', trigger:'manual'});
+             angular.element(my_url).tooltip('show');
+
+                  //angular.element(my_url).tooltip({ placement: 'bottom', delay: {show: 10, hide: 100}});
+
+                }
+
+
+//  End check
+};
+
+
+
+});
+angular.module('myApp').factory('homefact',function($http,$q){
+    var deferred = $q.defer();
+    var factory={};
+    //array format
+      var arrvideo=[{id:2,name:"mp4 Best"},{id:22,name:"mp4 Medium"}];
+      var arrmp3=[{id:1,name:"mp3"},{id:1,name:"mp3 best"}];
+    
+    factory.getFormat=function(value){
+        if(value==='mp3') {
+            return arrmp3;
+        }else {
+             return arrvideo;
+        }
+       
+    };
+    factory.getFormat2=function(value){
+       return arrvideo;
+       
+    };
+    //get youtube id from url. not work if id content equal sign. (=)
+    factory.get_youtube_id_from_url=function(url)
+    {
+         return $http.post('/home/service_youtube_id_from_url',url);
+    };
+    //get dailymotion id from url
+     factory.get_daily_id_from_url=function(url)
+    {
+         return $http.post('/home/service_dailymotion_id_from_url',url);
+    };
+    factory.check_client_download=function(youtube)
+    {
+         return $http.post(base_url+'home/check_youtube_download',youtube);
+       //  return $http.post(base_url+'home/youtube_download',youtube);
+    };
+
+    
+    //convert in back end. youtube(id,format)
+    factory.convert=function(youtube){
+
+         // return $http.post('/home/youtube_dl',youtube, {timeout: 29000});
+          return $http.post('/home/youtube_dl',youtube);
+    };
+    factory.get_download_format=function(format)
+    {
+         return $http.get(base_url+'download/fet_all_format/'+format)
+       .then(function (response) {
+        return response.data;
+        });
+    };
+     factory.download=function(path)
+    {
+     return $http.post(base_url+'download/get_file',path);
+     //console.log(path);
+     // return path;
+    };
+    //for domain. use in factory.domain
+    function extractHostname(url) {
+            var hostname;
+            //find & remove protocol (http, ftp, etc.) and get hostname
+
+            if (url.indexOf("://") > -1) {
+                hostname = url.split('/')[2];
+            }
+            else {
+                hostname = url.split('/')[0];
+            }
+            //find & remove port number
+            hostname = hostname.split(':')[0];
+            //find & remove "?"
+            hostname = hostname.split('?')[0];
+
+            return hostname;
+        }
+//Get domain from url
+    factory.domain=function(url) {
+
+         var domain = extractHostname(url),
+        splitArr = domain.split('.'),
+        arrLen = splitArr.length;
+
+        //extracting the root domain here
+        if (arrLen > 2) {
+            domain = splitArr[arrLen - 2] + '.' + splitArr[arrLen - 1];
+        }
+        return domain;
+    };// end domain
+    factory.getInfo=function(url) {
+       var aaa={myurl:url};
+          return $http.post('/home/getinfo',aaa);
+    };// end getInfo
+    
+
+    
+    
+  return factory;
+});
+
 angular.module('myApp').controller('kwordsCtr',function($scope,kwordsFact){  
   
     kwordsFact.kwords().then(function(response){
@@ -1580,11 +1569,8 @@ angular.module('myApp').directive('urlDl',function($http, youtubefact, ngProgres
 angular.module('myApp').controller('youtubectr',function($scope,$http,$location,youtubefact,homefact,$window,dailymotionFactory){
 
 $scope.mobile_filter =false;
-$scope.arrformat=homefact.getFormat();
-$scope.search_spin = [];// set it at an array first.
-$scope.down = [];// set it at an array first.
-$scope.msg = [];// set it at an array first.
-$scope.message = [];// set it at an array first.
+
+
 $scope.website =1;
 $scope.order ='relevance';
 $scope.order1 ='relevance';
@@ -1622,70 +1608,7 @@ $scope.$watch("website", function (newValue, oldValue) {
       }
   });
 
-
-
-
-//Search keyword.
- //var keyword=location.search.split('search_text=')[1]? location.search.split('search_text=')[1]:'music';
-// all parameters: https://developer.dailymotion.com/tools/apiexplorer#/video/list
-
-$scope.search_convert = function (id,format,$index) {
-  console.log('click');
-  console.log('the index is:'+$index);
-        // make up youtube.
-        var youtube={
-          url:'https://www.youtube.com/watch?v='+id,
-          format:format
-        };
-        // start spin.
-        $scope.search_spin[$index]=true;
-        $scope.msg[$index]=true;
-        // Call Convert function. We need a file name first.
-        //get file name
-        $scope.message[$index]='Get file name...';
-        homefact.fileName(youtube.url).then(function(response){
-          console.log(response);
-          youtube.name=response.data.data;
-          convert_youtube(youtube,$index);
-        });
-      };
-    //Convert youtube. From search or home.
-    function convert_youtube(youtube,$index)
-    {
-         //convert youtube
-         $scope.message[$index]='Converting...';
-         homefact.convert(youtube).then(function (response) {
-          console.log(response.data);
-          $scope.loading = false;
-          $scope.search_spin[$index]=false;
-          console.log(response.data.status);
-          if(response.data.status===true)
-          {
-            console.log(response.data.download);  
-            $scope.down[$index]=true;
-            $scope.message[$index]=response.data.data;
-                   //auto download.
-                   $window.open(base_url+'download/get-file/'+response.data.location+'/'+response.data.id+'/'+response.data.format, '_blank');
-                   
-                 }
-                 
-                 $scope.result = response.data;
-            //var json=response.data;
-
-          });
-        // end convert youtube.
-        
-      }
-    //download
-    $scope.autoDownload=function(path){
-      console.log('fire download...');
-      console.log(path);
-      homefact.auto_download_after_success(path);
-    };
-    
-    $scope.search_text='';
-
-//Daily moting search funciton
+//Daily moting search funciton Important
 $scope.dailymotion= function(){
   $scope.website=2;
   console.log(keyword+'<=========');
@@ -1735,20 +1658,11 @@ $scope.dailymotion= function(){
       });
   };
 
-  function videoDetail(id)
-  {
 
-//    var id='SjK2XlNE39Q';
-youtubefact.videoDetail(id).then(function(response){
- console.log(response.data.items[0].snippet.publishedAt); 
- var publish=response.data.items[0].snippet.publishedAt;
- return publish;
-});
-}
 
 
 $scope.nextPage = "";
- // Get youtube data
+ // Get youtube data Important
  $scope.getYoutubeData = function(){
    $scope.website=1; 
 
@@ -1799,11 +1713,10 @@ $scope.nextPage = "";
          $scope.prevPageToken = response.data.prevPageToken;
        });
 };// end get youtube data
-        // check length data.
-        $scope.checkDataLength = function(data){
-          return (data.length >=1);
-    };// end check length data
- //Function next page.
+
+
+ //Function next page. Important But not in use.
+ // we now just pagination in 50 result.
  $scope.callNextPageFn = function(website,nextPage){
    $scope.nextPage = nextPage;
    if(website===1)
@@ -1850,6 +1763,7 @@ angular.module('myApp').factory('youtubefact',function($http){
       }});
 
    };
+   
   factory.make_url=function(data)
    {
      return $http.get('/search/make_url/'+data);
