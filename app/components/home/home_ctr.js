@@ -27,10 +27,13 @@ $scope.ysearch = function(search_text){
    });
 // end home search
 
-        // Array format 
-        $scope.arrformat=homefact.getFormat('video');
 
-        $scope.youtube={
+
+
+
+//NOT SURE ABOUT THIS. WHERE IT USE. FIND OUT LATER.
+
+$scope.youtube={
              url:'',//leave it empty
              domain:'',
              format:2//default should be 1.
@@ -45,111 +48,9 @@ $scope.ysearch = function(search_text){
 
          //********************************************'
          
-         //convert time to second.
-         function hmsToSecondsOnly(str) {
-          var p = str.split(':'),
-          s = 0, m = 1;
 
-          while (p.length > 0) {
-            s += m * parseInt(p.pop(), 10);
-            m *= 60;
-          }
 
-          return s;
-        }
-        // Get file name.
-        function file_name(url)
-        {
-          homefact.fileName(url).then(function(response){
-            console.log(response);
-            $scope.loading = false;
-            $scope.message = 'file name: '+response.data.data;
 
-            $scope.msg=true;
-            $scope.youtube.name=response.data.data;
-            convert_youtube(youtube);
-          });
-
-        }
-        // Client download.
-        // tomorrow work.
-        // Start check url
-        
-        function check_url(youtube) {
-         $scope.loading = true;
-         $scope.down=false;
-         $scope.message = 'Get file name ...';
-         $scope.msg=true;
-               //var myFileName= file_name(youtube.url);
-               //get file name
-               homefact.fileName(youtube.url).then(function(response){
-                console.log(response);
-                $scope.msg=true;
-                $scope.youtube.name=response.data.data;
-                $scope.youtube.format=1;
-                console.log(youtube);
-                convert_youtube(youtube);
-              });
-             }
-             $scope.check_url=function(youtube) {
-              //show loading
-              $scope.loading = true;
-              $scope.message = 'Check url...';
-              $scope.msg=true;
-        //hide donwload button, resulet before if any.
-        $scope.down=false;
-        console.log(youtube);  
-            //step 1 check
-            $scope.videoInfo=homefact.getInfo(youtube.url).then(
-             function(response){
-               console.log(response.data);
-
-               console.log(response.status);
-               console.log(response);
-               if(response.data.status===true)
-               {
-                 console.log('Your url work!');
-                             //empty input box.
-                             console.log('null url');
-                             $scope.youtube.url=null;
-                             console.log(response.data);
-                             console.log(hmsToSecondsOnly(response.data.data));
-                             var duration=hmsToSecondsOnly(response.data.data);
-                             if(duration>1200)
-                             {
-                              $scope.loading = false;
-                              $scope.message = 'Your video/audio is longer than 20 minutes. Too long for an online converter.';
-                              $scope.msg=true;
-                            }else{
-                             console.log('video lentgh is ok');
-                             $scope.message = 'video/audio Lentgh is OK... Get file name ...';
-                             $scope.msg=true;
-                                 //var myFileName= file_name(youtube.url);
-                                 //get file name
-                                 homefact.fileName(youtube.url).then(function(response){
-                                  console.log(response);
-                                  $scope.msg=true;
-                                  $scope.youtube.name=response.data.data;
-                                  console.log(youtube);
-                                  convert_youtube(youtube);
-                                });
-                                 
-                                  // convert
-                                //  convert_youtube(youtube);
-                              }
-
-                            }else {
-                             console.log('your url not work!');
-                             $scope.loading = false;
-                             $scope.message = 'your url not work!.';
-                             $scope.msg=true;
-                             
-                           }
-                         }
-                         );
-          // end then  
-//  End check
-};
 
 // CHECK URL REDIRECT. IMPORTANT.
 $scope.check_url_redirect=function(youtube) {
@@ -197,37 +98,5 @@ $scope.check_url_redirect=function(youtube) {
 };
 
 
-    //*********************************************************
-    function convert_youtube(youtube)
-    {
 
-     $scope.message = 'Start Converting...';
-     homefact.convert(youtube).then(
-       function (response) {
-        console.log(response.data);
-        console.log(response.status);
-        $scope.loading = false;
-        console.log(response.data.status);
-        if(response.data.status===true)
-        {
-         console.log(response.data.download);            
-         $scope.down=true;
-                 //Auto click the button.
-                 $window.open(base_url+'download/get-file/'+response.data.location+'/'+response.data.id+'/'+response.data.format, '_blank');
-               }
-               $scope.result = response.data;
-               $scope.message = response.data.data;
-               $scope.msg=true;
-               console.log($scope.message);
-             },function(rejected){
-              console.log('time out');
-              $scope.loading = false;
-              console.log(rejected);
-              $scope.message = 'Sorry we cancel your request because it take too long. Maybe your target website is busy at the moments. Please try again later or try with other websites.';
-              $scope.msg=true;
-              console.log($scope.message);
-            }    
-        );// end then
-   }
-
- });
+});
