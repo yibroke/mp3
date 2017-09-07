@@ -5,7 +5,7 @@ $near_white: #dfdfdf;
   padding-top:10px;
 }
 .active_lang{
-    border-bottom: 1px solid green;
+  border-bottom: 1px solid green;
 }
 #modalLanguage{
   float: left;
@@ -14,7 +14,7 @@ $near_white: #dfdfdf;
   a{
     color: #333 !important;
   }
-    ul{
+  ul{
     list-style: none; /* Remove list bullets */
   }
   li{
@@ -47,7 +47,7 @@ $near_white: #dfdfdf;
 
 }
 .status{
-  
+
   text-align: center;
   color: green;
   font-size: 20px;
@@ -164,7 +164,7 @@ option {
     background-color: white;
     padding: 15px 5px 15px 5px;
   }
- 
+
   .youtube_thumb{
     float: left;
   }
@@ -212,6 +212,8 @@ option {
     color: #828282;
     border-top: 1px solid #ccc;
     background-color: black;
+    
+
   }
   .footer a{
     color: white;
@@ -263,7 +265,7 @@ option {
     margin-right: 0px;
     color: white;
     margin-top: 18px;
-   padding: 7px 9px 5px 9px;
+    padding: 7px 9px 5px 9px;
 
 
   }
@@ -294,152 +296,167 @@ option {
   } 
   // mobile
   @media (max-width: 767px){
-     
-    #form_search{
-      max-width: 100%;
-      margin-left: 3px;
+    .bg-success{
+      position: relative;
     }
-    nav .input-group{
-      width:99%;
-      padding-right: 1px;
-      padding-left: 5px;
-      margin-top: 10px;
-
+    .bao_contact{
+      height: 43px;
     }
-    .navbar-default .navbar-nav .open .dropdown-menu>li>a {
-      color: white;
+    .f_contact{
+     position: absolute;
+     bottom: 0;
+     right: 0;
+   }
 
-
-    } 
-
-
-    h1{
-      font-size:14px;
-    }
-    .form_url{
-      margin-top: 10px;
-      margin-bottom: 10px;
-    }
-    #myNavbar{
-
-      position: absolute;
-      right: 35px;
-      top: 3px;
-
-
-    }
-    .showhide{
-      display: none;
-      border: 1px solid red;
-    }
-
+   #form_search{
+    max-width: 100%;
+    margin-left: 3px;
+  }
+  nav .input-group{
+    width:99%;
+    padding-right: 1px;
+    padding-left: 5px;
+    margin-top: 10px;
 
   }
-  .current-search{
-    line-height: 30px;
-
-  }
-  .btn-download{
-    background-color: #FF5722;
-    border-color: #FF5722;
+  .navbar-default .navbar-nav .open .dropdown-menu>li>a {
     color: white;
-    min-width: 228px;
-    margin-right: 20px;
-  }
-  .btn{
-    font-family: "Open Sans";
-  }
-  /*always visable search*/
-  .youtube_group{
 
-    margin-left: 123px;
-    padding-left: 7px;
+
+  } 
+
+
+  h1{
+    font-size:14px;
   }
+  .form_url{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  #myNavbar{
 
-  /* CSS used here will be applied after bootstrap.css */
-
-  .navbar-header form {
     position: absolute;
-    right: 20px;
+    right: 35px;
+    top: 3px;
 
-    background-color: grey;
+
+  }
+  .showhide{
+    display: none;
+    border: 1px solid red;
   }
 
 
+}
+.current-search{
+  line-height: 30px;
 
-  @media only screen and (max-width:768px){
-    .form_search{
-      position:absolute;
-      top: 3px;
-      right: 3px;
-    }
-    .navbar-default .navbar-collapse, .navbar-default .navbar-form {
-      border-color: rgba(0,0,0,0);
-      margin-top: 0;
-      padding-top: 4px;
-    }
-    .navbar-nav {
-      margin: 1px -1px;
-    }
-    .navbar-brand {
-      float: left;
-      height: 50px;
-      /* padding: 5px 5px;*/
-      font-size: 18px;
-      line-height: 20px;
-    }
-    .navbar-form {
-      padding: 10px 15px; 
-      margin-top: 8px;
-      margin-right: 20px;
-      margin-bottom: 8px;
-      margin-left: -15px;
-      border-top: 0px solid transparent;
-      border-bottom: 0px solid transparent;
-      -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.1),0 1px 0 rgba(255,255,255,.1);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.1),0 0px 0 rgba(255,255,255,.1);
-    }
+}
+.btn-download{
+  background-color: #FF5722;
+  border-color: #FF5722;
+  color: white;
+  min-width: 228px;
+  margin-right: 20px;
+}
+.btn{
+  font-family: "Open Sans";
+}
+/*always visable search*/
+.youtube_group{
+
+  margin-left: 123px;
+  padding-left: 7px;
+}
+
+/* CSS used here will be applied after bootstrap.css */
+
+.navbar-header form {
+  position: absolute;
+  right: 20px;
+
+  background-color: grey;
+}
+
+
+
+@media only screen and (max-width:768px){
+  .form_search{
+    position:absolute;
+    top: 3px;
+    right: 3px;
+  }
+
+  .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border-color: rgba(0,0,0,0);
+    margin-top: 0;
+    padding-top: 4px;
+  }
+  .navbar-nav {
+    margin: 1px -1px;
+  }
+  .navbar-brand {
+    float: left;
+    height: 50px;
+    /* padding: 5px 5px;*/
+    font-size: 18px;
+    line-height: 20px;
   }
   .navbar-form {
-    padding: 10px 2px; 
+    padding: 10px 15px; 
+    margin-top: 8px;
+    margin-right: 20px;
+    margin-bottom: 8px;
+    margin-left: -15px;
+    border-top: 0px solid transparent;
+    border-bottom: 0px solid transparent;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.1),0 1px 0 rgba(255,255,255,.1);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.1),0 0px 0 rgba(255,255,255,.1);
   }
+}
+.navbar-form {
+  padding: 10px 2px; 
+}
 
-  #form_search > .input-group > .form-group {
-    display: inline;
+#form_search > .input-group > .form-group {
+  display: inline;
 
-  }
+}
 
-  /*auto complate*/
-  #ui-id-1,#ui-id-2{
-    list-style-type: none;
-    background-color: white;
-    padding-left: 15px;
-    border:1px solid grey;
-    width: 340px;
-    margin-right: 30px;
+/*auto complate*/
+#ui-id-1,#ui-id-2{
+  list-style-type: none;
+  background-color: white;
+  padding-left: 15px;
+  border:1px solid grey;
+  width: 340px;
+  margin-right: 30px;
 
-    overflow: hidden;
-    z-index: 2147483647;
-
-
-  }
-  .ui-menu-item{
-
-    border-bottom: 1px solid #d7e2e9;
-    font-size: 16px;
-    /*remove this width for second one*/
-    width: 98%;
-    padding-top: 5px;
-    padding-bottom: 5px;
-
-    cursor: pointer;
+  overflow: hidden;
+  z-index: 2147483647;
 
 
-  }
+}
+.ui-menu-item{
 
-  .ui-menu-item:hover{
-    color: #4264ba;
+  border-bottom: 1px solid #d7e2e9;
+  font-size: 16px;
+  /*remove this width for second one*/
+  width: 98%;
+  padding-top: 5px;
+  padding-bottom: 5px;
 
-  }
-  // for youtube auto sarch
-  .ui-helper-hidden-accessible { display:none; }
+  cursor: pointer;
+
+
+}
+
+.ui-menu-item:hover{
+  color: #4264ba;
+
+}
+// for youtube auto sarch
+.ui-helper-hidden-accessible { display:none; }
+.navbar-right {
+    margin-right: -12px;
+}
