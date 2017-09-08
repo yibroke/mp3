@@ -33,22 +33,13 @@
 				</select>
 			</div></div>
 			</div>
-			
-
-			
-			
-			
-
 			<hr>
-
-
-
 			<ul  dir-paginate="x in list | itemsPerPage: perPage">
 				<li> 
 					<div class="row">
 						<div class="col-md-12">
 							<p class="pull-right">[{x.status}]</p>
-							<input type="checkbox" checklist-model="contact.ids" checklist-value="x._id"> [{ x.email || 'No Email' }] | [{x.date | date }] 
+							<input type="checkbox" checklist-model="contact.ids" checklist-value="x._id"> [{ x.email || 'No Email' }] | [{x.date | date : "medium" }] 
 							<button ng-click="delete(x._id)" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
 							<br><br>
 							<pre>[{ x.message }]</pre>
