@@ -29,7 +29,7 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 //Express session
  app.use(session({//2
-  store: new RedisStore(),
+ store: new RedisStore(),
  secret:'secret',
  resave: false,
  saveUninitialized: false,
@@ -54,8 +54,6 @@ app.use(function (req,res,next) {
   res.locals.user= req.user||null;
   next();
 });
-
-
 
 
 //global vars keyword

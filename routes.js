@@ -1,15 +1,12 @@
 // use exports so the variable app will be ready to use.
 module.exports = function(app){
-
   app.get('/', function (req, res) {
     res.render('home/views/home', { 
       active_home:true 
     });
   });
   app.get('/login', function (req, res) {
-
    res.render('guess/views/login', { title: 'Login',loginMessage:req.flash('loginMessage') });
-
  });
 
 // keyword

@@ -1,9 +1,9 @@
 <div class="container" ng-controller="kwordsCtr">
 	<div class="row">
 		<div class="col-md-12">
-			<h1>Keyword</h1>
+		
 			<div ng-controller="kwordsCtr">
-				<h1>List search keywords</h1>
+				<h4>List search keywords</h4>
 
 				<table class="table table-bordered">
 					<tr>
@@ -15,7 +15,7 @@
 					<tr  dir-paginate="x in kwords  | itemsPerPage: 20">
 						<td>[{ x.name }]</td>
 						
-						<td><button ng-click="delete(x._id)" class="btn btn-danger">Delete</button></td>
+						<td><button ng-click="delete(x._id)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></button></td>
 
 					</tr>
 				</table>

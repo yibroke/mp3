@@ -1,0 +1,22 @@
+/*remove border in navbar*/
+.navbar {
+    border-radius: 0px;
+}
+
+.contact-list ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+  .contact-list ul li {
+    list-style-type: none;
+    padding: 10px 0;
+    border-bottom: 1px solid #dfdfdf; 
+}
+/*pull right md, lg*/
+
+
+ @media (max-width: 767px){
+.pull-right-lg {
+  float: left !important;
+}
+}
