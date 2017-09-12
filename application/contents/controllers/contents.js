@@ -45,5 +45,14 @@ router.post('/edit', function(req, res, next) {
     })
 });
 
+router.post('/insert', function(req, res, next) {
+  console.log(req.body);
+  var newvalues = { name:req.body.name, code: req.body.code, content:req.body.content };
+     req.db.collection("contents").insert(newvalues, function(err,data){
+      if(err) throw err;
+     res.redirect('/contents/');
+    })
+});
+
 
 module.exports = router;

@@ -3,11 +3,11 @@
     border-radius: 0px;
 }
 
-.contact-list ul {
+ul {
   list-style-type: none;
   margin: 0;
   padding: 0; }
-  .contact-list ul li {
+ul li {
     list-style-type: none;
     padding: 10px 0;
     border-bottom: 1px solid #dfdfdf; 
@@ -19,4 +19,9 @@
 .pull-right-lg {
   float: left !important;
 }
+}
+
+img{
+	max-width: 100%;
+
 }
