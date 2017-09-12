@@ -1,16 +1,16 @@
 angular.module('myApp').controller('youtubectr',function($scope,$http,$location,youtubefact,homefact,$window,dailymotionFactory){
 
-$scope.mobile_filter =false;
+  $scope.mobile_filter =false;
 
 
-$scope.website =1;
-$scope.order ='relevance';
-$scope.order1 ='relevance';
+  $scope.website =1;
+  $scope.order ='relevance';
+  $scope.order1 ='relevance';
 
 // order for youtube
 $scope.$watch("order", function (newValue, oldValue) {
   // this if to prevent the watch function fire after page load.
- if (newValue !== oldValue) {
+  if (newValue !== oldValue) {
     // do whatever you were going to do
     $scope.order =newValue;
     $scope.getYoutubeData();
@@ -23,24 +23,24 @@ $scope.$watch("order1", function (newValue, oldValue) {
  if (newValue !== oldValue) {
   $scope.order1 =newValue;
   $scope.dailymotion();
-   $scope.mobile_filter =false;
+  $scope.mobile_filter =false;
 }
 });
 // change search website.
 $scope.$watch("website", function (newValue, oldValue) {
-        if (newValue !== oldValue) {
-          $scope.mobile_filter =false;
-          if(newValue==1)
-          {
-           $scope.getYoutubeData();
-         }else{
-          $scope.dailymotion();
-        }
+  if (newValue !== oldValue) {
+    $scope.mobile_filter =false;
+    if(newValue==1)
+    {
+     $scope.getYoutubeData();
+   }else{
+    $scope.dailymotion();
+  }
 
-      }
-  });
+}
+});
 
-//Daily moting search funciton Important
+//Daily motion search funciton Important
 $scope.dailymotion= function(){
   $scope.website=2;
   console.log(keyword+'<=========');
@@ -52,10 +52,10 @@ $scope.dailymotion= function(){
    
  }
  console.log('call daily');
- dailymotionFactory.getVideosByParams({
+// https://github.com/JohnnyTheTank/angular-dailymotion-api-factory
+dailymotionFactory.getVideosByParams({
     search:keyword, // (optional)
-    //tags:keyword, // (optinal)d
-    limit:"100", // (optional) valid values: 1-100 | default: 10
+    limit:"50", // (optional) valid values: 1-100 | default: 10
     sort:$scope.order1, 
     page: $scope.nextPage ? $scope.nextPage : 1
   }).then(function(response){
@@ -71,26 +71,22 @@ $scope.dailymotion= function(){
           thumbnail:x[i].thumbnail_240_url,
           id:x[i].id,
           duration:x[i].duration,
-          public:x[i].created_time
+          public:x[i].created_time,
+          views:x[i].views_total
         };
         $scope.videos[i]=video;
       }
-      
-      console.log(response);
-      console.log(response.data.page);
-      
-      
-      
+    //  console.log(response);
+      // console.log(response.data.page);
       $scope.nextPageToken = response.data.page+1;
       $scope.prevPageToken =response.data.page-1;
-      console.log(!isNaN(response.data.page+1));
+      //console.log(!isNaN(response.data.page+1));
     }).catch(function () {
         //on error
         console.log('error');
       });
   };
-
-
+// End dailymotion factory.
 
 
 $scope.nextPage = "";
@@ -119,10 +115,9 @@ $scope.nextPage = "";
               
             }})
    .then(function (response) {
-
     $scope.videos=[];
     $scope.t=[];
-    console.log(response.data);
+    // console.log(response.data);
     var i;
     var x=response.data.items;
     var len=x.length;
@@ -135,6 +130,7 @@ $scope.nextPage = "";
             id:x[i].id.videoId,///id 
             upload:x[i].id.videoId,
             duration:'0',
+            views:'0',// default value coz youtube dont give views.
             public:'0'
             
           };
@@ -145,8 +141,6 @@ $scope.nextPage = "";
          $scope.prevPageToken = response.data.prevPageToken;
        });
 };// end get youtube data
-
-
  //Function next page. Important But not in use.
  // we now just pagination in 50 result.
  $scope.callNextPageFn = function(website,nextPage){

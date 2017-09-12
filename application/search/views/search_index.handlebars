@@ -75,7 +75,7 @@
         <div class="youtube_group">
           <a class="youtube_title" href="/play/[{website}]/[{x.id}]/[{x.title | slugify}].html"><strong>[{x.title|limitTo : 100}]</strong></a> 
           <!--show duration of youtube and dailymotion-->
-          <youtube-duration vid="[{x.id}]" wsite="[{website}]" d="[{x.duration}]" p="[{x.public}]"></youtube-duration>
+          <youtube-duration vid="[{x.id}]" wsite="[{website}]" d="[{x.duration}]" p="[{x.public}]" v="[{x.views}]"></youtube-duration> 
           <a class="btn btn-success" href="/play/[{website}]/[{x.id}]/[{x.title | slugify}].html">{{trans.play_and_download}}</a>
         </div>
         <!-- End youtube group -->

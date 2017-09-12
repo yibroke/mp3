@@ -28,6 +28,7 @@ app.config(function($interpolateProvider) {
     @url: https://github.com/JohnnyTheTank/angular-dailymotion-api-factory#readme 
     @license: MIT
 */
+// Add views_total there. Use Ctr+F to find.
 "use strict";
 
 angular.module('myApp').factory('dailymotionFactory', ['$http', 'dailymotionSearchDataService', function ($http, dailymotionSearchDataService) {
@@ -152,7 +153,7 @@ angular.module('myApp').factory('dailymotionFactory', ['$http', 'dailymotionSear
                     break;
 
                 case "videosByParams":
-                    dailymotionSearchData.object.fields = 'bookmarks_total,comments_total,created_time,description,duration,embed_html,id,item_type,media_type,owner.id,owner.screenname,owner.url,thumbnail_240_url,thumbnail_720_url,thumbnail_url,title,updated_time,url,';
+                    dailymotionSearchData.object.fields = 'bookmarks_total,views_total,comments_total,created_time,description,duration,embed_html,id,item_type,media_type,owner.id,owner.screenname,owner.url,thumbnail_240_url,thumbnail_720_url,thumbnail_url,title,updated_time,url,';
 
                     dailymotionSearchData = this.fillDataInObjectByList(dailymotionSearchData, _params, [
                         'fields', 'channel', 'country', 'created_after', 'created_before', 'detected_language', 'exclude_ids', 'featured', 'genre', 'has_game', 'hd', 'ids', 'in_history', 'languages', 'list', 'live', 'live_offair', 'live_onair', 'live_upcoming', 'longer_than', 'no_live', 'no_premium', 'nogenre', 'owners', 'partner', 'poster', 'premium', 'private', 'search', 'shorter_than', 'sort', 'svod', 'tags', 'tvod', 'ugc', 'verified', 'page', 'limit'
@@ -165,14 +166,6 @@ angular.module('myApp').factory('dailymotionFactory', ['$http', 'dailymotionSear
             return dailymotionSearchData;
         };
     });
-/**
-    @name: angular-dailymotion-api-factory 
-    @version: 0.5.1 (26-01-2016) 
-    @author: Jonathan Hornung <jonathan.hornung@gmail.com> 
-    @url: https://github.com/JohnnyTheTank/angular-dailymotion-api-factory#readme 
-    @license: MIT
-*/
-"use strict";angular.module("jtt_dailymotion",[]).factory("dailymotionFactory",["$http","dailymotionSearchDataService",function(a,b){var c={};return c.getVideosFromUserById=function(c){if(!c.id)return!1;var d=b.getNew("videosFromUserById",c);return a({method:"GET",url:d.url,params:d.object})},c.getVideosFromChannelById=function(c){if(!c.id)return!1;var d=b.getNew("videosFromChannelById",c);return a({method:"GET",url:d.url,params:d.object})},c.getVideosFromPlaylistById=function(c){if(!c.id)return!1;var d=b.getNew("videosFromPlaylistById",c);return a({method:"GET",url:d.url,params:d.object})},c.getVideosByParams=function(c){var d=b.getNew("videosByParams",c);return a({method:"GET",url:d.url,params:d.object})},c}]).service("dailymotionSearchDataService",function(){this.getApiBaseUrl=function(a){return"https://api.dailymotion.com/"},this.fillDataInObjectByList=function(a,b,c){return angular.forEach(c,function(c,d){"undefined"!=typeof b[c]&&(a.object[c]=b[c])}),a},this.getNew=function(a,b){var c={object:{},url:""};switch(a){case"videosFromUserById":c.object.fields="bookmarks_total,comments_total,created_time,description,duration,embed_html,id,item_type,media_type,owner.id,owner.screenname,owner.url,thumbnail_240_url,thumbnail_720_url,thumbnail_url,title,updated_time,url,",c=this.fillDataInObjectByList(c,b,["fields","channel","created_after","created_before","genre","nogenre","page","limit","search","tags"]),c.url=this.getApiBaseUrl()+"user/"+b.id+"/videos";break;case"videosFromChannelById":c.object.fields="bookmarks_total,comments_total,created_time,description,duration,embed_html,id,item_type,media_type,owner.id,owner.screenname,owner.url,thumbnail_240_url,thumbnail_720_url,thumbnail_url,title,updated_time,url,",c=this.fillDataInObjectByList(c,b,["fields","channel","created_after","created_before","search","sort","tags","page","limit"]),c.url=this.getApiBaseUrl()+"channel/"+b.id+"/videos";break;case"videosFromPlaylistById":c.object.fields="bookmarks_total,comments_total,created_time,description,duration,embed_html,id,item_type,media_type,owner.id,owner.screenname,owner.url,thumbnail_240_url,thumbnail_720_url,thumbnail_url,title,updated_time,url,",c=this.fillDataInObjectByList(c,b,["fields","search","sort","tags","page","limit"]),c.url=this.getApiBaseUrl()+"playlist/"+b.id+"/videos";break;case"videosByParams":c.object.fields="bookmarks_total,comments_total,created_time,description,duration,embed_html,id,item_type,media_type,owner.id,owner.screenname,owner.url,thumbnail_240_url,thumbnail_720_url,thumbnail_url,title,updated_time,url,",c=this.fillDataInObjectByList(c,b,["fields","channel","country","created_after","created_before","detected_language","exclude_ids","featured","genre","has_game","hd","ids","in_history","languages","list","live","live_offair","live_onair","live_upcoming","longer_than","no_live","no_premium","nogenre","owners","partner","poster","premium","private","search","shorter_than","sort","svod","tags","tvod","ugc","verified","page","limit"]),c.url=this.getApiBaseUrl()+"videos"}return c}});
 /**
  * Checklist-model
  * AngularJS directive for list of checkboxes
@@ -1417,70 +1410,6 @@ angular.module('myApp').directive('clientDl',function($http, youtubefact, ngProg
 
 
 });
-angular.module('myApp').directive('youtubeDuration',function($http){
-    return {
-        restrict: 'E',
-        template:"<p><i class='fa fa-clock-o' aria-hidden='true'></i>{{duration}} <i class='fa fa-calendar' aria-hidden='true'></i>{{date}}</p> ",
-        scope:{
-          vid:'@vid',  
-          website:'@wsite',  
-          du:'@d',  
-          pu:'@p'  
-        },
-        link:function($scope){
-            console.log($scope.website);
-            
-            if($scope.website==='1')
-            {
-                     $http.get('https://www.googleapis.com/youtube/v3/videos', {
-                        params: {
-                            key: "AIzaSyAnR-0wQOsEwYF7U4CHQIMBoBzkRpx-0dw",
-                            type: 'video',
-                            id: $scope.vid,
-                            part: 'snippet,contentDetails'       
-                        }}).then(function(response){
-                            var d = response.data.items[0].snippet.publishedAt; 
-                            var t = response.data.items[0].contentDetails.duration;
-                            var t = t.replace('PT',"").replace("H",":").replace('M',":").replace("S","");
-                            $scope.duration=t; 
-                            var date = new Date(d);
-                            var myDate = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
-                            $scope.date=myDate; 
-                        });
-            }else {
-                
-                //convert second to h:m:s
-                var date = new Date(null);
-                date.setSeconds($scope.du); // specify value for SECONDS here
-                $scope.duration=date.toISOString().substr(11, 8);;
-               
-                
-                unix_timestamp= parseInt($scope.pu);
-                var a = new Date(unix_timestamp * 1000);
-                var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-                var year = a.getFullYear();
-                var month = months[a.getMonth()];
-                var date = a.getDate();
-                var hour = a.getHours();
-                var min = a.getMinutes();
-                var sec = a.getSeconds();
-                var time = date + ' ' + month + ' ' + year ;
-                 $scope.date=time;
-                
-                
-                
-                
-            }
-            
-       
-            
-        }
-    };
-    
-    
-});
-
-
 angular.module('myApp').directive('urlDl',function($http, youtubefact, ngProgressFactory,$timeout,$interval){
   return {
     restrict: 'E',
@@ -1547,19 +1476,84 @@ angular.module('myApp').directive('urlDl',function($http, youtubefact, ngProgres
 
 
 });
+angular.module('myApp').directive('youtubeDuration',function($http){
+    return {
+        restrict: 'E',
+        template:"<p><i class='fa fa-clock-o' aria-hidden='true'></i>{{duration}} <i class='fa fa-calendar' aria-hidden='true'></i>{{date}} | <i class='fa fa-eye' aria-hidden='true'></i> {{view}}</p> ",
+        scope:{
+          vid:'@vid',  
+          website:'@wsite',  
+          du:'@d',  
+          pu:'@p',
+          v:'@v'  
+        },
+        link:function($scope){
+            console.log($scope.website);
+            
+            if($scope.website==='1')
+            {
+                     $http.get('https://www.googleapis.com/youtube/v3/videos', {
+                        params: {
+                            key: "AIzaSyAnR-0wQOsEwYF7U4CHQIMBoBzkRpx-0dw",
+                            type: 'video',
+                            id: $scope.vid,
+                            part: 'snippet,contentDetails,statistics'       
+                        }}).then(function(response){
+                            var d = response.data.items[0].snippet.publishedAt; 
+                            var t = response.data.items[0].contentDetails.duration;
+                            var t = t.replace('PT',"").replace("H",":").replace('M',":").replace("S","");
+                            $scope.duration=t; 
+                            var date = new Date(d);
+                            var myDate = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+                            $scope.date=myDate; 
+                            $scope.view=response.data.items[0].statistics.viewCount;
+                        });
+            }else {
+                
+                //convert second to h:m:s
+                var date = new Date(null);
+                date.setSeconds($scope.du); // specify value for SECONDS here
+                $scope.duration=date.toISOString().substr(11, 8);
+                unix_timestamp= parseInt($scope.pu);
+                var a = new Date(unix_timestamp * 1000);
+                var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                var year = a.getFullYear();
+                var month = months[a.getMonth()];
+                var date = a.getDate();
+                var hour = a.getHours();
+                var min = a.getMinutes();
+                var sec = a.getSeconds();
+                var time = date + ' ' + month + ' ' + year ;
+                 $scope.date=time;
+                 $scope.view =$scope.v;
+                
+                
+                
+                
+            }
+            
+       
+            
+        }
+    };
+    
+    
+});
+
+
 angular.module('myApp').controller('youtubectr',function($scope,$http,$location,youtubefact,homefact,$window,dailymotionFactory){
 
-$scope.mobile_filter =false;
+  $scope.mobile_filter =false;
 
 
-$scope.website =1;
-$scope.order ='relevance';
-$scope.order1 ='relevance';
+  $scope.website =1;
+  $scope.order ='relevance';
+  $scope.order1 ='relevance';
 
 // order for youtube
 $scope.$watch("order", function (newValue, oldValue) {
   // this if to prevent the watch function fire after page load.
- if (newValue !== oldValue) {
+  if (newValue !== oldValue) {
     // do whatever you were going to do
     $scope.order =newValue;
     $scope.getYoutubeData();
@@ -1572,24 +1566,24 @@ $scope.$watch("order1", function (newValue, oldValue) {
  if (newValue !== oldValue) {
   $scope.order1 =newValue;
   $scope.dailymotion();
-   $scope.mobile_filter =false;
+  $scope.mobile_filter =false;
 }
 });
 // change search website.
 $scope.$watch("website", function (newValue, oldValue) {
-        if (newValue !== oldValue) {
-          $scope.mobile_filter =false;
-          if(newValue==1)
-          {
-           $scope.getYoutubeData();
-         }else{
-          $scope.dailymotion();
-        }
+  if (newValue !== oldValue) {
+    $scope.mobile_filter =false;
+    if(newValue==1)
+    {
+     $scope.getYoutubeData();
+   }else{
+    $scope.dailymotion();
+  }
 
-      }
-  });
+}
+});
 
-//Daily moting search funciton Important
+//Daily motion search funciton Important
 $scope.dailymotion= function(){
   $scope.website=2;
   console.log(keyword+'<=========');
@@ -1601,10 +1595,10 @@ $scope.dailymotion= function(){
    
  }
  console.log('call daily');
- dailymotionFactory.getVideosByParams({
+// https://github.com/JohnnyTheTank/angular-dailymotion-api-factory
+dailymotionFactory.getVideosByParams({
     search:keyword, // (optional)
-    //tags:keyword, // (optinal)d
-    limit:"100", // (optional) valid values: 1-100 | default: 10
+    limit:"50", // (optional) valid values: 1-100 | default: 10
     sort:$scope.order1, 
     page: $scope.nextPage ? $scope.nextPage : 1
   }).then(function(response){
@@ -1620,26 +1614,22 @@ $scope.dailymotion= function(){
           thumbnail:x[i].thumbnail_240_url,
           id:x[i].id,
           duration:x[i].duration,
-          public:x[i].created_time
+          public:x[i].created_time,
+          views:x[i].views_total
         };
         $scope.videos[i]=video;
       }
-      
-      console.log(response);
-      console.log(response.data.page);
-      
-      
-      
+    //  console.log(response);
+      // console.log(response.data.page);
       $scope.nextPageToken = response.data.page+1;
       $scope.prevPageToken =response.data.page-1;
-      console.log(!isNaN(response.data.page+1));
+      //console.log(!isNaN(response.data.page+1));
     }).catch(function () {
         //on error
         console.log('error');
       });
   };
-
-
+// End dailymotion factory.
 
 
 $scope.nextPage = "";
@@ -1668,10 +1658,9 @@ $scope.nextPage = "";
               
             }})
    .then(function (response) {
-
     $scope.videos=[];
     $scope.t=[];
-    console.log(response.data);
+    // console.log(response.data);
     var i;
     var x=response.data.items;
     var len=x.length;
@@ -1684,6 +1673,7 @@ $scope.nextPage = "";
             id:x[i].id.videoId,///id 
             upload:x[i].id.videoId,
             duration:'0',
+            views:'0',// default value coz youtube dont give views.
             public:'0'
             
           };
@@ -1694,8 +1684,6 @@ $scope.nextPage = "";
          $scope.prevPageToken = response.data.prevPageToken;
        });
 };// end get youtube data
-
-
  //Function next page. Important But not in use.
  // we now just pagination in 50 result.
  $scope.callNextPageFn = function(website,nextPage){
