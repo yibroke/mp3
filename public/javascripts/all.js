@@ -1107,45 +1107,6 @@ angular.module('myApp').factory('homefact',function($http){
   return factory;
 });
 
-angular.module('myApp').controller('kwordsCtr',function($scope,kwordsFact){  
-  
-    kwordsFact.kwords().then(function(response){
-      
-        $scope.kwords=response.data;
-     });
-     $scope.delete=function(name)
-     {
-        console.log(name);
-         kwordsFact.delete(name).then(function(res){
-            console.log(res.data); 
-            if(res.data.n===1)
-            {
-               kwordsFact.kwords().then(function(response){
-      
-                    $scope.kwords=response.data;
-                });  
-            }else {
-                alert('error');
-            }
-         });
-     };
-  
-   
-  });
-
-
-angular.module('myApp').factory('kwordsFact',function($http){
-    var factory={};
-    factory.kwords=function(){
-        return $http.get('/api/kwords/list');
-
-    };
-    factory.delete=function(id){
-      return $http.delete('/api/kwords/delete/'+id);  
-    };
-    
-  return factory;
-});
 angular.module('myApp').controller('playctr',function($scope,homefact,$http,$window,ngProgressFactory, $timeout,$q){
 
 
@@ -1244,6 +1205,45 @@ $scope.check_url=function(data) {
         );// end then
        }
      });
+angular.module('myApp').controller('kwordsCtr',function($scope,kwordsFact){  
+  
+    kwordsFact.kwords().then(function(response){
+      
+        $scope.kwords=response.data;
+     });
+     $scope.delete=function(name)
+     {
+        console.log(name);
+         kwordsFact.delete(name).then(function(res){
+            console.log(res.data); 
+            if(res.data.n===1)
+            {
+               kwordsFact.kwords().then(function(response){
+      
+                    $scope.kwords=response.data;
+                });  
+            }else {
+                alert('error');
+            }
+         });
+     };
+  
+   
+  });
+
+
+angular.module('myApp').factory('kwordsFact',function($http){
+    var factory={};
+    factory.kwords=function(){
+        return $http.get('/api/kwords/list');
+
+    };
+    factory.delete=function(id){
+      return $http.delete('/api/kwords/delete/'+id);  
+    };
+    
+  return factory;
+});
 angular.module('myApp').controller('searchCtr',function($scope,youtubefact){  
 
 
@@ -1479,7 +1479,7 @@ angular.module('myApp').directive('urlDl',function($http, youtubefact, ngProgres
 angular.module('myApp').directive('youtubeDuration',function($http){
     return {
         restrict: 'E',
-        template:"<p><i class='fa fa-clock-o' aria-hidden='true'></i>{{duration}} <i class='fa fa-calendar' aria-hidden='true'></i>{{date}} | <i class='fa fa-eye' aria-hidden='true'></i> {{view | number}}</p> ",
+        template:"<p><i class='fa fa-clock-o' aria-hidden='true'></i>{{duration}} <i class='fa fa-calendar' aria-hidden='true'></i>{{date}} <i class='fa fa-eye' aria-hidden='true'></i>{{view | number}}</p> ",
         scope:{
           vid:'@vid',  
           website:'@wsite',  
@@ -1489,7 +1489,6 @@ angular.module('myApp').directive('youtubeDuration',function($http){
         },
         link:function($scope){
             console.log($scope.website);
-            
             if($scope.website==='1')
             {
                      $http.get('https://www.googleapis.com/youtube/v3/videos', {

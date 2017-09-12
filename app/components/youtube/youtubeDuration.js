@@ -1,7 +1,7 @@
 angular.module('myApp').directive('youtubeDuration',function($http){
     return {
         restrict: 'E',
-        template:"<p><i class='fa fa-clock-o' aria-hidden='true'></i>{{duration}} <i class='fa fa-calendar' aria-hidden='true'></i>{{date}} | <i class='fa fa-eye' aria-hidden='true'></i> {{view | number}}</p> ",
+        template:"<p><i class='fa fa-clock-o' aria-hidden='true'></i>{{duration}} <i class='fa fa-calendar' aria-hidden='true'></i>{{date}} <i class='fa fa-eye' aria-hidden='true'></i>{{view | number}}</p> ",
         scope:{
           vid:'@vid',  
           website:'@wsite',  
@@ -11,7 +11,6 @@ angular.module('myApp').directive('youtubeDuration',function($http){
         },
         link:function($scope){
             console.log($scope.website);
-            
             if($scope.website==='1')
             {
                      $http.get('https://www.googleapis.com/youtube/v3/videos', {
