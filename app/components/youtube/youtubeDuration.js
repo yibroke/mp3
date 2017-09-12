@@ -1,7 +1,7 @@
 angular.module('myApp').directive('youtubeDuration',function($http){
     return {
         restrict: 'E',
-        template:"<p><i class='fa fa-clock-o' aria-hidden='true'></i>{{duration}} <i class='fa fa-calendar' aria-hidden='true'></i>{{date}} | <i class='fa fa-eye' aria-hidden='true'></i> {{view}}</p> ",
+        template:"<p><i class='fa fa-clock-o' aria-hidden='true'></i>{{duration}} <i class='fa fa-calendar' aria-hidden='true'></i>{{date}} | <i class='fa fa-eye' aria-hidden='true'></i> {{view | number}}</p> ",
         scope:{
           vid:'@vid',  
           website:'@wsite',  
