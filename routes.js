@@ -6,7 +6,7 @@ module.exports = function(app){
     });
   });
   app.get('/login', function (req, res) {
-   res.render('guess/views/login', { title: 'Login',loginMessage:req.flash('loginMessage') });
+   res.render('guess/views/login', { title: 'Login' });
  });
 
 // keyword
@@ -16,7 +16,7 @@ app.get('/keyword/:key', function(req, res,next){
  res.render('search/views/search_index',{
   title: key,
   search_text: key,
-  url:'http://videodown.cc/'+'keyword/'+req.params.key,
+  url:'https://videodown.cc/'+'keyword/'+req.params.key,
 })
 });
 
