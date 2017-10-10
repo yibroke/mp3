@@ -46,7 +46,7 @@ var contactCtr = require('./application/contact/controllers/contact');app.use('/
 
 // API
 var api_contact = require('./api/api_contact');app.use('/api/contact', api_contact);
-var api_contact = require('./api/api_kwords');app.use('/api/kwords', api_contact);
+var api_keyword = require('./api/api_kwords');app.use('/api/kwords', api_keyword);
 var api_youtube_dl = require('./api/api_youtube_dl');app.use('/api/youtubedl', api_youtube_dl);
 
 }

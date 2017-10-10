@@ -33,10 +33,11 @@ $scope.listQuery =[
 {id:'solve' , value:'Solve'},
 {id:'reference', value:'Reference'}
 ];
+//pre select query
 $scope.pickQuery ={id:'all',value:'All'};
-
+// pre select sort
  $scope.pickSort= {id: 'new', value: 'New First'} //This sets the default value of the select in the ui
-//need this.
+//need this. for count list ids.(delete or change status)
 $scope.contact = {
 	ids: []
 };
