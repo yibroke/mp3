@@ -6,7 +6,7 @@ module.exports = function(app){
     });
   });
   app.get('/login', function (req, res) {
-   res.render('guess/views/login', { title: 'Login' });
+   res.render('guess/views/login', { title: 'Login',loginMessage:req.flash('loginMessage') });
  });
 
 // keyword
