@@ -12,14 +12,14 @@ var expressValidator = require('express-validator');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var i18n=require("i18n-express"); // <-- require the module 
+const keys = require('app-config/keys');
 var expressMongoDb = require('express-mongo-db');
-app.use(expressMongoDb('mongodb://kinny:admin007@localhost:27017/vdown'));
+app.use(expressMongoDb(keys.mongodb.dbURI));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(cookieParser());
 var ObjectId = require('mongodb').ObjectID;
 var path = require('path');
-
 //static go above session to prevent passport deserializeUser called 10x
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
@@ -29,7 +29,7 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 //Express session
  app.use(session({//2
- store: new RedisStore(),
+ //store: new RedisStore(),
  secret:'secret',
  resave: false,
  saveUninitialized: false,
@@ -45,20 +45,17 @@ app.use(i18n({
   defaultLang :'en',
   browserEnable:false
 }));
-
 //customer validation
 app.use(expressValidator());
 //global vars
+app.locals.base_url=keys.base_url; // base_url
 app.use(function (req,res,next) {
   res.locals.login =  req.isAuthenticated();//check login
   res.locals.user= req.user||null;
   next();
 });
-
-
 //global vars keyword
 app.use(function (req,res,next) {
-
   if(!res.locals.kwords) res.locals.kwords ={};
   req.db.collection("kwords").find({}).limit(40).sort({date:-1}).toArray(function(err, data){
    if(err) throw err;
@@ -66,7 +63,6 @@ app.use(function (req,res,next) {
  })
   next();
 });
-
 //global vars Ads
 app.use(function (req,res,next) {
 
@@ -78,9 +74,6 @@ app.use(function (req,res,next) {
  })
   next();
 });
-
-
-
 require('./routes')(app);// it need to be here. on top it not work.
 var port    = process.env.PORT || 3000;
 app.listen(port, function () {

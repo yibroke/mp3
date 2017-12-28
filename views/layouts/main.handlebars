@@ -24,7 +24,7 @@
   <meta name="description" content="{{#if description}} {{description}} {{else}} Free Youtube downloader ❤ Download youtube videos ❤ mp3 download 【 VIDEODOWN.CC 】{{/if}}">
   <meta property="og:type" content="website" />
   <meta property="og:title" content="{{#if title}}{{title}}{{else}}Free Youtube downloader :: 【 VIDEODOWN.CC 】{{/if}}" />
-  <meta property="og:url" content="{{#if url}}{{url}}{{else}}http://videodown.cc/{{/if}}" />
+  <meta property="og:url" content="{{#if url}}{{url}}{{else}} {{base_url}} {{/if}}" />
   <meta property="og:description" content="{{#if description}} {{description}} {{else}} Free Youtube downloader ❤ Download youtube videos ❤ mp3 download 【 VIDEODOWN.CC 】{{/if}}" />
   <link rel="image_src" type="image/jpeg" href="{{#if image}} {{image}}{{else}}https://s3.ap-northeast-2.amazonaws.com/inetwork-bucket/videodown.jpg{{/if}}" />
   <meta property="og:image" content="{{#if image}}{{image}}{{else}}https://s3.ap-northeast-2.amazonaws.com/inetwork-bucket/videodown.jpg{{/if}}?t=12345"/>
@@ -60,7 +60,6 @@
     });
     FB.AppEvents.logPageView();
   };
-
   (function(d, s, id){
    var js, fjs = d.getElementsByTagName(s)[0];
    if (d.getElementById(id)) {return;}
@@ -69,25 +68,21 @@
    fjs.parentNode.insertBefore(js, fjs);
  }(document, 'script', 'facebook-jssdk'));
 </script>
-
-
 <nav class="navbar navbar-default" ng-controller="searchCtr">
   <div class="container">
    <div class="row">
      <div class="col-md-12">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle pull-right top-search" ng-click="searchbox_hide()">
-
          <span class="glyphicon" ng-class="myglyphicon"></span>    
        </button>
        <a href="#" ng-hide="logo==1" class="navbar-toggle pull-right top-flag"  data-toggle="modal" data-target="#modalLanguage">
-
         {{#is lang "en"}}  <img src="/bower_components/flag-icon-css/flags/4x3/us.svg">{{/is}}
         {{#is lang "vi"}}<img src="/bower_components/flag-icon-css/flags/4x3/vn.svg">{{/is}}
         {{#is lang "ko"}} <img src="/bower_components/flag-icon-css/flags/4x3/kr.svg">{{/is}}
         {{#is lang "zh"}} <img src="/bower_components/flag-icon-css/flags/4x3/cn.svg">{{/is}}
       </a>
-      <a ng-hide="logo==1" class="navbar-brand" href="/"><img src="/images/logo_videodown.png" alt="logo"></a>
+      <a ng-hide="logo==1" class="navbar-brand" href="{{base_url}}"><img src="/images/logo_videodown.png" alt="logo"></a>
     </div>
     <div ng-class="{showhide: !logo}" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
@@ -95,8 +90,6 @@
         </li>
         <li class="hidden-xs li-language"><a href="#" data-toggle="modal" data-target="#modalLanguage">Language</a></li>
         <!-- action="/search/make_url" -->
- 
-
         <form id="form_search" ng-submit="ysearch(search_text)"  name="search" class="navbar-form navbar-right ng-pristine ng-valid" role="form" method="GET" accept-charset="utf-8">
           <div class="input-group">
             <input type="text" name="search_text" ng-model="search_text" class="form-control" id="youtube" title="{{trans.cant_empty}}" placeholder="{{trans.search}}">
@@ -109,8 +102,8 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> <strong>{{user.name}}</strong>
             <ul class="dropdown-menu">
-              <li><a href="/dashboard">Daskboard</a></li>
-              <li><a href="/user/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+              <li><a href="{{base_url}}/dashboard">Daskboard</a></li>
+              <li><a href="{{base_url}}/user/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
             </ul>
           </li>
           {{/if}}
@@ -123,14 +116,13 @@
 <div class="wrapper"  ng-cloak>
   {{clang}}
   {{{body}}}
-
   <div class="container">
-   <div class="row">
+    <div class="row">
      <div class="col-md-12">
        <h1>{{trans.resent_search}}</h1>
        <div class="current-search">
          {{#each kwords.arr}}
-         <a {{#is @index '>' 20 }} class="hidden-sm hidden-xs" {{/is}} href="/keyword/{{this.slug}}"> 
+         <a {{#is @index '>' 20 }} class="hidden-sm hidden-xs" {{/is}} href="{{../base_url}}/keyword/{{this.slug}}"> 
            <span class="alert alert-info">{{this.name}}</span></a>
            {{/each}}
          </div>
@@ -147,27 +139,25 @@
     <div class="row text-center"> 
      <div class="col-md-3 col-xs-12">
        <div class="row">
-         <div class="col-xs-8">  <a  href="/"><img class=" b_logo" src="/images/logo_videodown.png" alt="VideoDown logo footer"></a></div>
+         <div class="col-xs-8">  <a  href="{{base_url}}"><img class=" b_logo" src="/images/logo_videodown.png" alt="VideoDown logo footer"></a></div>
          <div class="col-xs-4 hidden-lg hidden-md text-right bao_contact"> 
-        {{!-- {{> flag}} --}}
-        <br>
-        <a class="f_contact" href="#" data-toggle="modal" data-target="#modalContact">{{trans.contact_us}}</a>
+          {{!-- {{> flag}} --}}
+          <br>
+          <a class="f_contact" href="#" data-toggle="modal" data-target="#modalContact">{{trans.contact_us}}</a>
         </div>
       </div>
     </div>
     <div class="col-md-7 col-xs-12">
       <br>
-      <p><span class="glyphicon glyphicon-copyright-mark"></span> 2017 <a href="/">Videodown.cc</a> All Rights Reserved
+      <p><span class="glyphicon glyphicon-copyright-mark"></span> 2017 <a href="{{base_url}}">Videodown.cc</a> All Rights Reserved
       </p>
     </div>
     <div class="col-md-2 col-xs-12 hidden-sm hidden-xs text-right">
-
-{{!-- {{> flag}} --}}
-<br>
-<a href="#" data-toggle="modal" data-target="#modalContact">{{trans.contact_us}}</a>
-    
+      {{!-- {{> flag}} --}}
+      <br>
+      <a href="#" data-toggle="modal" data-target="#modalContact">{{trans.contact_us}}</a>
+    </div>
   </div>
-</div>
 </div>
 <br>
 {{> language}}

@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const keys = require('app-config/keys');
 var request = require('request');
 var youtubedl = require('youtube-dl');
 var autoIncrement = require("mongodb-autoincrement"); // auto inc
@@ -9,7 +10,6 @@ router.get('/1/:id/:name', function(req, res, next) {
   var website = 1;
   var id = req.params.id;
   var url="https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&id="+id+"&key=AIzaSyAnR-0wQOsEwYF7U4CHQIMBoBzkRpx-0dw";
-  console.log(url);
   request({url: url, json: true}, function (error, response, body) {
    if (body.items[0]) {
     var t =body.items[0].snippet.title;
@@ -28,7 +28,7 @@ router.get('/1/:id/:name', function(req, res, next) {
       video_title: video_title,
       description: description,
       id:id,
-      url:'http://videodown.cc/'+'play/1/'+id+'/'+req.params.name,
+      url:keys.base_url+'/play/1/'+id+'/'+req.params.name,
       website: 1,
       youtube_url:youtube_url,
       image:meta_img, 
@@ -88,7 +88,7 @@ router.get('/3', function(req, res, next) {
        id: info.id,
        title: info.title+'【 VIDEODOWN.CC 】',
        video_title: info.title,
-       url:'http://videodown.cc/play/3?url='+url,
+       url:keys.base_url+'/play/3?url='+url,
        url_source: info.url,
        url_pass:url,
        image: info.thumbnail,
