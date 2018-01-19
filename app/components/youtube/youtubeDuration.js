@@ -29,7 +29,7 @@ angular.module('myApp').directive('youtubeDuration',function($http){
                             $scope.date=myDate; 
                             $scope.view=response.data.items[0].statistics.viewCount;
                         });
-            }else {
+            }else if($scope.website==='2') {
                 
                 //convert second to h:m:s
                 var date = new Date(null);
@@ -45,12 +45,29 @@ angular.module('myApp').directive('youtubeDuration',function($http){
                 var min = a.getMinutes();
                 var sec = a.getSeconds();
                 var time = date + ' ' + month + ' ' + year ;
-                 $scope.date=time;
+                 $scope.date=$scope.pu;
                  $scope.view =$scope.v;
                 
                 
                 
                 
+            }else{
+                 var date = new Date(null);
+                date.setSeconds($scope.du); // specify value for SECONDS here
+                $scope.duration=date.toISOString().substr(11, 8);
+                unix_timestamp= parseInt($scope.pu);
+                var a = new Date(unix_timestamp * 1000);
+                var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                var year = a.getFullYear();
+                var month = months[a.getMonth()];
+                var date = a.getDate();
+                var hour = a.getHours();
+                var min = a.getMinutes();
+                var sec = a.getSeconds();
+                var time = date + ' ' + month + ' ' + year ;
+                 $scope.date=time;
+                 $scope.view =$scope.v;
+
             }
             
        

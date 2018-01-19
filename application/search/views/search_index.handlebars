@@ -12,9 +12,14 @@
               <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span>
             </span></a>
           </li>
-          <li ng-class="{active : website === 2}"><a href="" ng-click="website=2"><span class="icon-brand2"></span> <span class="icon-Dailymotion_logo"></span></a></li>
+          <li ng-class="{active : website === 4}"><a href="" ng-click="website=4">
+          <i class="fa fa-soundcloud" aria-hidden="true"></i> SoundClound
+          </a>
+          </li>
+          <li ng-class="{active : website === 2}"><a href="" ng-click="website=2"><span class="icon-brand2"></span> <span class="icon-Dailymotion_logo"></span></a>
+          </li>
           <!--           youtube sort hide on daily -->
-          <div class="youtube_sort" ng-class="{hidden : website === 2}">
+          <div class="youtube_sort" ng-class="{hidden : website != 1}">
             <li class="pull-right hidden-xs">
               <ul>
                <li ng-class="{active: order ==='relevance'}" ng-click="order='relevance'">{{trans.relevance}}</li>
@@ -31,7 +36,7 @@
           </li>
         </div>
         <!-- daily sort hide on youtube  -->
-        <div class="youtube_sort" ng-class="{hidden : website === 1}">
+        <div class="youtube_sort" ng-class="{hidden : website != 2}">
           <li class="pull-right hidden-xs">
             <ul>
               <li ng-class="{active: order1 ==='relevance'}" ng-click="order1='relevance'">{{trans.relevance}}</li>

@@ -1,0 +1,16 @@
+			
+<br>
+<p ng-show="msg">{{trans.cancel_request}}</p>
+<!-- Download -->
+<div ng-show="down">
+	<a  class="btn btn-lg btn-download" target="_blank" id='mydownloadurl' href="[{result.link}]" download="{{format_name}}"><span class="icon-if_Download_2202271"></span> DOWNLOAD MP3</a>
+</div>
+<hr>
+<!-- End loading and download -->
+<div class="buttonContainer">
+	<div class="form-group">
+		<!-- Button select format audio -->
+		<button type="submit" class="btn btn-success btn-lg" ng-click="theButtonMp3||check_url(youtube.mp3)"> {{trans.convert}} audio <span class="glyphicon glyphicon-music"></span>  </button>
+		<input type="hidden" ng-model='youtube.mp3' ng-init="youtube.mp3= 11">
+		</div>
+</div><!-- end bottun container -->

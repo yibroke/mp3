@@ -102,6 +102,43 @@ router.get('/3', function(req, res, next) {
 
 // end play 3
 
+//player 4 soundclound
+
+router.get('/4/:id/:name', function(req, res, next) {
+  var id =req.params.id;
+  var url = "http://api.soundcloud.com/tracks/"+id+"?client_id=3f91b1b7f705f1c92af593fc2d28503c";
+  console.log(url);
+  // Get info.
+  request({
+    url: url,
+    json: true
+  }, function (error, response, body) {
+    if(error) throw error;
+
+    if (body.id) {
+        console.log(body) // Print the json response
+        res.render('play/views/play',{
+          title:body.title+'【 VIDEODOWN.CC 】',
+          format_name:body.title.replace(/[-'`~!@#$%^&*()_|+=?;:'",ㅣ.<>\{\}\[\]\\\/]/gi, ''),
+          video_title: body.title,
+          description: body.description,
+          id:id,
+          url:'http://videodown.cc/'+'play/4/'+id+'/'+req.params.name,
+          website:4,
+          youtube_url:body.uri,
+          image:body.thumbnail_720_url, 
+          duration:parseInt(body.duration)/1000,
+          video: body
+        });
+
+      }else{
+        console.log('error');
+         res.render('play/views/error');// or can rediect to error page.
+      }
+    })
+});
+
+// end play 4
 
 // Make URL.
 router.get('/make_url', function(req,res,next){

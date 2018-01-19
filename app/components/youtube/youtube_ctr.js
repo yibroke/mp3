@@ -1,4 +1,9 @@
 angular.module('myApp').controller('youtubectr',function($scope,$http,$location,youtubefact,homefact,$window,dailymotionFactory){
+//SOUDNCLOUND
+ SC.initialize({
+  client_id: '3f91b1b7f705f1c92af593fc2d28503c'
+});
+ // END SOUNDCLOUD.
 
   $scope.mobile_filter =false;
 
@@ -33,12 +38,55 @@ $scope.$watch("website", function (newValue, oldValue) {
     if(newValue==1)
     {
      $scope.getYoutubeData();
+
+   }else if(newValue==4){
+     $scope.getSoundCloudData();
    }else{
+
     $scope.dailymotion();
   }
 
 }
 });
+
+// Soundclound search function
+$scope.getSoundCloudData = function(){
+
+  $scope.website=4;
+  console.log(keyword+'<=========');
+  if(isNaN($scope.nextPage))
+  {
+   console.log('it is not a number');
+   $scope.nextPage=1;
+ }
+
+ var page_size = 50;
+ SC.get('/tracks', {
+   q: keyword, license: '', limit: page_size
+ }).then(function(response) {
+   $scope.videos=[];
+     console.log(response);
+    var i;
+    var x=response;
+    var len=x.length;
+    for(i=0;i<len;i++)
+    {
+      var video={
+        title:x[i].title,
+        thumbnail:x[i].artwork_url || 'http://a1.sndcdn.com/images/default_avatar_large.png?1515765262',
+        id:x[i].id,
+        upload:x[i].created_at,
+        duration:'0',
+        views:'0',
+        public:'0'
+      };
+      $scope.videos[i]=video;
+    }
+    console.log($scope.videos);
+     $scope.$apply();
+
+  });
+}
 
 //Daily motion search funciton Important
 $scope.dailymotion= function(){
@@ -136,10 +184,10 @@ $scope.nextPage = "";
           };
           $scope.videos[i]=video;
         }
-         //console.log($scope.videos);
-         $scope.nextPageToken = response.data.nextPageToken;
-         $scope.prevPageToken = response.data.prevPageToken;
-       });
+        // console.log($scope.videos);
+        $scope.nextPageToken = response.data.nextPageToken;
+        $scope.prevPageToken = response.data.prevPageToken;
+      });
 };// end get youtube data
  //Function next page. Important But not in use.
  // we now just pagination in 50 result.
@@ -149,7 +197,9 @@ $scope.nextPage = "";
    {
      $scope.getYoutubeData();
 
-   }else {
+   }else if(website===4){
+     $scope.getYoutubeData();
+   }else{
     $scope.dailymotion();
   }      
 //         $scope.getYoutubeData();

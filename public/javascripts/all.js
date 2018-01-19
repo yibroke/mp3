@@ -863,10 +863,11 @@ $scope.listQuery =[
 {id:'solve' , value:'Solve'},
 {id:'reference', value:'Reference'}
 ];
+//pre select query
 $scope.pickQuery ={id:'all',value:'All'};
-
+// pre select sort
  $scope.pickSort= {id: 'new', value: 'New First'} //This sets the default value of the select in the ui
-//need this.
+//need this. for count list ids.(delete or change status)
 $scope.contact = {
 	ids: []
 };
@@ -1107,6 +1108,45 @@ angular.module('myApp').factory('homefact',function($http){
   return factory;
 });
 
+angular.module('myApp').controller('kwordsCtr',function($scope,kwordsFact){  
+  
+    kwordsFact.kwords().then(function(response){
+      
+        $scope.kwords=response.data;
+     });
+     $scope.delete=function(name)
+     {
+        console.log(name);
+         kwordsFact.delete(name).then(function(res){
+            console.log(res.data); 
+            if(res.data.n===1)
+            {
+               kwordsFact.kwords().then(function(response){
+      
+                    $scope.kwords=response.data;
+                });  
+            }else {
+                alert('error');
+            }
+         });
+     };
+  
+   
+  });
+
+
+angular.module('myApp').factory('kwordsFact',function($http){
+    var factory={};
+    factory.kwords=function(){
+        return $http.get('/api/kwords/list');
+
+    };
+    factory.delete=function(id){
+      return $http.delete('/api/kwords/delete/'+id);  
+    };
+    
+  return factory;
+});
 angular.module('myApp').controller('playctr',function($scope,homefact,$http,$window,ngProgressFactory, $timeout,$q){
 
 
@@ -1205,45 +1245,6 @@ $scope.check_url=function(data) {
         );// end then
        }
      });
-angular.module('myApp').controller('kwordsCtr',function($scope,kwordsFact){  
-  
-    kwordsFact.kwords().then(function(response){
-      
-        $scope.kwords=response.data;
-     });
-     $scope.delete=function(name)
-     {
-        console.log(name);
-         kwordsFact.delete(name).then(function(res){
-            console.log(res.data); 
-            if(res.data.n===1)
-            {
-               kwordsFact.kwords().then(function(response){
-      
-                    $scope.kwords=response.data;
-                });  
-            }else {
-                alert('error');
-            }
-         });
-     };
-  
-   
-  });
-
-
-angular.module('myApp').factory('kwordsFact',function($http){
-    var factory={};
-    factory.kwords=function(){
-        return $http.get('/api/kwords/list');
-
-    };
-    factory.delete=function(id){
-      return $http.delete('/api/kwords/delete/'+id);  
-    };
-    
-  return factory;
-});
 angular.module('myApp').controller('searchCtr',function($scope,youtubefact){  
 
 
@@ -1507,7 +1508,7 @@ angular.module('myApp').directive('youtubeDuration',function($http){
                             $scope.date=myDate; 
                             $scope.view=response.data.items[0].statistics.viewCount;
                         });
-            }else {
+            }else if($scope.website==='2') {
                 
                 //convert second to h:m:s
                 var date = new Date(null);
@@ -1523,12 +1524,29 @@ angular.module('myApp').directive('youtubeDuration',function($http){
                 var min = a.getMinutes();
                 var sec = a.getSeconds();
                 var time = date + ' ' + month + ' ' + year ;
-                 $scope.date=time;
+                 $scope.date=$scope.pu;
                  $scope.view =$scope.v;
                 
                 
                 
                 
+            }else{
+                 var date = new Date(null);
+                date.setSeconds($scope.du); // specify value for SECONDS here
+                $scope.duration=date.toISOString().substr(11, 8);
+                unix_timestamp= parseInt($scope.pu);
+                var a = new Date(unix_timestamp * 1000);
+                var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                var year = a.getFullYear();
+                var month = months[a.getMonth()];
+                var date = a.getDate();
+                var hour = a.getHours();
+                var min = a.getMinutes();
+                var sec = a.getSeconds();
+                var time = date + ' ' + month + ' ' + year ;
+                 $scope.date=time;
+                 $scope.view =$scope.v;
+
             }
             
        
@@ -1541,6 +1559,11 @@ angular.module('myApp').directive('youtubeDuration',function($http){
 
 
 angular.module('myApp').controller('youtubectr',function($scope,$http,$location,youtubefact,homefact,$window,dailymotionFactory){
+//SOUDNCLOUND
+ SC.initialize({
+  client_id: '3f91b1b7f705f1c92af593fc2d28503c'
+});
+ // END SOUNDCLOUD.
 
   $scope.mobile_filter =false;
 
@@ -1575,12 +1598,55 @@ $scope.$watch("website", function (newValue, oldValue) {
     if(newValue==1)
     {
      $scope.getYoutubeData();
+
+   }else if(newValue==4){
+     $scope.getSoundCloudData();
    }else{
+
     $scope.dailymotion();
   }
 
 }
 });
+
+// Soundclound search function
+$scope.getSoundCloudData = function(){
+
+  $scope.website=4;
+  console.log(keyword+'<=========');
+  if(isNaN($scope.nextPage))
+  {
+   console.log('it is not a number');
+   $scope.nextPage=1;
+ }
+
+ var page_size = 50;
+ SC.get('/tracks', {
+   q: keyword, license: '', limit: page_size
+ }).then(function(response) {
+   $scope.videos=[];
+     console.log(response);
+    var i;
+    var x=response;
+    var len=x.length;
+    for(i=0;i<len;i++)
+    {
+      var video={
+        title:x[i].title,
+        thumbnail:x[i].artwork_url || 'http://a1.sndcdn.com/images/default_avatar_large.png?1515765262',
+        id:x[i].id,
+        upload:x[i].created_at,
+        duration:'0',
+        views:'0',
+        public:'0'
+      };
+      $scope.videos[i]=video;
+    }
+    console.log($scope.videos);
+     $scope.$apply();
+
+  });
+}
 
 //Daily motion search funciton Important
 $scope.dailymotion= function(){
@@ -1678,10 +1744,10 @@ $scope.nextPage = "";
           };
           $scope.videos[i]=video;
         }
-         //console.log($scope.videos);
-         $scope.nextPageToken = response.data.nextPageToken;
-         $scope.prevPageToken = response.data.prevPageToken;
-       });
+        // console.log($scope.videos);
+        $scope.nextPageToken = response.data.nextPageToken;
+        $scope.prevPageToken = response.data.prevPageToken;
+      });
 };// end get youtube data
  //Function next page. Important But not in use.
  // we now just pagination in 50 result.
@@ -1691,7 +1757,9 @@ $scope.nextPage = "";
    {
      $scope.getYoutubeData();
 
-   }else {
+   }else if(website===4){
+     $scope.getYoutubeData();
+   }else{
     $scope.dailymotion();
   }      
 //         $scope.getYoutubeData();
