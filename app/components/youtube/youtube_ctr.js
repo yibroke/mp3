@@ -78,7 +78,7 @@ $scope.getSoundCloudData = function(){
         upload:x[i].created_at,
         duration:'0',
         views:'0',
-        public:'0'
+        public:x[i].created_at
       };
       $scope.videos[i]=video;
     }

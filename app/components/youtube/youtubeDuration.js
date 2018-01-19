@@ -10,8 +10,8 @@ angular.module('myApp').directive('youtubeDuration',function($http){
           v:'@v'  
         },
         link:function($scope){
-            console.log($scope.website);
-            if($scope.website==='1')
+            
+            if($scope.website=='1')
             {
                      $http.get('https://www.googleapis.com/youtube/v3/videos', {
                         params: {
@@ -29,7 +29,7 @@ angular.module('myApp').directive('youtubeDuration',function($http){
                             $scope.date=myDate; 
                             $scope.view=response.data.items[0].statistics.viewCount;
                         });
-            }else if($scope.website==='2') {
+            }else if($scope.website=='2') {
                 
                 //convert second to h:m:s
                 var date = new Date(null);
@@ -45,13 +45,14 @@ angular.module('myApp').directive('youtubeDuration',function($http){
                 var min = a.getMinutes();
                 var sec = a.getSeconds();
                 var time = date + ' ' + month + ' ' + year ;
-                 $scope.date=$scope.pu;
+                 $scope.date=time;
                  $scope.view =$scope.v;
                 
                 
                 
                 
             }else{
+                console.log($scope.pu)
                  var date = new Date(null);
                 date.setSeconds($scope.du); // specify value for SECONDS here
                 $scope.duration=date.toISOString().substr(11, 8);
@@ -65,7 +66,7 @@ angular.module('myApp').directive('youtubeDuration',function($http){
                 var min = a.getMinutes();
                 var sec = a.getSeconds();
                 var time = date + ' ' + month + ' ' + year ;
-                 $scope.date=time;
+                 $scope.date=$scope.pu;
                  $scope.view =$scope.v;
 
             }
