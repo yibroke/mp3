@@ -1480,7 +1480,7 @@ angular.module('myApp').directive('urlDl',function($http, youtubefact, ngProgres
 angular.module('myApp').directive('youtubeDuration',function($http){
     return {
         restrict: 'E',
-        template:"<p><i class='fa fa-clock-o' aria-hidden='true'></i>{{duration}} <i class='fa fa-calendar' aria-hidden='true'></i>{{date}} <i class='fa fa-eye' aria-hidden='true'></i>{{view | number}}</p> ",
+        templateUrl:"/template/youtube_duration.handlebars",
         scope:{
           vid:'@vid',  
           website:'@wsite',  
@@ -1531,21 +1531,12 @@ angular.module('myApp').directive('youtubeDuration',function($http){
                 
                 
             }else{
-                console.log($scope.pu)
+              
                  var date = new Date(null);
                 date.setSeconds($scope.du); // specify value for SECONDS here
                 $scope.duration=date.toISOString().substr(11, 8);
-                unix_timestamp= parseInt($scope.pu);
-                var a = new Date(unix_timestamp * 1000);
-                var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-                var year = a.getFullYear();
-                var month = months[a.getMonth()];
-                var date = a.getDate();
-                var hour = a.getHours();
-                var min = a.getMinutes();
-                var sec = a.getSeconds();
-                var time = date + ' ' + month + ' ' + year ;
-                 $scope.date=$scope.pu;
+                var str = $scope.pu;
+                 $scope.date= str.substr(0,str.indexOf(' ')); // "72"
                  $scope.view =$scope.v;
 
             }
@@ -1614,7 +1605,7 @@ $scope.$watch("website", function (newValue, oldValue) {
 $scope.getSoundCloudData = function(){
 
   $scope.website=4;
-  console.log(keyword+'<=========');
+ // console.log(keyword+'<=========');
   if(isNaN($scope.nextPage))
   {
    console.log('it is not a number');
@@ -1626,7 +1617,7 @@ $scope.getSoundCloudData = function(){
    q: keyword, license: '', limit: page_size
  }).then(function(response) {
    $scope.videos=[];
-     console.log(response);
+    // console.log(response);
     var i;
     var x=response;
     var len=x.length;
@@ -1637,13 +1628,13 @@ $scope.getSoundCloudData = function(){
         thumbnail:x[i].artwork_url || 'http://a1.sndcdn.com/images/default_avatar_large.png?1515765262',
         id:x[i].id,
         upload:x[i].created_at,
-        duration:'0',
-        views:'0',
+        duration:x[i].duration/1000,
+        views:x[i].likes_count,
         public:x[i].created_at
       };
       $scope.videos[i]=video;
     }
-    console.log($scope.videos);
+  //  console.log($scope.videos);
      $scope.$apply();
 
   });

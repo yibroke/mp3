@@ -53,7 +53,7 @@ $scope.$watch("website", function (newValue, oldValue) {
 $scope.getSoundCloudData = function(){
 
   $scope.website=4;
-  console.log(keyword+'<=========');
+ // console.log(keyword+'<=========');
   if(isNaN($scope.nextPage))
   {
    console.log('it is not a number');
@@ -65,7 +65,7 @@ $scope.getSoundCloudData = function(){
    q: keyword, license: '', limit: page_size
  }).then(function(response) {
    $scope.videos=[];
-     console.log(response);
+    // console.log(response);
     var i;
     var x=response;
     var len=x.length;
@@ -76,13 +76,13 @@ $scope.getSoundCloudData = function(){
         thumbnail:x[i].artwork_url || 'http://a1.sndcdn.com/images/default_avatar_large.png?1515765262',
         id:x[i].id,
         upload:x[i].created_at,
-        duration:'0',
-        views:'0',
+        duration:x[i].duration/1000,
+        views:x[i].likes_count,
         public:x[i].created_at
       };
       $scope.videos[i]=video;
     }
-    console.log($scope.videos);
+  //  console.log($scope.videos);
      $scope.$apply();
 
   });
