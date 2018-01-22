@@ -10,14 +10,12 @@ router.get('/', function(req, res){
 })
 
 router.get('/search', function(req, res){
-	var url='https://api.4shared.com/v1_2/files.json?oauth_consumer_key=44f6ae5d9c0e192866d3412db168dfe8&category=3&offset=20&limit=10';
+	var url='https://search.4shared.com/v1_2/files.json?oauth_consumer_key=44f6ae5d9c0e192866d3412db168dfe8&category=3&offset=20&limit=10';
 	request({
 		url: url,
 		json: true
 	}, function (error, response, body) {
 		if(error) throw error;
-
-		
         console.log(body) // Print the json response
         res.json(body);
 
@@ -25,9 +23,19 @@ router.get('/search', function(req, res){
 })
 })
 
-// router.get('/download', function(req, res, next){
-// 	https://api.4shared.com/v1_2/files/89BHBylb/download
-// })
+router.get('/download', function(req, res){
+	var url='https://api.4shared.com/v1_2/files.json?oauth_consumer_key=44f6ae5d9c0e192866d3412db168dfe8&files/89BHBylb/download';
+	request({
+		url: url,
+		json: true
+	}, function (error, response, body) {
+		if(error) throw error;
+        console.log(body) // Print the json response
+        res.json(body);
+
+    
+})
+})
 
 
 module.exports = router;
