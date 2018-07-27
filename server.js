@@ -6,12 +6,13 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session); // redis
 var passport = require('passport');
+var serveStatic = require('serve-static');
 var LocalStrategy = require('passport-local').Strategy;
 var flash = require('connect-flash');
 var expressValidator = require('express-validator');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var i18n=require("i18n-express"); // <-- require the module 
+var i18n=require("i18n-express"); // <-- require the module
 const keys = require('app-config/keys');
 var expressMongoDb = require('express-mongo-db');
 app.use(expressMongoDb(keys.mongodb.dbURI));
@@ -23,8 +24,26 @@ var path = require('path');
 //static go above session to prevent passport deserializeUser called 10x
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
-app.use(express.static('public'));// Serving static files in Express
+// app.use(express.static('public'));// Serving static files in Express
+app.use(serveStatic(path.join(__dirname, 'public'), {
+  maxAge: '1d',
+  setHeaders: setCustomCacheControl
+}));
+function setCustomCacheControl (res, path) {
+  if (serveStatic.mime.lookup(path) === 'text/html') {
+    // Custom Cache-Control for HTML files
+    res.setHeader('Cache-Control', 'public, max-age=0')
+  }
+}
+
+
+
+
+
 app.set('views', path.join(__dirname, 'application'));// set views/ any file in client directory
+
+
+
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 //Express session
@@ -39,7 +58,7 @@ app.use(passport.initialize());//3
 app.use(passport.session());//4
 app.use(flash());
 app.use(i18n({
-  translationsPath: path.join(__dirname, 'i18n'), // <--- use here. Specify translations files path. 
+  translationsPath: path.join(__dirname, 'i18n'), // <--- use here. Specify translations files path.
   siteLangs: ["en","vi","ko","zh"],
   textsVarName: 'trans',
   defaultLang :'en',
@@ -79,5 +98,3 @@ var port    = process.env.PORT || 3000;
 app.listen(port, function () {
   console.log('Example app listening on port 3000!');
 });
-
-
