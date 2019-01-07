@@ -19,7 +19,7 @@
   <!-- google font -->
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
   <!-- custome icon  -->
-  <link rel="stylesheet" href="/icomoon/style.css">  
+  <link rel="stylesheet" href="/icomoon/style.css">
   <title>{{#if title}}{{title}}{{else}}Free Youtube downloader :: 【 VIDEODOWN.CC 】{{/if}}</title>
   <meta name="description" content="{{#if description}} {{description}} {{else}} Free Youtube downloader ❤ Download youtube videos ❤ mp3 download 【 VIDEODOWN.CC 】{{/if}}">
   <meta property="og:type" content="website" />
@@ -28,10 +28,17 @@
   <meta property="og:description" content="{{#if description}} {{description}} {{else}} Free Youtube downloader ❤ Download youtube videos ❤ mp3 download 【 VIDEODOWN.CC 】{{/if}}" />
   <link rel="image_src" type="image/jpeg" href="{{#if image}} {{image}}{{else}}https://s3.ap-northeast-2.amazonaws.com/inetwork-bucket/videodown.jpg{{/if}}" />
   <meta property="og:image" content="{{#if image}}{{image}}{{else}}https://s3.ap-northeast-2.amazonaws.com/inetwork-bucket/videodown.jpg{{/if}}?t=12345"/>
-  <meta property="og:image:width" content="480"/> 
+  <meta property="og:image:width" content="480"/>
   <meta property="og:image:height" content="360"/>
-  <meta property="og:image:type" content="image/jpeg" /> 
+  <meta property="og:image:type" content="image/jpeg" />
   <meta property="fb:app_id" content="1920667494887938" />
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+	     (adsbygoogle = window.adsbygoogle || []).push({
+	          google_ad_client: "ca-pub-9203295721541116",
+	          enable_page_level_ads: true
+	     });
+	</script>
 </head>
 <body ng-app="myApp">
  <!--Analytics-->
@@ -74,7 +81,7 @@
      <div class="col-md-12">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle pull-right top-search" ng-click="searchbox_hide()">
-         <span class="glyphicon" ng-class="myglyphicon"></span>    
+         <span class="glyphicon" ng-class="myglyphicon"></span>
        </button>
        <a href="#" ng-hide="logo==1" class="navbar-toggle pull-right top-flag"  data-toggle="modal" data-target="#modalLanguage">
         {{#is lang "en"}}  <img src="/bower_components/flag-icon-css/flags/4x3/us.svg">{{/is}}
@@ -122,7 +129,7 @@
        <h1>{{trans.resent_search}}</h1>
        <div class="current-search">
          {{#each kwords.arr}}
-         <a {{#is @index '>' 20 }} class="hidden-sm hidden-xs" {{/is}} href="{{../base_url}}/keyword/{{this.slug}}"> 
+         <a {{#is @index '>' 20 }} class="hidden-sm hidden-xs" {{/is}} href="{{../base_url}}/keyword/{{this.slug}}">
            <span class="alert alert-info">{{this.name}}</span></a>
            {{/each}}
          </div>
@@ -136,11 +143,11 @@
  </div><!-- end  wrapper -->
  <footer class="container-fluid footer">
   <div class="container">
-    <div class="row text-center"> 
+    <div class="row text-center">
      <div class="col-md-3 col-xs-12">
        <div class="row">
          <div class="col-xs-8">  <a  href="{{base_url}}"><img class=" b_logo" src="/images/logo_videodown.png" alt="VideoDown logo footer"></a></div>
-         <div class="col-xs-4 hidden-lg hidden-md text-right bao_contact"> 
+         <div class="col-xs-4 hidden-lg hidden-md text-right bao_contact">
           {{!-- {{> flag}} --}}
           <br>
           <a class="f_contact" href="#" data-toggle="modal" data-target="#modalContact">{{trans.contact_us}}</a>
