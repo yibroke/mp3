@@ -1,0 +1,43 @@
+
+<div ng-cloak class="container" ng-controller="playctr">
+	<div class="row">
+		<div class="col-md-9">
+			<h1><strong>{{video_title}}</strong></h1>
+			<div class="videoContainer">
+				{{#is image}}
+				
+				<iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{id}}&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
+				
+				{{/is}}
+
+			</div>
+			<!-- like button -->
+			<div class="product-social-links pull-left">
+				<div class="fb-like pull-left" data-href="{{url}}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>   
+				<div class="twitter">  <a href="{{url}}" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+			</div>
+			<!-- end like button -->
+			<div class="pull-right">
+				
+			</div>
+			<br>
+			<div class="clearfix"></div>
+			<!-- Loading and download -->
+			<div class="bao text-center" ng-show="loading">
+				<span class="status">[{status}]</span>
+				<div id="demo_contained"></div>
+				<!-- <button ng-click="resCancel()" class="btn btn-danger pull-right btn-xs">Cancel</button> -->
+			</div>
+			{{!-- download button --}}
+			<url-dl id="{{id}}" url="{{url_pass}}" title ="{{video_title}}"></url-dl>
+
+		</div>
+		<div class="col-md-3">
+			<br>
+			<div class="fb-page" data-href="https://www.facebook.com/videodown.cc/" data-tabs="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/videodown.cc/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/videodown.cc/">videodown.cc</a></blockquote></div>
+			<br>
+			<!--add-->
+			{{{ads.square.content}}}
+		</div>
+	</div>
+</div>

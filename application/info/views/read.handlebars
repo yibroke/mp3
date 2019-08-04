@@ -1,0 +1,28 @@
+<div class="container read">
+	<div class="row">
+		<div class="col-md-12">
+			{{#if user }}
+			<a href="/post/insert?id={{data._id}}">Edit</a>
+
+			{{/if}}
+			<h1>{{title}}</h1>
+
+			<p>{{{data.content}}}</p>
+			<p>{{data.date}}</p>
+
+
+			<div class="endRead text-center">
+				<h1>Want to know our predictions ?<br>
+				Contact us at (65) 9372 1040</h1>
+
+				<a class="btn btn-success" href="#">Click to view our track records</a>
+			</div>
+			<br><br>
+
+
+
+		</div>
+
+	</div>
+</div>
+

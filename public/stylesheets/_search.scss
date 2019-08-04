@@ -1,0 +1,53 @@
+ .youtube_sort{
+ 	padding:6px 10px 6px 20px;
+ 	ul{
+ 		display:inline;
+ 		li{
+ 			display:inline;
+ 			margin-left:10px;
+ 			cursor: pointer;
+ 			color: #666;
+ 		}
+ 		a:hover{
+
+ 		}
+ 		.active{
+ 			border-bottom:2px solid green;
+ 			color: green;
+ 			font-weight: bolder;
+ 		}
+ 		li:hover{
+ 			color: black;
+ 			border-bottom:2px solid green;
+ 		}
+ 	}
+ }
+ .nav-tabs{
+ 	margin-right: 0px;
+ }
+
+ .filter-left{
+	// background-color:white;
+    	// border:1px solid red;
+    	//float: right;
+    	text-align: right;
+    	ul{
+    		padding-left: 0px !important;
+    		padding-top: 10px;
+    		padding-right: 10px;
+    		li{
+    		// border-bottom:1px solid red;
+    		display: block;
+    		cursor: pointer;
+    		padding-top:10px;
+    		padding-bottom: 10px;
+    		border-bottom:1px solid white;
+    	}
+    	.active{
+    		color: green;
+    	}
+    	li:hover{
+    		color: orange;
+    	}
+    }
+}

@@ -1,0 +1,27 @@
+<script src="/editor/nicEdit/nicEdit.js" type="text/javascript"></script>
+<script type="text/javascript">
+	bkLib.onDomLoaded(function() { nicEditors.allTextAreas(); });
+</script>
+<br>
+<div class="list_post" ng-controller="postCtr">
+
+	<h1>Edit info</h1>
+
+	<form  method="post" action="/info/edit" >
+
+		
+
+		<div class="form-group">
+			<label>Phone</label>
+			<input type="text" class="form-control"  name="phone" value="{{site.phone}}" required>
+		</div>
+		<div class="form-group">
+			<label>Facebook</label>
+			<input type="text" class="form-control"  name="facebook" value="{{site.facebook}}" required>
+		</div>
+
+		<div class="form-group">
+			<button type="submit" class="btn btn-success" >Submit</button>
+		</div>
+	</form>
+</div>

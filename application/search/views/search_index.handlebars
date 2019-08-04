@@ -1,0 +1,110 @@
+<script>var keyword ='{{search_text}}'</script>
+<div class="bg-gray-100">
+  <div class="container" ng-controller="youtubectr" ng-cloak>
+    <div class="row">
+      <div class="col-md-9" data-ng-init="getYoutubeData()">
+        <br>
+        {{{ads.long.content}}}
+        <h2> {{trans.search_for}}<strong>{{search_text}}</strong></h2>
+        <ul class="nav nav-tabs">
+          <li ng-class="{active : website=== 1}"><a href="" ng-click="website=1">
+            <span class="icon-YouTube_logo_2017">
+              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span>
+            </span></a>
+          </li>
+          <li ng-class="{active : website === 4}"><a href="" ng-click="website=4">
+          <i class="fa fa-soundcloud" aria-hidden="true"></i> SoundClound
+          </a>
+          </li>
+          <li ng-class="{active : website === 2}"><a href="" ng-click="website=2"><span class="icon-brand2"></span> <span class="icon-Dailymotion_logo"></span></a>
+          </li>
+          <!--           youtube sort hide on daily -->
+          <div class="youtube_sort" ng-class="{hidden : website != 1}">
+            <li class="pull-right hidden-xs">
+              <ul>
+               <li ng-class="{active: order ==='relevance'}" ng-click="order='relevance'">{{trans.relevance}}</li>
+               <li>|</li>
+               <li ng-class="{active: order ==='date'}" ng-click="order='date'">{{trans.date}}</li>
+               <li>|</li>
+               <li ng-class="{active: order ==='viewCount'}" ng-click="order='viewCount'">{{trans.views}}</li>
+               <li>|</li>
+               <li ng-class="{active: order ==='rating'}" ng-click="order='rating'">{{trans.rating}}</li>
+             </ul>
+           </li>
+           <li class="pull-right hidden-lg hidden-md hidden-sm" ng-click="mobile_filter=!mobile_filter">
+            <span class="icon-if_filter_326641"></span> {{trans.filter}}
+          </li>
+        </div>
+        <!-- daily sort hide on youtube  -->
+        <div class="youtube_sort" ng-class="{hidden : website != 2}">
+          <li class="pull-right hidden-xs">
+            <ul>
+              <li ng-class="{active: order1 ==='relevance'}" ng-click="order1='relevance'">{{trans.relevance}}</li>
+              <li>|</li>
+              <li ng-class="{active: order1 ==='recent'}" ng-click="order1='recent'">{{trans.date}}</li>
+              <li>|</li>
+              <li ng-class="{active: order1 ==='visited'}" ng-click="order1='visited'">{{trans.views}}</li>
+            </ul>
+          </li>
+          <li class="pull-right hidden-lg hidden-md hidden-sm"  ng-click="mobile_filter=!mobile_filter">
+           <span class="icon-if_filter_326641"></span> {{trans.filter}}
+         </li>
+       </div>
+       <!-- end daily sort -->
+     </ul>
+     <div class="filter-left hidden-lg hidden-md hidden-sm">
+       <ul  ng-class="{hidden : website === 2}" ng-show="mobile_filter">
+         <li class="active" ng-class="{active: order ==='relevance'}" ng-click="order='relevance'">{{trans.relevance}}</li>
+         <li ng-class="{active: order ==='date'}" ng-click="order='date'">{{trans.date}}</li>
+         <li ng-class="{active: order ==='viewCount'}" ng-click="order='viewCount'">{{trans.views}}</li>
+         <li ng-class="{active: order ==='rating'}" ng-click="order='rating'">{{trans.rating}}</li>
+       </ul>
+       <ul ng-class="{hidden : website === 1}" ng-show="mobile_filter">
+        <li ng-class="{active: order1 ==='relevance'}" ng-click="order1='relevance'">{{trans.relevance}}</li>
+        <li ng-class="{active: order1 ==='recent'}" ng-click="order1='recent'">{{trans.date}}</li>
+        <li ng-class="{active: order1 ==='visited'}" ng-click="order1='visited'">{{trans.views}}</li>
+      </ul>
+    </div>
+    <div class="clearfix"></div>
+    <!--Loop youtube videos-->
+    <div ng-init="limit=10">
+      <div  class="list-group my_list" ng-repeat="x in videos | limitTo:limit">
+        <div class="youtube_thumb" ><a href="/play/[{website}]/[{x.id}]/[{x.title | slugify}].html"> <img  alt="[{x.title}]" ng-src="[{x.thumbnail}]"></a></div>
+        <div class="youtube_group">
+          <a class="youtube_title" href="/play/[{website}]/[{x.id}]/[{x.title | slugify}].html"><strong>[{x.title|limitTo : 100}]</strong></a> 
+          <!--show duration of youtube and dailymotion-->
+          <youtube-duration vid="[{x.id}]" wsite="[{website}]" d="[{x.duration}]" p="[{x.public}]" v="[{x.views}]">
+          </youtube-duration> 
+          <a class="btn btn-success" href="/play/[{website}]/[{x.id}]/[{x.title | slugify}].html">{{trans.play_and_download}}</a>
+        </div>
+        <!-- End youtube group -->
+        <p ng-show="msg[$index]">[{message[$index]}] </p>
+      </div>
+    </div>
+    <!--end loop videos-->
+    <br>
+    <!-- pagination -->
+    <div class="text-center">
+      <button type="button" ng-show="nextPageToken" id="pageTokenNext" ng-click="limit = limit +10" class="btn btn-lg btn-success">{{trans.show_more}} </button>
+      <!-- <button type="button" ng-show="nextPageToken" id="pageTokenNext" ng-click="callNextPageFn(website,nextPageToken)" class="btn btn-lg btn-success">Show more </button> -->
+    </div>
+    <div class="clearfix"></div>
+    <!-- end pagination -->
+  </div> 
+  <div class="col-md-3 text-center">
+    <br>
+    <br>
+    <div class="fb-page" data-href="https://www.facebook.com/videodown.cc/" data-tabs="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/videodown.cc/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/videodown.cc/">videodown.cc</a></blockquote></div>
+    <br>
+    <br>
+    <!--add-->
+    {{{ads.square.content}}}
+  </div>
+</div>
+</div>
+<br>
+</div>
+
+
+
+

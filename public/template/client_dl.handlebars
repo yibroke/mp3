@@ -1,0 +1,33 @@
+<div ng-if="convert" ng-init="finish()">
+
+<br>
+<p ng-show="msg">[{message}] </p>
+<!-- Download -->
+<div>
+	<a  class="btn btn-lg btn-download" target="_blank" id='mydownloadurl' href="[{result.link}]" download="[{title}]"><span class="icon-if_Download_2202271"></span> DOWNLOAD MP4</a>
+</div>
+
+
+<div class="clearfix"></div>
+</div>
+
+<div ng-if="notwork" ng-init="finish()">
+
+	<p class="alert alert-danger">Video not available</p>
+	
+	<div class="clearfix"></div>
+</div>
+<div ng-if="formats.url" ng-init="finish()">
+
+	<a class="btn btn-lg btn-download pull-left" href="[{formats.url}]?title=[{title}]" download><span class="icon-if_Download_2202271"></span> DOWNLOAD  MP4 </a> 
+	
+	<div class="clearfix"></div>
+</div>
+<div ng-if="!formats.url" ng-init="start()">
+	<!-- <div id="com_load"> <button class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</button></div> -->
+</div>
+
+<div class="bao text-center" ng-show="loading">
+	<span class="status">[{status}]</span>
+	<div id="demo_contained1"></div>
+</div>
