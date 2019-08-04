@@ -1,5 +1,4 @@
 // use exports so the variable app will be ready to use.
-const keys = require('app-config/keys');
 module.exports = function(app){
   app.get('/', function (req, res) {
     res.render('home/views/home', { 
@@ -17,7 +16,7 @@ app.get('/keyword/:key', function(req, res,next){
   title: key,
   description:'Search and convert video about '+key+' to mp3',
   search_text: key,
-  url:keys.base_url+'/keyword/'+req.params.key,
+  url:process.env.base_url+'/keyword/'+req.params.key,
 })
 });
 function ensureAuth(req, res, next){

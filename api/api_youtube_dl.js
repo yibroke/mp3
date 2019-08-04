@@ -7,7 +7,7 @@ var cmd=require('node-cmd');
 router.post('/youtube_dl', function(req, res, next){
   console.log(req.body);
   var url =  req.body.url.replace('&#x3D;','=');
-  console.log(url);
+  console.log("url:",url);
   var id = req.body.id;
   var format = req.body.format;
   var name =req.body.name;
@@ -41,6 +41,8 @@ router.post('/youtube_dl', function(req, res, next){
     myCmd,
     function(err, data, stderr){
       if(err){
+        console.log(err);
+        
         var arr ={
           status:false,
           data:'Oops Your url is not work!'+err,
@@ -57,6 +59,8 @@ router.post('/youtube_dl', function(req, res, next){
           download: '/downloads/' + location + '/' + id + '.' + format2,
           cmd: myCmd,
         }; 
+        console.log(arr);
+        
       }
       console.log('the current working dir is : ',data);
       res.send(arr);

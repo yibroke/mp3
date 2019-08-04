@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const keys = require('app-config/keys');
 var request = require('request');
 var youtubedl = require('youtube-dl');
 var autoIncrement = require("mongodb-autoincrement"); // auto inc
@@ -28,7 +27,7 @@ router.get('/1/:id/:name', function(req, res, next) {
       video_title: video_title,
       description: description,
       id:id,
-      url:keys.base_url+'/play/1/'+id+'/'+req.params.name,
+      url:process.env.base_url+'/play/1/'+id+'/'+req.params.name,
       website: 1,
       youtube_url:youtube_url,
       image:meta_img, 
@@ -88,7 +87,7 @@ router.get('/3', function(req, res, next) {
        id: info.id,
        title: info.title+'【 VIDEODOWN.CC 】',
        video_title: info.title,
-       url:keys.base_url+'/play/3?url='+url,
+       url:process.env.base_url+'/play/3?url='+url,
        url_source: info.url,
        url_pass:url,
        image: info.thumbnail,

@@ -1389,7 +1389,7 @@ angular.module('myApp').directive('clientDl',function($http, youtubefact, ngProg
       $scope.loading =false;
     }
     youtubefact.clientDl($scope.id).then(function(res){
-      //console.log(res.data);
+      console.log(res.data);
      if(res.data == 'false'){
        $scope.notwork=true;
      }else if(res.data.data =='Successful'){

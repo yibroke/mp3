@@ -13,9 +13,9 @@ var expressValidator = require('express-validator');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var i18n=require("i18n-express"); // <-- require the module
-const keys = require('app-config/keys');
+require('dotenv').config()
 var expressMongoDb = require('express-mongo-db');
-app.use(expressMongoDb(keys.mongodb.dbURI));
+app.use(expressMongoDb(process.env.dbURI));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(cookieParser());
@@ -67,7 +67,7 @@ app.use(i18n({
 //customer validation
 app.use(expressValidator());
 //global vars
-app.locals.base_url=keys.base_url; // base_url
+app.locals.base_url=process.env.base_url; // base_url
 app.use(function (req,res,next) {
   res.locals.login =  req.isAuthenticated();//check login
   res.locals.user= req.user||null;

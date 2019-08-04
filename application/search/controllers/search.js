@@ -43,14 +43,16 @@ router.get('/make_url/:key', function(req,res,next){
 
 // Client DL
 router.get('/client_dl/:id', function(req,res,next){
+  console.log('ddd');
+  //TODO NOTWORK FROM HERE
   var id = req.params.id;
   var url = 'http://www.youtube.com/watch?v='+id;
   var options = [];
-  youtubedl.getInfo(url, options,{maxBuffer: 1000*1024}, function(err, info) {
+  youtubedl.getInfo(url, options, function(err, info) {
     if (err) {
-     // throw err;
-     res.send('false');
-   }else{
+      console.log(err);
+      return res.send('false');
+    }
     var arr1 = info.formats;
     var i =0; var l = arr1.length;
     var response = [];
@@ -102,7 +104,7 @@ router.get('/client_dl/:id', function(req,res,next){
       }
       );
   }
-}
+
 });
 })
 // url dl
