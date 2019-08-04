@@ -1,4 +1,11 @@
 # mp3
+
+This is a nice project before but not working well BECAUSE OF youtube update policy...
+I build this in 2017.
+I dont continue update this projects.
+
+A lot of code are out of date. Dont follow it.
+
 -- Download and convert videos.
 Smaller logo: ![Alt][1]
 
